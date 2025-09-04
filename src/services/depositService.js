@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:5000/api/deposits/';
+const API_URL = 'https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app/api/deposits/';
 
 const getDeposits = async () => {
   console.log('[depositService] GET all deposits:', API_URL);

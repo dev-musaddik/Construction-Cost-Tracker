@@ -7,7 +7,7 @@ import authHeader from './auth-header';
  * - Keeps credentials for cookie-based auth
  */
 const api = axios.create({
-  baseURL: (import.meta?.env?.VITE_API_URL || 'http://localhost:5000') + '/api',
+  baseURL: (import.meta?.env?.VITE_API_URL || 'https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app') + '/api',
   withCredentials: true,
 });
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:5000/api/users/';
+const API_URL = 'https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app/api/users/';
 
 const getUsers = () => {
   return axios.get(API_URL, { headers: authHeader() });
