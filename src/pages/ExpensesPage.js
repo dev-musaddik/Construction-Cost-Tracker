@@ -283,7 +283,7 @@ const ExpensesPage = () => {
   };
 
   const handleExportCsv = () => {
-    const url = "https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app/api/expenses/export/csv";
+    const url = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/export/csv";
     console.debug("[ExpensesPage] export CSV ->", url);
     window.open(url, "_blank");
   };

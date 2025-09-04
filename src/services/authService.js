@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app/api/users/';
+const API_URL = 'https://construction-cost-tracker-server-g2.vercel.app/api/users/';
 
 const register = (name, email, password) => {
   return axios.post(API_URL + 'register', {
@@ -37,7 +37,7 @@ const updateProfile = (userData) => {
   return axios.put(API_URL + 'profile', userData, { headers: authHeader() });
 };
 const scheduleDailyReport = () => {
-  return axios.post('https://construction-cost-tracker-server-g2xg-4mnituoop.vercel.app/api/reports/schedule', {}, { headers: authHeader() });
+  return axios.post('https://construction-cost-tracker-server-g2.vercel.app/api/reports/schedule', {}, { headers: authHeader() });
 };
 const authService = {
   register,
