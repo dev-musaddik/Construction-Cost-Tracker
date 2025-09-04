@@ -321,7 +321,7 @@ const DashboardPage = () => {
           <p className="text-sm text-gray-300 bg-gray-200 animate-pulse mb-4 h-4 w-2/6 rounded"></p>
         </div>
       ) : (
-        <p className="text-sm text-gray-500 mb-4 fire-text">
+        <p className="text-sm text-gray-800 mb-4 and border-yellow-300">
           {meta?.startDate ? (
             `${t("range")}: ${new Date(
               meta.startDate
