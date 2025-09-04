@@ -257,7 +257,7 @@ export default function Navbar() {
         <aside
           ref={mobileRef}
           className={[
-            "fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs flex-col gap-2 border-r border-slate-200 bg-white p-4 shadow-xl transition-transform dark:border-slate-800 dark:bg-slate-900",
+            "fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs flex-col gap-2 border-r border-slate-200 bg-gray-500 p-4 shadow-xl transition-transform dark:border-slate-800",
             mobileOpen ? "translate-x-0" : "-translate-x-full",
           ].join(" ")}
           aria-label="Mobile navigation"
@@ -274,10 +274,10 @@ export default function Navbar() {
             </Button>
           </div>
 
-          <div className="h-px w-full bg-slate-100 dark:bg-slate-800" />
+          <div className="h-px w-full bg-gray-500" />
 
           {user ? (
-            <ul className="mt-2 grid gap-1">
+            <ul className="mt-2 grid gap-1 bg-gray-500 p-4">
               {navLinks.map((l) => (
                 <li key={l.to}>
                   <NavItem to={l.to} icon={l.icon} label={l.label} />
@@ -290,7 +290,7 @@ export default function Navbar() {
               )}
             </ul>
           ) : (
-            <div className="mt-3 grid gap-2">
+            <div className="mt-3 grid gap-2 bg-gray-500">
               <Link to="/login">
                 <Button className="w-full">Login</Button>
               </Link>
@@ -302,7 +302,7 @@ export default function Navbar() {
             </div>
           )}
 
-          <div className="mt-auto space-y-2 pt-4">
+          <div className="mt-auto space-y-2 pt-4 bg-gray-500 text-white">
             <Button variant="outline" className="w-full" onClick={switchLanguage}>
               <Globe className="mr-2 h-4 w-4" /> {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
