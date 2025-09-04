@@ -1,0 +1,8906 @@
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+
+
+.logo-container {
+  width: 150px;
+  height: 150px;
+  background-color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+}
+
+
+.logo {
+  max-width: 100%;
+  height: auto;
+}
+.hero-section {
+  background-color: #f0f2f5;
+  padding: 50px 0;
+  text-align: center;
+}
+
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+
+.hero-content .btn {
+  margin-right: 10px;
+}
+.about-section {
+  padding: 50px 0;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.projects-section {
+  padding: 50px 0;
+  background-color: #f0f2f5;
+}
+
+.projects-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.projects-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+
+.project-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+
+.project-card p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.project-card .btn {
+  margin-top: 10px;
+}
+.contact-section {
+  padding: 50px 0;
+}
+
+.contact-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.contact-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+
+.form-group label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.form-group textarea {
+  height: 150px;
+}
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/*  */
+.timeline-section {
+  padding: 50px 0;
+}
+
+.timeline-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.timeline-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: #ccc;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: white;
+  border: 4px solid #FF9F55;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  left: 50%;
+}
+
+
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.right::after {
+  left: -16px;
+}
+
+
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+}
+.skills-section {
+  padding: 50px 0;
+  background-color: #f0f2f5;
+}
+
+
+.skills-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.skills-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+.skills-list li {
+  background-color: #fff;
+  color: #333;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+}
+.services-section {
+  padding: 50px 0;
+}
+
+.services-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.services-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+
+.service-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+
+.service-card i {
+  font-size: 3rem;
+  color: #FF9F55;
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+
+.service-card p {
+  font-size: 1.1rem;
+}
+.testimonials-section {
+  padding: 50px 0;
+  background-color: #f0f2f5;
+}
+
+.testimonials-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.testimonials-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+
+.testimonial-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+
+.testimonial-card p {
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.testimonial-card .author {
+  font-weight: bold;
+}
+.blog-section {
+  padding: 50px 0;
+}
+
+
+.blog-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.blog-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+
+.blog-post {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.blog-post h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+
+.blog-post .meta {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+
+.blog-post p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+/*  */
+.login-container,
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+input[type='email'],
+input[type='password'],
+input[type='text'] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.dashboard-container {
+  padding: 20px;
+}
+
+.summary-cards {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+
+.card {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+}
+
+.recent-transactions {
+  margin-top: 20px;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #343a40;
+  color: white;
+}
+
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.categories-container,
+.expenses-container,
+.deposits-container {
+  padding: 20px;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-body {
+  margin-bottom: 15px;
+}
+
+
+.modal-footer {
+  text-align: right;
+}
+
+.profile-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 auto 10px;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+
+.detail {
+  margin-bottom: 10px;
+}
+
+.detail strong {
+  display: inline-block;
+  width: 100px;
+}
+
+.admin-users-container {
+  padding: 20px;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #343a40;
+  color: white;
+}
+
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+
+.nav-links li {
+  margin-right: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.footer-content p {
+  margin: 0;
+}
+.dark-mode .hero-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .about-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+.dark-mode .projects-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .project-card {
+  background-color: #34495e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.dark-mode .contact-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border: 1px solid #4a6278;
+}
+
+
+.dark-mode .footer {
+  background-color: #2c3e50;
+}
+.dark-mode .timeline-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+.dark-mode .timeline::after {
+  background-color: #4a6278;
+}
+
+
+.dark-mode .timeline-item::after {
+  background-color: #34495e;
+  border-color: #FF9F55;
+}
+
+.dark-mode .left::before {
+  border-color: transparent transparent transparent #34495e;
+}
+
+.dark-mode .right::before {
+  border-color: transparent #34495e transparent transparent;
+}
+
+
+.dark-mode .content {
+  background-color: #2c3e50;
+}
+.dark-mode .skills-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .skills-list li {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+.dark-mode .services-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .service-card {
+  background-color: #2c3e50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .testimonials-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .testimonial-card {
+  background-color: #34495e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .blog-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .blog-post {
+  background-color: #2c3e50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .login-container,
+.dark-mode .register-container {
+  background-color: #2c3e50;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+
+.dark-mode input[type='email'],
+.dark-mode input[type='password'],
+.dark-mode input[type='text'] {
+  background-color: #34495e;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+
+.dark-mode button {
+  background-color: #3498db;
+}
+
+
+.dark-mode button:hover {
+  background-color: #2980b9;
+}
+.dark-mode .dashboard-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.dark-mode .card {
+  background-color: #34495e;
+}
+
+.dark-mode thead {
+  background-color: #4a6278;
+}
+
+
+.dark-mode td {
+  border-color: #4a6278;
+}
+
+
+.dark-mode tbody tr:nth-child(even) {
+  background-color: #34495e;
+}
+.dark-mode .categories-container,
+.dark-mode .expenses-container,
+.dark-mode .deposits-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .modal-content {
+  background-color: #34495e;
+}
+.dark-mode .profile-container {
+  background-color: #2c3e50;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .avatar {
+  background-color: #4a6278;
+}
+.dark-mode .admin-users-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+.dark-mode .navbar {
+  background-color: #2c3e50;
+}
+.dark-mode .loader-container {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.dark-mode .loader {
+  border-top-color: #3498db;
+}
+
+
+
+
+.blue-mode .hero-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+.blue-mode .about-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .projects-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .project-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blue-mode .contact-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .form-group input,
+.blue-mode .form-group textarea {
+  background-color: #e0f7fa;
+  color: #004d40;
+  border: 1px solid #4dd0e1;
+}
+
+
+.blue-mode .footer {
+  background-color: #004d40;
+  color: #e0f7fa;
+}
+.blue-mode .timeline-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .timeline::after {
+  background-color: #4dd0e1;
+}
+
+.blue-mode .timeline-item::after {
+  background-color: #b2ebf2;
+  border-color: #00796b;
+}
+
+
+.blue-mode .left::before {
+  border-color: transparent transparent transparent #b2ebf2;
+}
+
+.blue-mode .right::before {
+  border-color: transparent #b2ebf2 transparent transparent;
+}
+
+
+.blue-mode .content {
+  background-color: #e0f7fa;
+}
+.blue-mode .skills-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .skills-list li {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+.blue-mode .services-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .service-card {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .testimonials-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .testimonial-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .blog-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .blog-post {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .login-container,
+.blue-mode .register-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+
+.blue-mode input[type='email'],
+.blue-mode input[type='password'],
+.blue-mode input[type='text'] {
+  background-color: #b2ebf2;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+.blue-mode button {
+  background-color: #00796b;
+}
+
+
+.blue-mode button:hover {
+  background-color: #004d40;
+}
+.blue-mode .dashboard-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .card {
+  background-color: #b2ebf2;
+}
+
+.blue-mode thead {
+  background-color: #004d40;
+}
+
+.blue-mode td {
+  border-color: #4dd0e1;
+}
+
+
+.blue-mode tbody tr:nth-child(even) {
+  background-color: #b2ebf2;
+}
+.blue-mode .categories-container,
+.blue-mode .expenses-container,
+.blue-mode .deposits-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .modal-content {
+  background-color: #b2ebf2;
+}
+.blue-mode .profile-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+
+.blue-mode .avatar {
+  background-color: #4dd0e1;
+}
+.blue-mode .admin-users-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+.blue-mode .navbar {
+  background-color: #004d40;
+}
+.blue-mode .loader-container {
+  background-color: rgba(224, 247, 250, 0.8);
+}
+
+
+.blue-mode .loader {
+  border-top-color: #00796b;
+}
+
+.green-mode .hero-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .about-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.green-mode .projects-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .project-card {
+  background-color: #c8e6c9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.green-mode .contact-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .form-group input,
+.green-mode .form-group textarea {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+
+.green-mode .footer {
+  background-color: #1b5e20;
+  color: #e8f5e9;
+}
+.green-mode .timeline-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+.green-mode .timeline::after {
+  background-color: #a5d6a7;
+}
+
+
+.green-mode .timeline-item::after {
+  background-color: #c8e6c9;
+  border-color: #2e7d32;
+}
+
+.green-mode .left::before {
+  border-color: transparent transparent transparent #c8e6c9;
+}
+
+
+.green-mode .right::before {
+  border-color: transparent #c8e6c9 transparent transparent;
+}
+
+
+.green-mode .content {
+  background-color: #e8f5e9;
+}
+.green-mode .skills-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .skills-list li {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+.green-mode .services-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .service-card {
+  background-color: #e8f5e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .testimonials-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .testimonial-card {
+  background-color: #c8e6c9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .blog-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .blog-post {
+  background-color: #e8f5e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .login-container,
+.green-mode .register-container {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+
+.green-mode input[type='email'],
+.green-mode input[type='password'],
+.green-mode input[type='text'] {
+  background-color: #c8e6c9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+.green-mode button {
+  background-color: #2e7d32;
+}
+
+
+.green-mode button:hover {
+  background-color: #1b5e20;
+}
+.green-mode .dashboard-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .card {
+  background-color: #c8e6c9;
+}
+
+.green-mode thead {
+  background-color: #1b5e20;
+}
+
+.green-mode td {
+  border-color: #a5d6a7;
+}
+
+
+.green-mode tbody tr:nth-child(even) {
+  background-color: #c8e6c9;
+}
+.green-mode .categories-container,
+.green-mode .expenses-container,
+.green-mode .deposits-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .modal-content {
+  background-color: #c8e6c9;
+}
+.green-mode .profile-container {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+
+.green-mode .avatar {
+  background-color: #a5d6a7;
+}
+.green-mode .admin-users-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+.green-mode .navbar {
+  background-color: #1b5e20;
+}
+.green-mode .loader-container {
+  background-color: rgba(232, 245, 233, 0.8);
+}
+
+
+.green-mode .loader {
+  border-top-color: #2e7d32;
+}
+
+.purple-mode .hero-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .about-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+.purple-mode .projects-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .project-card {
+  background-color: #e1bee7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.purple-mode .contact-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .form-group input,
+.purple-mode .form-group textarea {
+  background-color: #f3e5f5;
+  color: #4a148c;
+  border: 1px solid #ce93d8;
+}
+
+
+.purple-mode .footer {
+  background-color: #4a148c;
+  color: #f3e5f5;
+}
+.purple-mode .timeline-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+.purple-mode .timeline::after {
+  background-color: #ce93d8;
+}
+
+
+.purple-mode .timeline-item::after {
+  background-color: #e1bee7;
+  border-color: #6a1b9a;
+}
+
+.purple-mode .left::before {
+  border-color: transparent transparent transparent #e1bee7;
+}
+
+
+.purple-mode .right::before {
+  border-color: transparent #e1bee7 transparent transparent;
+}
+
+
+.purple-mode .content {
+  background-color: #f3e5f5;
+}
+.purple-mode .skills-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .skills-list li {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+.purple-mode .services-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .service-card {
+  background-color: #f3e5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .testimonials-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .testimonial-card {
+  background-color: #e1bee7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .blog-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .blog-post {
+  background-color: #f3e5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .login-container,
+.purple-mode .register-container {
+  background-color: #f3e5f5;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+
+.purple-mode input[type='email'],
+.purple-mode input[type='password'],
+.purple-mode input[type='text'] {
+  background-color: #e1bee7;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+.purple-mode button {
+  background-color: #6a1b9a;
+}
+
+
+.purple-mode button:hover {
+  background-color: #4a148c;
+}
+.purple-mode .dashboard-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.purple-mode .card {
+  background-color: #e1bee7;
+}
+
+
+.purple-mode thead {
+  background-color: #4a148c;
+}
+
+.purple-mode td {
+  border-color: #ce93d8;
+}
+
+
+.purple-mode tbody tr:nth-child(even) {
+  background-color: #e1bee7;
+}
+.purple-mode .categories-container,
+.purple-mode .expenses-container,
+.purple-mode .deposits-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .modal-content {
+  background-color: #e1bee7;
+}
+.purple-mode .profile-container {
+  background-color: #f3e5f5;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+
+.purple-mode .avatar {
+  background-color: #ce93d8;
+}
+.purple-mode .admin-users-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+.purple-mode .navbar {
+  background-color: #4a148c;
+}
+.purple-mode .loader-container {
+  background-color: rgba(243, 229, 245, 0.8);
+}
+
+
+.purple-mode .loader {
+  border-top-color: #6a1b9a;
+}
+.purple-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.orange-mode .hero-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.orange-mode .about-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .projects-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .project-card {
+  background-color: #ffe0b2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.orange-mode .contact-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .form-group input,
+.orange-mode .form-group textarea {
+  background-color: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+
+.orange-mode .footer {
+  background-color: #e65100;
+  color: #fff3e0;
+}
+.orange-mode .timeline-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .timeline::after {
+  background-color: #ffcc80;
+}
+
+.orange-mode .timeline-item::after {
+  background-color: #ffe0b2;
+  border-color: #ef6c00;
+}
+
+
+.orange-mode .left::before {
+  border-color: transparent transparent transparent #ffe0b2;
+}
+
+.orange-mode .right::before {
+  border-color: transparent #ffe0b2 transparent transparent;
+}
+
+
+.orange-mode .content {
+  background-color: #fff3e0;
+}
+.orange-mode .skills-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .skills-list li {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+.orange-mode .services-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .service-card {
+  background-color: #fff3e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .testimonials-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .testimonial-card {
+  background-color: #ffe0b2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .blog-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .blog-post {
+  background-color: #fff3e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .login-container,
+.orange-mode .register-container {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+
+.orange-mode input[type='email'],
+.orange-mode input[type='password'],
+.orange-mode input[type='text'] {
+  background-color: #ffe0b2;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+.orange-mode button {
+  background-color: #ef6c00;
+}
+
+
+.orange-mode button:hover {
+  background-color: #e65100;
+}
+.orange-mode .dashboard-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.orange-mode .card {
+  background-color: #ffe0b2;
+}
+
+
+.orange-mode thead {
+  background-color: #e65100;
+}
+
+.orange-mode td {
+  border-color: #ffcc80;
+}
+
+
+.orange-mode tbody tr:nth-child(even) {
+  background-color: #ffe0b2;
+}
+.orange-mode .categories-container,
+.orange-mode .expenses-container,
+.orange-mode .deposits-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .modal-content {
+  background-color: #ffe0b2;
+}
+.orange-mode .profile-container {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+
+.orange-mode .avatar {
+  background-color: #ffcc80;
+}
+.orange-mode .admin-users-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+.orange-mode .navbar {
+  background-color: #e65100;
+}
+.orange-mode .loader-container {
+  background-color: rgba(255, 243, 224, 0.8);
+}
+
+
+.orange-mode .loader {
+  border-top-color: #ef6c00;
+}
+.orange-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.pink-mode .hero-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+.pink-mode .about-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .projects-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .project-card {
+  background-color: #f8bbd0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pink-mode .contact-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .form-group input,
+.pink-mode .form-group textarea {
+  background-color: #fce4ec;
+  color: #c2185b;
+  border: 1px solid #f48fb1;
+}
+
+
+.pink-mode .footer {
+  background-color: #c2185b;
+  color: #fce4ec;
+}
+.pink-mode .timeline-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .timeline::after {
+  background-color: #f48fb1;
+}
+
+.pink-mode .timeline-item::after {
+  background-color: #f8bbd0;
+  border-color: #d81b60;
+}
+
+
+.pink-mode .left::before {
+  border-color: transparent transparent transparent #f8bbd0;
+}
+
+.pink-mode .right::before {
+  border-color: transparent #f8bbd0 transparent transparent;
+}
+
+
+.pink-mode .content {
+  background-color: #fce4ec;
+}
+.pink-mode .skills-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .skills-list li {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+.pink-mode .services-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .service-card {
+  background-color: #fce4ec;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .testimonials-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .testimonial-card {
+  background-color: #f8bbd0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .blog-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .blog-post {
+  background-color: #fce4ec;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .login-container,
+.pink-mode .register-container {
+  background-color: #fce4ec;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+
+.pink-mode input[type='email'],
+.pink-mode input[type='password'],
+.pink-mode input[type='text'] {
+  background-color: #f8bbd0;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+.pink-mode button {
+  background-color: #d81b60;
+}
+
+
+.pink-mode button:hover {
+  background-color: #c2185b;
+}
+.pink-mode .dashboard-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .card {
+  background-color: #f8bbd0;
+}
+
+.pink-mode thead {
+  background-color: #c2185b;
+}
+
+.pink-mode td {
+  border-color: #f48fb1;
+}
+
+
+.pink-mode tbody tr:nth-child(even) {
+  background-color: #f8bbd0;
+}
+.pink-mode .categories-container,
+.pink-mode .expenses-container,
+.pink-mode .deposits-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .modal-content {
+  background-color: #f8bbd0;
+}
+.pink-mode .profile-container {
+  background-color: #fce4ec;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+
+.pink-mode .avatar {
+  background-color: #f48fb1;
+}
+.pink-mode .admin-users-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+.pink-mode .navbar {
+  background-color: #c2185b;
+}
+.pink-mode .loader-container {
+  background-color: rgba(252, 228, 236, 0.8);
+}
+
+
+.pink-mode .loader {
+  border-top-color: #d81b60;
+}
+.pink-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.cyan-mode .hero-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .about-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+.cyan-mode .projects-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .project-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.cyan-mode .contact-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .form-group input,
+.cyan-mode .form-group textarea {
+  background-color: #e0f7fa;
+  color: #006064;
+  border: 1px solid #4dd0e1;
+}
+
+
+.cyan-mode .footer {
+  background-color: #006064;
+  color: #e0f7fa;
+}
+.cyan-mode .timeline-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+.cyan-mode .timeline::after {
+  background-color: #4dd0e1;
+}
+
+
+.cyan-mode .timeline-item::after {
+  background-color: #b2ebf2;
+  border-color: #00838f;
+}
+
+.cyan-mode .left::before {
+  border-color: transparent transparent transparent #b2ebf2;
+}
+
+
+.cyan-mode .right::before {
+  border-color: transparent #b2ebf2 transparent transparent;
+}
+
+
+.cyan-mode .content {
+  background-color: #e0f7fa;
+}
+.cyan-mode .skills-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .skills-list li {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+.cyan-mode .services-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .service-card {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .testimonials-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .testimonial-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .blog-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .blog-post {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .login-container,
+.cyan-mode .register-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+
+.cyan-mode input[type='email'],
+.cyan-mode input[type='password'],
+.cyan-mode input[type='text'] {
+  background-color: #b2ebf2;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+.cyan-mode button {
+  background-color: #00838f;
+}
+
+
+.cyan-mode button:hover {
+  background-color: #006064;
+}
+.cyan-mode .dashboard-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+.cyan-mode .card {
+  background-color: #b2ebf2;
+}
+
+
+.cyan-mode thead {
+  background-color: #006064;
+}
+
+.cyan-mode td {
+  border-color: #4dd0e1;
+}
+
+
+.cyan-mode tbody tr:nth-child(even) {
+  background-color: #b2ebf2;
+}
+.cyan-mode .categories-container,
+.cyan-mode .expenses-container,
+.cyan-mode .deposits-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .modal-content {
+  background-color: #b2ebf2;
+}
+.cyan-mode .profile-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+
+.cyan-mode .avatar {
+  background-color: #4dd0e1;
+}
+.cyan-mode .admin-users-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+.cyan-mode .navbar {
+  background-color: #006064;
+}
+.cyan-mode .loader-container {
+  background-color: rgba(224, 247, 250, 0.8);
+}
+
+
+.cyan-mode .loader {
+  border-top-color: #00838f;
+}
+.cyan-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.teal-mode .hero-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+.teal-mode .about-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .projects-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .project-card {
+  background-color: #b2dfdb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.teal-mode .contact-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .form-group input,
+.teal-mode .form-group textarea {
+  background-color: #e0f2f1;
+  color: #004d40;
+  border: 1px solid #80cbc4;
+}
+
+
+.teal-mode .footer {
+  background-color: #004d40;
+  color: #e0f2f1;
+}
+.teal-mode .timeline-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+.teal-mode .timeline::after {
+  background-color: #80cbc4;
+}
+
+
+.teal-mode .timeline-item::after {
+  background-color: #b2dfdb;
+  border-color: #00695c;
+}
+
+.teal-mode .left::before {
+  border-color: transparent transparent transparent #b2dfdb;
+}
+
+.teal-mode .right::before {
+  border-color: transparent #b2dfdb transparent transparent;
+}
+
+
+.teal-mode .content {
+  background-color: #e0f2f1;
+}
+.teal-mode .skills-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .skills-list li {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+.teal-mode .services-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .service-card {
+  background-color: #e0f2f1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .testimonials-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .testimonial-card {
+  background-color: #b2dfdb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .blog-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .blog-post {
+  background-color: #e0f2f1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .login-container,
+.teal-mode .register-container {
+  background-color: #e0f2f1;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+
+.teal-mode input[type='email'],
+.teal-mode input[type='password'],
+.teal-mode input[type='text'] {
+  background-color: #b2dfdb;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+.teal-mode button {
+  background-color: #00695c;
+}
+
+
+.teal-mode button:hover {
+  background-color: #004d40;
+}
+.teal-mode .dashboard-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .card {
+  background-color: #b2dfdb;
+}
+
+.teal-mode thead {
+  background-color: #004d40;
+}
+
+
+.teal-mode td {
+  border-color: #80cbc4;
+}
+
+
+.teal-mode tbody tr:nth-child(even) {
+  background-color: #b2dfdb;
+}
+.teal-mode .categories-container,
+.teal-mode .expenses-container,
+.teal-mode .deposits-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .modal-content {
+  background-color: #b2dfdb;
+}
+.teal-mode .profile-container {
+  background-color: #e0f2f1;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+
+.teal-mode .avatar {
+  background-color: #80cbc4;
+}
+.teal-mode .admin-users-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+.teal-mode .navbar {
+  background-color: #004d40;
+}
+.teal-mode .loader-container {
+  background-color: rgba(224, 242, 241, 0.8);
+}
+
+
+.teal-mode .loader {
+  border-top-color: #00695c;
+}
+.teal-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.lime-mode .hero-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .about-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .projects-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+.lime-mode .project-card {
+  background-color: #f0f4c3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.lime-mode .contact-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .form-group input,
+.lime-mode .form-group textarea {
+  background-color: #f9fbe7;
+  color: #827717;
+  border: 1px solid #e6ee9c;
+}
+
+
+.lime-mode .footer {
+  background-color: #827717;
+  color: #f9fbe7;
+}
+.lime-mode .timeline-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+.lime-mode .timeline::after {
+  background-color: #e6ee9c;
+}
+
+.lime-mode .timeline-item::after {
+  background-color: #f0f4c3;
+  border-color: #9e9d24;
+}
+
+
+.lime-mode .left::before {
+  border-color: transparent transparent transparent #f0f4c3;
+}
+
+.lime-mode .right::before {
+  border-color: transparent #f0f4c3 transparent transparent;
+}
+
+
+.lime-mode .content {
+  background-color: #f9fbe7;
+}
+.lime-mode .skills-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .skills-list li {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+.lime-mode .services-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .service-card {
+  background-color: #f9fbe7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .testimonials-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .testimonial-card {
+  background-color: #f0f4c3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .blog-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .blog-post {
+  background-color: #f9fbe7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .login-container,
+.lime-mode .register-container {
+  background-color: #f9fbe7;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+
+.lime-mode input[type='email'],
+.lime-mode input[type='password'],
+.lime-mode input[type='text'] {
+  background-color: #f0f4c3;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+.lime-mode button {
+  background-color: #9e9d24;
+}
+
+
+.lime-mode button:hover {
+  background-color: #827717;
+}
+.lime-mode .dashboard-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .card {
+  background-color: #f0f4c3;
+}
+
+.lime-mode thead {
+  background-color: #827717;
+}
+
+.lime-mode td {
+  border-color: #e6ee9c;
+}
+
+
+.lime-mode tbody tr:nth-child(even) {
+  background-color: #f0f4c3;
+}
+.lime-mode .categories-container,
+.lime-mode .expenses-container,
+.lime-mode .deposits-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .modal-content {
+  background-color: #f0f4c3;
+}
+.lime-mode .profile-container {
+  background-color: #f9fbe7;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+
+.lime-mode .avatar {
+  background-color: #e6ee9c;
+}
+.lime-mode .admin-users-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+.lime-mode .navbar {
+  background-color: #827717;
+}
+.lime-mode .loader-container {
+  background-color: rgba(249, 251, 231, 0.8);
+}
+
+
+.lime-mode .loader {
+  border-top-color: #9e9d24;
+}
+.lime-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.amber-mode .hero-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .about-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+.amber-mode .projects-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .project-card {
+  background-color: #ffecb3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.amber-mode .contact-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .form-group input,
+.amber-mode .form-group textarea {
+  background-color: #fff8e1;
+  color: #ff6f00;
+  border: 1px solid #ffe082;
+}
+
+
+.amber-mode .footer {
+  background-color: #ff6f00;
+  color: #fff8e1;
+}
+.amber-mode .timeline-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+.amber-mode .timeline::after {
+  background-color: #ffe082;
+}
+
+
+.amber-mode .timeline-item::after {
+  background-color: #ffecb3;
+  border-color: #ff8f00;
+}
+
+.amber-mode .left::before {
+  border-color: transparent transparent transparent #ffecb3;
+}
+
+.amber-mode .right::before {
+  border-color: transparent #ffecb3 transparent transparent;
+}
+
+
+.amber-mode .content {
+  background-color: #fff8e1;
+}
+.amber-mode .skills-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .skills-list li {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+.amber-mode .services-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .service-card {
+  background-color: #fff8e1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .testimonials-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .testimonial-card {
+  background-color: #ffecb3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .blog-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .blog-post {
+  background-color: #fff8e1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .login-container,
+.amber-mode .register-container {
+  background-color: #fff8e1;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+
+.amber-mode input[type='email'],
+.amber-mode input[type='password'],
+.amber-mode input[type='text'] {
+  background-color: #ffecb3;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+.amber-mode button {
+  background-color: #ff8f00;
+}
+
+
+.amber-mode button:hover {
+  background-color: #ff6f00;
+}
+.amber-mode .dashboard-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .card {
+  background-color: #ffecb3;
+}
+
+.amber-mode thead {
+  background-color: #ff6f00;
+}
+
+.amber-mode td {
+  border-color: #ffe082;
+}
+
+
+.amber-mode tbody tr:nth-child(even) {
+  background-color: #ffecb3;
+}
+.amber-mode .categories-container,
+.amber-mode .expenses-container,
+.amber-mode .deposits-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .modal-content {
+  background-color: #ffecb3;
+}
+.amber-mode .profile-container {
+  background-color: #fff8e1;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+
+.amber-mode .avatar {
+  background-color: #ffe082;
+}
+.amber-mode .admin-users-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+.amber-mode .navbar {
+  background-color: #ff6f00;
+}
+.amber-mode .loader-container {
+  background-color: rgba(255, 248, 225, 0.8);
+}
+
+
+.amber-mode .loader {
+  border-top-color: #ff8f00;
+}
+.amber-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.deep-orange-mode .hero-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .about-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+.deep-orange-mode .projects-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .project-card {
+  background-color: #ffccbc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.deep-orange-mode .contact-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .form-group input,
+.deep-orange-mode .form-group textarea {
+  background-color: #fbe9e7;
+  color: #bf360c;
+  border: 1px solid #ffab91;
+}
+
+
+.deep-orange-mode .footer {
+  background-color: #bf360c;
+  color: #fbe9e7;
+}
+.deep-orange-mode .timeline-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+.deep-orange-mode .timeline::after {
+  background-color: #ffab91;
+}
+
+
+.deep-orange-mode .timeline-item::after {
+  background-color: #ffccbc;
+  border-color: #d84315;
+}
+
+.deep-orange-mode .left::before {
+  border-color: transparent transparent transparent #ffccbc;
+}
+
+
+.deep-orange-mode .right::before {
+  border-color: transparent #ffccbc transparent transparent;
+}
+
+
+.deep-orange-mode .content {
+  background-color: #fbe9e7;
+}
+.deep-orange-mode .skills-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .skills-list li {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+.deep-orange-mode .services-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .service-card {
+  background-color: #fbe9e7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .testimonials-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .testimonial-card {
+  background-color: #ffccbc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .blog-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .blog-post {
+  background-color: #fbe9e7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .login-container,
+.deep-orange-mode .register-container {
+  background-color: #fbe9e7;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode input[type='email'],
+.deep-orange-mode input[type='password'],
+.deep-orange-mode input[type='text'] {
+  background-color: #ffccbc;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+.deep-orange-mode button {
+  background-color: #d84315;
+}
+
+
+.deep-orange-mode button:hover {
+  background-color: #bf360c;
+}
+.deep-orange-mode .dashboard-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+.deep-orange-mode .card {
+  background-color: #ffccbc;
+}
+
+.deep-orange-mode thead {
+  background-color: #bf360c;
+}
+
+.deep-orange-mode td {
+  border-color: #ffab91;
+}
+
+
+.deep-orange-mode tbody tr:nth-child(even) {
+  background-color: #ffccbc;
+}
+.deep-orange-mode .categories-container,
+.deep-orange-mode .expenses-container,
+.deep-orange-mode .deposits-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .modal-content {
+  background-color: #ffccbc;
+}
+.deep-orange-mode .profile-container {
+  background-color: #fbe9e7;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .avatar {
+  background-color: #ffab91;
+}
+.deep-orange-mode .admin-users-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+.deep-orange-mode .navbar {
+  background-color: #bf360c;
+}
+.deep-orange-mode .loader-container {
+  background-color: rgba(251, 233, 231, 0.8);
+}
+
+
+.deep-orange-mode .loader {
+  border-top-color: #d84315;
+}
+.deep-orange-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.brown-mode .hero-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .about-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+.brown-mode .projects-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .project-card {
+  background-color: #d7ccc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.brown-mode .contact-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .form-group input,
+.brown-mode .form-group textarea {
+  background-color: #efebe9;
+  color: #3e2723;
+  border: 1px solid #bcaaa4;
+}
+
+
+.brown-mode .footer {
+  background-color: #3e2723;
+  color: #efebe9;
+}
+.brown-mode .timeline-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+.brown-mode .timeline::after {
+  background-color: #bcaaa4;
+}
+
+
+.brown-mode .timeline-item::after {
+  background-color: #d7ccc8;
+  border-color: #5d4037;
+}
+
+.brown-mode .left::before {
+  border-color: transparent transparent transparent #d7ccc8;
+}
+
+
+.brown-mode .right::before {
+  border-color: transparent #d7ccc8 transparent transparent;
+}
+
+.brown-mode .content {
+  background-color: #efebe9;
+}
+.brown-mode .skills-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .skills-list li {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+.brown-mode .services-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .service-card {
+  background-color: #efebe9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .testimonials-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .testimonial-card {
+  background-color: #d7ccc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .blog-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .blog-post {
+  background-color: #efebe9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .login-container,
+.brown-mode .register-container {
+  background-color: #efebe9;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+
+.brown-mode input[type='email'],
+.brown-mode input[type='password'],
+.brown-mode input[type='text'] {
+  background-color: #d7ccc8;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+
+.brown-mode button {
+  background-color: #5d4037;
+}
+
+.brown-mode button:hover {
+  background-color: #3e2723;
+}
+.brown-mode .dashboard-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .card {
+  background-color: #d7ccc8;
+}
+
+.brown-mode thead {
+  background-color: #3e2723;
+}
+
+
+.brown-mode td {
+  border-color: #bcaaa4;
+}
+
+
+.brown-mode tbody tr:nth-child(even) {
+  background-color: #d7ccc8;
+}
+.brown-mode .categories-container,
+.brown-mode .expenses-container,
+.brown-mode .deposits-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .modal-content {
+  background-color: #d7ccc8;
+}
+.brown-mode .profile-container {
+  background-color: #efebe9;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+
+.brown-mode .avatar {
+  background-color: #bcaaa4;
+}
+.brown-mode .admin-users-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+.brown-mode .navbar {
+  background-color: #3e2723;
+}
+.brown-mode .loader-container {
+  background-color: rgba(239, 235, 233, 0.8);
+}
+
+
+.brown-mode .loader {
+  border-top-color: #5d4037;
+}
+.brown-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.grey-mode .hero-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .about-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+.grey-mode .projects-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .project-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.grey-mode .contact-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+
+.grey-mode .form-group input,
+.grey-mode .form-group textarea {
+  background-color: #fafafa;
+  color: #212121;
+  border: 1px solid #eeeeee;
+}
+
+
+.grey-mode .footer {
+  background-color: #212121;
+  color: #fafafa;
+}
+.grey-mode .timeline-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+.grey-mode .timeline::after {
+  background-color: #eeeeee;
+}
+
+
+.grey-mode .timeline-item::after {
+  background-color: #f5f5f5;
+  border-color: #424242;
+}
+
+.grey-mode .left::before {
+  border-color: transparent transparent transparent #f5f5f5;
+}
+
+
+.grey-mode .right::before {
+  border-color: transparent #f5f5f5 transparent transparent;
+}
+
+.grey-mode .content {
+  background-color: #fafafa;
+}
+.grey-mode .skills-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .skills-list li {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+.grey-mode .services-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+
+.grey-mode .service-card {
+  background-color: #fafafa;
+  box-shadow: 0 4px 6px rgba(0, 0, .1);
+}
+.grey-mode .testimonials-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .testimonial-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.grey-mode .blog-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+
+.grey-mode .blog-post {
+  background-color: #fafafa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.grey-mode .login-container,
+.grey-mode .register-container {
+  background-color: #fafafa;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+
+.grey-mode input[type='email'],
+.grey-mode input[type='password'],
+.grey-mode input[type='text'] {
+  background-color: #f5f5f5;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+.grey-mode button {
+  background-color: #424242;
+}
+
+
+.grey-mode button:hover {
+  background-color: #212121;
+}
+.grey-mode .dashboard-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .card {
+  background-color: #f5f5f5;
+}
+
+.grey-mode thead {
+  background-color: #212121;
+}
+
+.grey-mode td {
+  border-color: #eeeeee;
+}
+
+
+.grey-mode tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.grey-mode .categories-container,
+.grey-mode .expenses-container,
+.grey-mode .deposits-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .modal-content {
+  background-color: #f5f5f5;
+}
+.grey-mode .profile-container {
+  background-color: #fafafa;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+
+.grey-mode .avatar {
+  background-color: #eeeeee;
+}
+.grey-mode .admin-users-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+.grey-mode .navbar {
+  background-color: #212121;
+}
+.grey-mode .loader-container {
+  background-color: rgba(250, 250, 250, 0.8);
+}
+
+
+.grey-mode .loader {
+  border-top-color: #424242;
+}
+.grey-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.blue-grey-mode .hero-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .about-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+.blue-grey-mode .projects-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .project-card {
+  background-color: #cfd8dc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.blue-grey-mode .contact-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .form-group input,
+.blue-grey-mode .form-group textarea {
+  background-color: #eceff1;
+  color: #263238;
+  border: 1px solid #b0bec5;
+}
+
+
+.blue-grey-mode .footer {
+  background-color: #263238;
+  color: #eceff1;
+}
+.blue-grey-mode .timeline-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+.blue-grey-mode .timeline::after {
+  background-color: #b0bec5;
+}
+
+
+.blue-grey-mode .timeline-item::after {
+  background-color: #cfd8dc;
+  border-color: #455a64;
+}
+
+.blue-grey-mode .left::before {
+  border-color: transparent transparent transparent #cfd8dc;
+}
+
+
+.blue-grey-mode .right::before {
+  border-color: transparent #cfd8dc transparent transparent;
+}
+
+
+.blue-grey-mode .content {
+  background-color: #eceff1;
+}
+.blue-grey-mode .skills-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .skills-list li {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+.blue-grey-mode .services-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .service-card {
+  background-color: #eceff1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .testimonials-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .testimonial-card {
+  background-color: #cfd8dc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .blog-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .blog-post {
+  background-color: #eceff1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .login-container,
+.blue-grey-mode .register-container {
+  background-color: #eceff1;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+
+.blue-grey-mode input[type='email'],
+.blue-grey-mode input[type='password'],
+.blue-grey-mode input[type='text'] {
+  background-color: #cfd8dc;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+.blue-grey-mode button {
+  background-color: #455a64;
+}
+
+
+.blue-grey-mode button:hover {
+  background-color: #263238;
+}
+.blue-grey-mode .dashboard-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+.blue-grey-mode .card {
+  background-color: #cfd8dc;
+}
+
+
+.blue-grey-mode thead {
+  background-color: #263238;
+}
+
+.blue-grey-mode td {
+  border-color: #b0bec5;
+}
+
+
+.blue-grey-mode tbody tr:nth-child(even) {
+  background-color: #cfd8dc;
+}
+.blue-grey-mode .categories-container,
+.blue-grey-mode .expenses-container,
+.blue-grey-mode .deposits-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .modal-content {
+  background-color: #cfd8dc;
+}
+.blue-grey-mode .profile-container {
+  background-color: #eceff1;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+
+.blue-grey-mode .avatar {
+  background-color: #b0bec5;
+}
+.blue-grey-mode .admin-users-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+.blue-grey-mode .navbar {
+  background-color: #263238;
+}
+.blue-grey-mode .loader-container {
+  background-color: rgba(236, 239, 241, 0.8);
+}
+
+
+.blue-grey-mode .loader {
+  border-top-color: #455a64;
+}
+.blue-grey-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.red-mode .hero-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .about-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+.red-mode .projects-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .project-card {
+  background-color: #ffcdd2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.red-mode .contact-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .form-group input,
+.red-mode .form-group textarea {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+
+.red-mode .footer {
+  background-color: #b71c1c;
+  color: #ffebee;
+}
+.red-mode .timeline-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+.red-mode .timeline::after {
+  background-color: #ef9a9a;
+}
+
+
+.red-mode .timeline-item::after {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+}
+
+.red-mode .left::before {
+  border-color: transparent transparent transparent #ffcdd2;
+}
+
+.red-mode .right::before {
+  border-color: transparent #ffcdd2 transparent transparent;
+}
+
+
+.red-mode .content {
+  background-color: #ffebee;
+}
+.red-mode .skills-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .skills-list li {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+.red-mode .services-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .service-card {
+  background-color: #ffebee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .testimonials-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .testimonial-card {
+  background-color: #ffcdd2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .blog-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .blog-post {
+  background-color: #ffebee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .login-container,
+.red-mode .register-container {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+
+.red-mode input[type='email'],
+.red-mode input[type='password'],
+.red-mode input[type='text'] {
+  background-color: #ffcdd2;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+.red-mode button {
+  background-color: #c62828;
+}
+
+
+.red-mode button:hover {
+  background-color: #b71c1c;
+}
+.red-mode .dashboard-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.red-mode .card {
+  background-color: #ffcdd2;
+}
+
+
+.red-mode thead {
+  background-color: #b71c1c;
+}
+
+.red-mode td {
+  border-color: #ef9a9a;
+}
+
+
+.red-mode tbody tr:nth-child(even) {
+  background-color: #ffcdd2;
+}
+.red-mode .categories-container,
+.red-mode .expenses-container,
+.red-mode .deposits-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .modal-content {
+  background-color: #ffcdd2;
+}
+.red-mode .profile-container {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+
+.red-mode .avatar {
+  background-color: #ef9a9a;
+}
+.red-mode .admin-users-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.red-mode .navbar {
+  background-color: #b71c1c;
+}
+.red-mode .loader-container {
+  background-color: rgba(255, 235, 238, 0.8);
+}
+
+
+.red-mode .loader {
+  border-top-color: #c62828;
+}
+.red-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.deep-purple-mode .hero-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.deep-purple-mode .about-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .projects-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .project-card {
+  background-color: #d1c4e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.deep-purple-mode .contact-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .form-group input,
+.deep-purple-mode .form-group textarea {
+  background-color: #ede7f6;
+  color: #311b92;
+  border: 1px solid #b39ddb;
+}
+
+
+.deep-purple-mode .footer {
+  background-color: #311b92;
+  color: #ede7f6;
+}
+.deep-purple-mode .timeline-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+.deep-purple-mode .timeline::after {
+  background-color: #b39ddb;
+}
+
+
+.deep-purple-mode .timeline-item::after {
+  background-color: #d1c4e9;
+  border-color: #4527a0;
+}
+
+.deep-purple-mode .left::before {
+  border-color: transparent transparent transparent #d1c4e9;
+}
+
+
+.deep-purple-mode .right::before {
+  border-color: transparent #d1c4e9 transparent transparent;
+}
+
+
+.deep-purple-mode .content {
+  background-color: #ede7f6;
+}
+.deep-purple-mode .skills-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .skills-list li {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+.deep-purple-mode .services-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .service-card {
+  background-color: #ede7f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .testimonials-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .testimonial-card {
+  background-color: #d1c4e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .blog-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .blog-post {
+  background-color: #ede7f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .login-container,
+.deep-purple-mode .register-container {
+  background-color: #ede7f6;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode input[type='email'],
+.deep-purple-mode input[type='password'],
+.deep-purple-mode input[type='text'] {
+  background-color: #d1c4e9;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode button {
+  background-color: #4527a0;
+}
+
+
+.deep-purple-mode button:hover {
+  background-color: #311b92;
+}
+.deep-purple-mode .dashboard-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.deep-purple-mode .card {
+  background-color: #d1c4e9;
+}
+
+.deep-purple-mode thead {
+  background-color: #311b92;
+}
+
+
+.deep-purple-mode td {
+  border-color: #b39ddb;
+}
+
+
+.deep-purple-mode tbody tr:nth-child(even) {
+  background-color: #d1c4e9;
+}
+.deep-purple-mode .categories-container,
+.deep-purple-mode .expenses-container,
+.deep-purple-mode .deposits-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .modal-content {
+  background-color: #d1c4e9;
+}
+.deep-purple-mode .profile-container {
+  background-color: #ede7f6;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .avatar {
+  background-color: #b39ddb;
+}
+.deep-purple-mode .admin-users-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+.deep-purple-mode .navbar {
+  background-color: #311b92;
+}
+.deep-purple-mode .loader-container {
+  background-color: rgba(237, 231, 246, 0.8);
+}
+
+
+.deep-purple-mode .loader {
+  border-top-color: #4527a0;
+}
+.deep-purple-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.indigo-mode .hero-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .about-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+.indigo-mode .projects-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .project-card {
+  background-color: #c5cae9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.indigo-mode .contact-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+.indigo-mode .form-group input,
+.indigo-mode .form-group textarea {
+  background-color: #e8eaf6;
+  color: #1a237e;
+  border: 1px solid #9fa8da;
+}
+
+
+.indigo-mode .footer {
+  background-color: #1a237e;
+  color: #e8eaf6;
+}
+.indigo-mode .timeline-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+.indigo-mode .timeline::after {
+  background-color: #9fa8da;
+}
+
+
+.indigo-mode .timeline-item::after {
+  background-color: #c5cae9;
+  border-color: #283593;
+}
+
+.indigo-mode .left::before {
+  border-color: transparent transparent transparent #c5cae9;
+}
+
+.indigo-mode .right::before {
+  border-color: transparent #c5cae9 transparent transparent;
+}
+
+
+.indigo-mode .content {
+  background-color: #e8eaf6;
+}
+.indigo-mode .skills-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .skills-list li {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+.indigo-mode .services-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+
+.indigo-mode .service-card {
+  background-color: #e8eaf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .testimonials-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .testimonial-card {
+  background-color: #c5cae9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .blog-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+
+.indigo-mode .blog-post {
+  background-color: #e8eaf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .login-container,
+.indigo-mode .register-container {
+  background-color: #e8eaf6;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode input[type='email'],
+.indigo-mode input[type='password'],
+.indigo-mode input[type='text'] {
+  background-color: #c5cae9;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode button {
+  background-color: #283593;
+}
+
+
+.indigo-mode button:hover {
+  background-color: #1a237e;
+}
+.indigo-mode .dashboard-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+.indigo-mode .card {
+  background-color: #c5cae9;
+}
+
+.indigo-mode thead {
+  background-color: #1a237e;
+}
+
+
+.indigo-mode td {
+  border-color: #9fa8da;
+}
+
+
+.indigo-mode tbody tr:nth-child(even) {
+  background-color: #c5cae9;
+}
+.indigo-mode .categories-container,
+.indigo-mode .expenses-container,
+.indigo-mode .deposits-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .modal-content {
+  background-color: #c5cae9;
+}
+.indigo-mode .profile-container {
+  background-color: #e8eaf6;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode .avatar {
+  background-color: #9fa8da;
+}
+.indigo-mode .admin-users-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+.indigo-mode .navbar {
+  background-color: #1a237e;
+}
+.indigo-mode .loader-container {
+  background-color: rgba(232, 234, 246, 0.8);
+}
+
+
+.indigo-mode .loader {
+  border-top-color: #283593;
+}
+.indigo-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.light-blue-mode .hero-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .about-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .projects-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+.light-blue-mode .project-card {
+  background-color: #b3e5fc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-blue-mode .contact-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .form-group input,
+.light-blue-mode .form-group textarea {
+  background-color: #e1f5fe;
+  color: #01579b;
+  border: 1px solid #81d4fa;
+}
+
+
+.light-blue-mode .footer {
+  background-color: #01579b;
+  color: #e1f5fe;
+}
+.light-blue-mode .timeline-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .timeline::after {
+  background-color: #81d4fa;
+}
+
+.light-blue-mode .timeline-item::after {
+  background-color: #b3e5fc;
+  border-color: #0277bd;
+}
+
+
+.light-blue-mode .left::before {
+  border-color: transparent transparent transparent #b3e5fc;
+}
+
+.light-blue-mode .right::before {
+  border-color: transparent #b3e5fc transparent transparent;
+}
+
+
+.light-blue-mode .content {
+  background-color: #e1f5fe;
+}
+.light-blue-mode .skills-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .skills-list li {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+.light-blue-mode .services-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .service-card {
+  background-color: #e1f5fe;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .testimonials-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .testimonial-card {
+  background-color: #b3e5fc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .blog-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .blog-post {
+  background-color: #e1f5fe;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .login-container,
+.light-blue-mode .register-container {
+  background-color: #e1f5fe;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+
+.light-blue-mode input[type='email'],
+.light-blue-mode input[type='password'],
+.light-blue-mode input[type='text'] {
+  background-color: #b3e5fc;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+.light-blue-mode button {
+  background-color: #0277bd;
+}
+
+
+.light-blue-mode button:hover {
+  background-color: #01579b;
+}
+.light-blue-mode .dashboard-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+.light-blue-mode .card {
+  background-color: #b3e5fc;
+}
+
+
+.light-blue-mode thead {
+  background-color: #01579b;
+}
+
+.light-blue-mode td {
+  border-color: #81d4fa;
+}
+
+
+.light-blue-mode tbody tr:nth-child(even) {
+  background-color: #b3e5fc;
+}
+.light-blue-mode .categories-container,
+.light-blue-mode .expenses-container,
+.light-blue-mode .deposits-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .modal-content {
+  background-color: #b3e5fc;
+}
+.light-blue-mode .profile-container {
+  background-color: #e1f5fe;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+
+.light-blue-mode .avatar {
+  background-color: #81d4fa;
+}
+.light-blue-mode .admin-users-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+.light-blue-mode .navbar {
+  background-color: #01579b;
+}
+.light-blue-mode .loader-container {
+  background-color: rgba(225, 245, 254, 0.8);
+}
+
+
+.light-blue-mode .loader {
+  border-top-color: #0277bd;
+}
+.light-blue-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.light-green-mode .hero-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .about-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+.light-green-mode .projects-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .project-card {
+  background-color: #dcedc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.light-green-mode .contact-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .form-group input,
+.light-green-mode .form-group textarea {
+  background-color: #f1f8e9;
+  color: #33691e;
+  border: 1px solid #c5e1a5;
+}
+
+
+.light-green-mode .footer {
+  background-color: #33691e;
+  color: #f1f8e9;
+}
+.light-green-mode .timeline-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .timeline::after {
+  background-color: #c5e1a5;
+}
+
+.light-green-mode .timeline-item::after {
+  background-color: #dcedc8;
+  border-color: #558b2f;
+}
+
+
+.light-green-mode .left::before {
+  border-color: transparent transparent transparent #dcedc8;
+}
+
+.light-green-mode .right::before {
+  border-color: transparent #dcedc8 transparent transparent;
+}
+
+
+.light-green-mode .content {
+  background-color: #f1f8e9;
+}
+.light-green-mode .skills-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .skills-list li {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+.light-green-mode .services-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .service-card {
+  background-color: #f1f8e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .testimonials-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .testimonial-card {
+  background-color: #dcedc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .blog-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .blog-post {
+  background-color: #f1f8e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .login-container,
+.light-green-mode .register-container {
+  background-color: #f1f8e9;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+
+.light-green-mode input[type='email'],
+.light-green-mode input[type='password'],
+.light-green-mode input[type='text'] {
+  background-color: #dcedc8;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+
+.light-green-mode button {
+  background-color: #558b2f;
+}
+
+
+.light-green-mode button:hover {
+  background-color: #33691e;
+}
+.light-green-mode .dashboard-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+.light-green-mode .card {
+  background-color: #dcedc8;
+}
+
+
+.light-green-mode thead {
+  background-color: #33691e;
+}
+
+.light-green-mode td {
+  border-color: #c5e1a5;
+}
+
+
+.light-green-mode tbody tr:nth-child(even) {
+  background-color: #dcedc8;
+}
+.light-green-mode .categories-container,
+.light-green-mode .expenses-container,
+.light-green-mode .deposits-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .modal-content {
+  background-color: #dcedc8;
+}
+.light-green-mode .profile-container {
+  background-color: #f1f8e9;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+
+.light-green-mode .avatar {
+  background-color: #c5e1a5;
+}
+.light-green-mode .admin-users-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+.light-green-mode .navbar {
+  background-color: #33691e;
+}
+.light-green-mode .loader-container {
+  background-color: rgba(241, 248, 233, 0.8);
+}
+
+
+.light-green-mode .loader {
+  border-top-color: #558b2f;
+}
+.light-green-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.yellow-mode .hero-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .about-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+.yellow-mode .projects-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .project-card {
+  background-color: #fff9c4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.yellow-mode .contact-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .form-group input,
+.yellow-mode .form-group textarea {
+  background-color: #fffde7;
+  color: #f57f17;
+  border: 1px solid #fff59d;
+}
+
+
+.yellow-mode .footer {
+  background-color: #f57f17;
+  color: #fffde7;
+}
+.yellow-mode .timeline-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+.yellow-mode .timeline::after {
+  background-color: #fff59d;
+}
+
+
+.yellow-mode .timeline-item::after {
+  background-color: #fff9c4;
+  border-color: #f57f17;
+}
+
+.yellow-mode .left::before {
+  border-color: transparent transparent transparent #fff9c4;
+}
+
+
+.yellow-mode .right::before {
+  border-color: transparent #fff9c4 transparent transparent;
+}
+
+.yellow-mode .content {
+  background-color: #fffde7;
+}
+.yellow-mode .skills-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .skills-list li {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+.yellow-mode .services-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .service-card {
+  background-color: #fffde7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .testimonials-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .testimonial-card {
+  background-color: #fff9c4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .blog-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .blog-post {
+  background-color: #fffde7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .login-container,
+.yellow-mode .register-container {
+  background-color: #fffde7;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+
+.yellow-mode input[type='email'],
+.yellow-mode input[type='password'],
+.yellow-mode input[type='text'] {
+  background-color: #fff9c4;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+
+.yellow-mode button {
+  background-color: #f57f17;
+}
+
+.yellow-mode button:hover {
+  background-color: #f57f17;
+}
+.yellow-mode .dashboard-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+.yellow-mode .card {
+  background-color: #fff9c4;
+}
+
+.yellow-mode thead {
+  background-color: #f57f17;
+}
+
+
+.yellow-mode td {
+  border-color: #fff59d;
+}
+
+
+.yellow-mode tbody tr:nth-child(even) {
+  background-color: #fff9c4;
+}
+.yellow-mode .categories-container,
+.yellow-mode .expenses-container,
+.yellow-mode .deposits-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .modal-content {
+  background-color: #fff9c4;
+}
+.yellow-mode .profile-container {
+  background-color: #fffde7;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+
+.yellow-mode .avatar {
+  background-color: #fff59d;
+}
+.yellow-mode .admin-users-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+.yellow-mode .navbar {
+  background-color: #f57f17;
+}
+.yellow-mode .loader-container {
+  background-color: rgba(255, 253, 231, 0.8);
+}
+
+
+.yellow-mode .loader {
+  border-top-color: #f57f17;
+}
+.yellow-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.black-mode .hero-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .about-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+.black-mode .projects-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .project-card {
+  background-color: #424242;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.black-mode .contact-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+
+.black-mode .form-group input,
+.black-mode .form-group textarea {
+  background-color: #212121;
+  color: #ffffff;
+  border: 1px solid #616161;
+}
+
+
+.black-mode .footer {
+  background-color: #000000;
+  color: #ffffff;
+}
+.black-mode .timeline-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+.black-mode .timeline::after {
+  background-color: #616161;
+}
+
+.black-mode .timeline-item::after {
+  background-color: #424242;
+  border-color: #ffffff;
+}
+
+.black-mode .left::before {
+  border-color: transparent transparent transparent #424242;
+}
+
+.black-mode .right::before {
+  border-color: transparent #424242 transparent transparent;
+}
+
+
+.black-mode .content {
+  background-color: #212121;
+}
+.black-mode .skills-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .skills-list li {
+  background-color: #424242;
+  color: #ffffff;
+}
+.black-mode .services-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+
+.black-mode .service-card {
+  background-color: #212121;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.black-mode .testimonials-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .testimonial-card {
+  background-color: #424242;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.black-mode .blog-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+
+.black-mode .blog-post {
+  background-color: #212121;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.black-mode .login-container,
+.black-mode .register-container {
+  background-color: #212121;
+  border-color: #616161;
+  color: #ffffff;
+}
+
+
+.black-mode input[type='email'],
+.black-mode input[type='password'],
+.black-mode input[type='text'] {
+  background-color: #424242;
+  border-color: #616161;
+  color: #ffffff;
+}
+
+.black-mode button {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.black-mode button:hover {
+  background-color: #e0e0e0;
+}
+.black-mode .dashboard-container {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .card {
+  background-color: #424242;
+}
+
+.black-mode thead {
+  background-color: #000000;
+}
+
+.black-mode td {
+  border-color: #616161;
+}
+
+
+.black-mode tbody tr:nth-child(even) {
+  background-color: #424242;
+}
+.black-mode .categories-container,
+.black-mode .expenses-container,
+.black-mode .deposits-container {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .modal-content {
+  background-color: #424242;
+}
+.black-mode .profile-container {
+  background-color: #212121;
+  border-color: #616161;
+  color: #ffffff;
+}
+
+
+.black-mode .avatar {
+  background-color: #616161;
+}
+.black-mode .admin-users-container {
+  background-color: #212121;
+  color: #ffffff;
+}
+.black-mode .navbar {
+  background-color: #000000;
+}
+.black-mode .loader-container {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.black-mode .loader {
+  border-top-color: #ffffff;
+}
+.black-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.white-mode .hero-section {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.white-mode .about-section {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+
+.white-mode .projects-section {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.white-mode .project-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.white-mode .contact-section {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+
+.white-mode .form-group input,
+.white-mode .form-group textarea {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #e0e0e0;
+}
+
+
+.white-mode .footer {
+  background-color: #e0e0e0;
+  color: #000000;
+}
+.white-mode .timeline-section {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+
+.white-mode .timeline::after {
+  background-color: #e0e0e0;
+}
+
+
+.white-mode .timeline-item::after {
+  background-color: #f5f5f5;
+  border-color: #000000;
+}
+
+.white-mode .left::before {
+  border-color: transparent transparent transparent #f5f5f5;
+}
+
+.white-mode .right::before {
+  border-color: transparent #f5f5f5 transparent transparent;
+}
+
+
+.white-mode .content {
+  background-color: #ffffff;
+}
+.white-mode .skills-section {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.white-mode .skills-list li {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+.white-mode .services-section {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+
+.white-mode .service-card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.white-mode .testimonials-section {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.white-mode .testimonial-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.white-mode .blog-section {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+
+.white-mode .blog-post {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.white-mode .login-container,
+.white-mode .register-container {
+  background-color: #ffffff;
+  border-color: #e0e0e0;
+  color: #000000;
+}
+
+
+.white-mode input[type='email'],
+.white-mode input[type='password'],
+.white-mode input[type='text'] {
+  background-color: #f5f5f5;
+  border-color: #e0e0e0;
+  color: #000000;
+}
+
+
+.white-mode button {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.white-mode button:hover {
+  background-color: #212121;
+}
+.white-mode .dashboard-container {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.white-mode .card {
+  background-color: #f5f5f5;
+}
+
+.white-mode thead {
+  background-color: #e0e0e0;
+}
+
+
+.white.mode td {
+  border-color: #e0e0e0;
+}
+
+
+.white-mode tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.white-mode .categories-container,
+.white-mode .expenses-container,
+.white-mode .deposits-container {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+
+.white-mode .modal-content {
+  background-color: #f5f5f5;
+}
+.white-mode .profile-container {
+  background-color: #ffffff;
+  border-color: #e0e0e0;
+  color: #000000;
+}
+
+
+.white-mode .avatar {
+  background-color: #e0e0e0;
+}
+.white-mode .admin-users-container {
+  background-color: #ffffff;
+  color: #000000;
+}
+.white-mode .navbar {
+  background-color: #e0e0e0;
+}
+.white-mode .loader-container {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+.white-mode .loader {
+  border-top-color: #000000;
+}
+.white-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.dark-mode .hero-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .about-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+.dark-mode .projects-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .project-card {
+  background-color: #34495e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.dark-mode .contact-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border: 1px solid #4a6278;
+}
+
+
+.dark-mode .footer {
+  background-color: #2c3e50;
+}
+.dark-mode .timeline-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+.dark-mode .timeline::after {
+  background-color: #4a6278;
+}
+
+
+.dark-mode .timeline-item::after {
+  background-color: #34495e;
+  border-color: #FF9F55;
+}
+
+.dark-mode .left::before {
+  border-color: transparent transparent transparent #34495e;
+}
+
+
+.dark-mode .right::before {
+  border-color: transparent #34495e transparent transparent;
+}
+
+
+.dark-mode .content {
+  background-color: #2c3e50;
+}
+.dark-mode .skills-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .skills-list li {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+.dark-mode .services-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .service-card {
+  background-color: #2c3e50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .testimonials-section {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .testimonial-card {
+  background-color: #34495e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .blog-section {
+  background-color: #34495e;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .blog-post {
+  background-color: #2c3e50;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+.dark-mode .login-container,
+.dark-mode .register-container {
+  background-color: #2c3e50;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+
+.dark-mode input[type='email'],
+.dark-mode input[type='password'],
+.dark-mode input[type='text'] {
+  background-color: #34495e;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+.dark-mode button {
+  background-color: #3498db;
+}
+
+
+.dark-mode button:hover {
+  background-color: #2980b9;
+}
+.dark-mode .dashboard-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.dark-mode .card {
+  background-color: #34495e;
+}
+
+
+.dark-mode thead {
+  background-color: #4a6278;
+}
+
+.dark-mode td {
+  border-color: #4a6278;
+}
+
+
+.dark-mode tbody tr:nth-child(even) {
+  background-color: #34495e;
+}
+.dark-mode .categories-container,
+.dark-mode .expenses-container,
+.dark-mode .deposits-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .modal-content {
+  background-color: #34495e;
+}
+.dark-mode .profile-container {
+  background-color: #2c3e50;
+  border-color: #4a6278;
+  color: #ecf0f1;
+}
+
+
+.dark-mode .avatar {
+  background-color: #4a6278;
+}
+.dark-mode .admin-users-container {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+.dark-mode .navbar {
+  background-color: #2c3e50;
+}
+.dark-mode .loader-container {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+.dark-mode .loader {
+  border-top-color: #3498db;
+}
+.dark-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.blue-mode .hero-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .about-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+.blue-mode .projects-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .project-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.blue-mode .contact-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .form-group input,
+.blue-mode .form-group textarea {
+  background-color: #e0f7fa;
+  color: #004d40;
+  border: 1px solid #4dd0e1;
+}
+
+
+.blue-mode .footer {
+  background-color: #004d40;
+  color: #e0f7fa;
+}
+.blue-mode .timeline-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+.blue-mode .timeline::after {
+  background-color: #4dd0e1;
+}
+
+
+.blue-mode .timeline-item::after {
+  background-color: #b2ebf2;
+  border-color: #00796b;
+}
+
+.blue-mode .left::before {
+  border-color: transparent transparent transparent #b2ebf2;
+}
+
+
+.blue-mode .right::before {
+  border-color: transparent #b2ebf2 transparent transparent;
+}
+
+
+.blue-mode .content {
+  background-color: #e0f7fa;
+}
+.blue-mode .skills-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .skills-list li {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+.blue-mode .services-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .service-card {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .testimonials-section {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .testimonial-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .blog-section {
+  background-color: #b2ebf2;
+  color: #004d40;
+}
+
+
+.blue-mode .blog-post {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-mode .login-container,
+.blue-mode .register-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+
+.blue-mode input[type='email'],
+.blue-mode input[type='password'],
+.blue-mode input[type='text'] {
+  background-color: #b2ebf2;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+
+.blue-mode button {
+  background-color: #00796b;
+}
+
+
+.blue-mode button:hover {
+  background-color: #004d40;
+}
+.blue-mode .dashboard-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+.blue-mode .card {
+  background-color: #b2ebf2;
+}
+
+.blue-mode thead {
+  background-color: #004d40;
+}
+
+
+.blue-mode td {
+  border-color: #4dd0e1;
+}
+
+
+.blue-mode tbody tr:nth-child(even) {
+  background-color: #b2ebf2;
+}
+.blue-mode .categories-container,
+.blue-mode .expenses-container,
+.blue-mode .deposits-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+
+
+.blue-mode .modal-content {
+  background-color: #b2ebf2;
+}
+.blue-mode .profile-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #004d40;
+}
+
+
+.blue-mode .avatar {
+  background-color: #4dd0e1;
+}
+.blue-mode .admin-users-container {
+  background-color: #e0f7fa;
+  color: #00796b;
+}
+.blue-mode .navbar {
+  background-color: #004d40;
+}
+.blue-mode .loader-container {
+  background-color: rgba(224, 247, 250, 0.8);
+}
+
+
+.blue-mode .loader {
+  border-top-color: #00796b;
+}
+.blue-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.green-mode .hero-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.green-mode .about-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .projects-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .project-card {
+  background-color: #c8e6c9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.green-mode .contact-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .form-group input,
+.green-mode .form-group textarea {
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+
+.green-mode .footer {
+  background-color: #1b5e20;
+  color: #e8f5e9;
+}
+.green-mode .timeline-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .timeline::after {
+  background-color: #a5d6a7;
+}
+
+.green-mode .timeline-item::after {
+  background-color: #c8e6c9;
+  border-color: #2e7d32;
+}
+
+
+.green-mode .left::before {
+  border-color: transparent transparent transparent #c8e6c9;
+}
+
+.green-mode .right::before {
+  border-color: transparent #c8e6c9 transparent transparent;
+}
+
+
+.green-mode .content {
+  background-color: #e8f5e9;
+}
+.green-mode .skills-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .skills-list li {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+.green-mode .services-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .service-card {
+  background-color: #e8f5e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .testimonials-section {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .testimonial-card {
+  background-color: #c8e6c9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .blog-section {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+}
+
+
+.green-mode .blog-post {
+  background-color: #e8f5e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.green-mode .login-container,
+.green-mode .register-container {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+
+.green-mode input[type='email'],
+.green-mode input[type='password'],
+.green-mode input[type='text'] {
+  background-color: #c8e6c9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+
+.green-mode button {
+  background-color: #2e7d32;
+}
+
+
+.green-mode button:hover {
+  background-color: #1b5e20;
+}
+.green-mode .dashboard-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.green-mode .card {
+  background-color: #c8e6c9;
+}
+
+.green-mode thead {
+  background-color: #1b5e20;
+}
+
+.green-mode td {
+  border-color: #a5d6a7;
+}
+
+
+.green-mode tbody tr:nth-child(even) {
+  background-color: #c8e6c9;
+}
+.green-mode .categories-container,
+.green-mode .expenses-container,
+.green-mode .deposits-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+
+.green-mode .modal-content {
+  background-color: #c8e6c9;
+}
+.green-mode .profile-container {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+  color: #1b5e20;
+}
+
+
+.green-mode .avatar {
+  background-color: #a5d6a7;
+}
+.green-mode .admin-users-container {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+.green-mode .navbar {
+  background-color: #1b5e20;
+}
+.green-mode .loader-container {
+  background-color: rgba(232, 245, 233, 0.8);
+}
+
+
+.green-mode .loader {
+  border-top-color: #2e7d32;
+}
+.green-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.purple-mode .hero-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.purple-mode .about-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .projects-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .project-card {
+  background-color: #e1bee7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.purple-mode .contact-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .form-group input,
+.purple-mode .form-group textarea {
+  background-color: #f3e5f5;
+  color: #4a148c;
+  border: 1px solid #ce93d8;
+}
+
+
+.purple-mode .footer {
+  background-color: #4a148c;
+  color: #f3e5f5;
+}
+.purple-mode .timeline-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .timeline::after {
+  background-color: #ce93d8;
+}
+
+.purple-mode .timeline-item::after {
+  background-color: #e1bee7;
+  border-color: #6a1b9a;
+}
+
+
+.purple-mode .left::before {
+  border-color: transparent transparent transparent #e1bee7;
+}
+
+.purple-mode .right::before {
+  border-color: transparent #e1bee7 transparent transparent;
+}
+
+
+.purple-mode .content {
+  background-color: #f3e5f5;
+}
+.purple-mode .skills-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .skills-list li {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+.purple-mode .services-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .service-card {
+  background-color: #f3e5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .testimonials-section {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .testimonial-card {
+  background-color: #e1bee7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .blog-section {
+  background-color: #e1bee7;
+  color: #4a148c;
+}
+
+
+.purple-mode .blog-post {
+  background-color: #f3e5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.purple-mode .login-container,
+.purple-mode .register-container {
+  background-color: #f3e5f5;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+
+.purple-mode input[type='email'],
+.purple-mode input[type='password'],
+.purple-mode input[type='text'] {
+  background-color: #e1bee7;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+
+.purple-mode button {
+  background-color: #6a1b9a;
+}
+
+
+.purple-mode button:hover {
+  background-color: #4a148c;
+}
+.purple-mode .dashboard-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.purple-mode .card {
+  background-color: #e1bee7;
+}
+
+.purple-mode thead {
+  background-color: #4a148c;
+}
+
+
+.purple-mode td {
+  border-color: #ce93d8;
+}
+
+
+.purple-mode tbody tr:nth-child(even) {
+  background-color: #e1bee7;
+}
+.purple-mode .categories-container,
+.purple-mode .expenses-container,
+.purple-mode .deposits-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+
+
+.purple-mode .modal-content {
+  background-color: #e1bee7;
+}
+.purple-mode .profile-container {
+  background-color: #f3e5f5;
+  border-color: #ce93d8;
+  color: #4a148c;
+}
+
+
+.purple-mode .avatar {
+  background-color: #ce93d8;
+}
+.purple-mode .admin-users-container {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
+.purple-mode .navbar {
+  background-color: #4a148c;
+}
+.purple-mode .loader-container {
+  background-color: rgba(243, 229, 245, 0.8);
+}
+
+
+.purple-mode .loader {
+  border-top-color: #6a1b9a;
+}
+.purple-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.orange-mode .hero-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .about-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .projects-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.orange-mode .project-card {
+  background-color: #ffe0b2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.orange-mode .contact-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .form-group input,
+.orange-mode .form-group textarea {
+  background-color: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffcc80;
+}
+
+
+.orange-mode .footer {
+  background-color: #e65100;
+  color: #fff3e0;
+}
+.orange-mode .timeline-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+.orange-mode .timeline::after {
+  background-color: #ffcc80;
+}
+
+
+.orange-mode .timeline-item::after {
+  background-color: #ffe0b2;
+  border-color: #ef6c00;
+}
+
+.orange-mode .left::before {
+  border-color: transparent transparent transparent #ffe0b2;
+}
+
+
+.orange-mode .right::before {
+  border-color: transparent #ffe0b2 transparent transparent;
+}
+
+
+.orange-mode .content {
+  background-color: #fff3e0;
+}
+.orange-mode .skills-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .skills-list li {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+.orange-mode .services-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .service-card {
+  background-color: #fff3e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .testimonials-section {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .testimonial-card {
+  background-color: #ffe0b2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .blog-section {
+  background-color: #ffe0b2;
+  color: #e65100;
+}
+
+
+.orange-mode .blog-post {
+  background-color: #fff3e0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.orange-mode .login-container,
+.orange-mode .register-container {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+
+.orange-mode input[type='email'],
+.orange-mode input[type='password'],
+.orange-mode input[type='text'] {
+  background-color: #ffe0b2;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+
+.orange-mode button {
+  background-color: #ef6c00;
+}
+
+
+.orange-mode button:hover {
+  background-color: #e65100;
+}
+.orange-mode .dashboard-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.orange-mode .card {
+  background-color: #ffe0b2;
+}
+
+.orange-mode thead {
+  background-color: #e65100;
+}
+
+
+.orange-mode td {
+  border-color: #ffcc80;
+}
+
+
+.orange-mode tbody tr:nth-child(even) {
+  background-color: #ffe0b2;
+}
+.orange-mode .categories-container,
+.orange-mode .expenses-container,
+.orange-mode .deposits-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+
+.orange-mode .modal-content {
+  background-color: #ffe0b2;
+}
+.orange-mode .profile-container {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+
+.orange-mode .avatar {
+  background-color: #ffcc80;
+}
+.orange-mode .admin-users-container {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+.orange-mode .navbar {
+  background-color: #e65100;
+}
+.orange-mode .loader-container {
+  background-color: rgba(255, 243, 224, 0.8);
+}
+
+
+.orange-mode .loader {
+  border-top-color: #ef6c00;
+}
+.orange-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.pink-mode .hero-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .about-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .projects-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+.pink-mode .project-card {
+  background-color: #f8bbd0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.pink-mode .contact-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .form-group input,
+.pink-mode .form-group textarea {
+  background-color: #fce4ec;
+  color: #c2185b;
+  border: 1px solid #f48fb1;
+}
+
+
+.pink-mode .footer {
+  background-color: #c2185b;
+  color: #fce4ec;
+}
+.pink-mode .timeline-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+.pink-mode .timeline::after {
+  background-color: #f48fb1;
+}
+
+.pink-mode .timeline-item::after {
+  background-color: #f8bbd0;
+  border-color: #d81b60;
+}
+
+
+.pink-mode .left::before {
+  border-color: transparent transparent transparent #f8bbd0;
+}
+
+.pink-mode .right::before {
+  border-color: transparent #f8bbd0 transparent transparent;
+}
+
+
+.pink-mode .content {
+  background-color: #fce4ec;
+}
+.pink-mode .skills-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .skills-list li {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+.pink-mode .services-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .service-card {
+  background-color: #fce4ec;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .testimonials-section {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .testimonial-card {
+  background-color: #f8bbd0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .blog-section {
+  background-color: #f8bbd0;
+  color: #c2185b;
+}
+
+
+.pink-mode .blog-post {
+  background-color: #fce4ec;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pink-mode .login-container,
+.pink-mode .register-container {
+  background-color: #fce4ec;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+
+.pink-mode input[type='email'],
+.pink-mode input[type='password'],
+.pink-mode input[type='text'] {
+  background-color: #f8bbd0;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+.pink-mode button {
+  background-color: #d81b60;
+}
+
+
+.pink-mode button:hover {
+  background-color: #c2185b;
+}
+.pink-mode .dashboard-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+.pink-mode .card {
+  background-color: #f8bbd0;
+}
+
+
+.pink-mode thead {
+  background-color: #c2185b;
+}
+
+.pink-mode td {
+  border-color: #f48fb1;
+}
+
+
+.pink-mode tbody tr:nth-child(even) {
+  background-color: #f8bbd0;
+}
+.pink-mode .categories-container,
+.pink-mode .expenses-container,
+.pink-mode .deposits-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+
+
+.pink-mode .modal-content {
+  background-color: #f8bbd0;
+}
+.pink-mode .profile-container {
+  background-color: #fce4ec;
+  border-color: #f48fb1;
+  color: #c2185b;
+}
+
+
+.pink-mode .avatar {
+  background-color: #f48fb1;
+}
+.pink-mode .admin-users-container {
+  background-color: #fce4ec;
+  color: #d81b60;
+}
+.pink-mode .navbar {
+  background-color: #c2185b;
+}
+.pink-mode .loader-container {
+  background-color: rgba(252, 228, 236, 0.8);
+}
+
+
+.pink-mode .loader {
+  border-top-color: #d81b60;
+}
+.pink-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.cyan-mode .hero-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .about-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+.cyan-mode .projects-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .project-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.cyan-mode .contact-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .form-group input,
+.cyan-mode .form-group textarea {
+  background-color: #e0f7fa;
+  color: #006064;
+  border: 1px solid #4dd0e1;
+}
+
+
+.cyan-mode .footer {
+  background-color: #006064;
+  color: #e0f7fa;
+}
+.cyan-mode .timeline-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+.cyan-mode .timeline::after {
+  background-color: #4dd0e1;
+}
+
+
+.cyan-mode .timeline-item::after {
+  background-color: #b2ebf2;
+  border-color: #00838f;
+}
+
+.cyan-mode .left::before {
+  border-color: transparent transparent transparent #b2ebf2;
+}
+
+
+.cyan-mode .right::before {
+  border-color: transparent #b2ebf2 transparent transparent;
+}
+
+
+.cyan-mode .content {
+  background-color: #e0f7fa;
+}
+.cyan-mode .skills-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .skills-list li {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+.cyan-mode .services-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .service-card {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .testimonials-section {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .testimonial-card {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .blog-section {
+  background-color: #b2ebf2;
+  color: #006064;
+}
+
+
+.cyan-mode .blog-post {
+  background-color: #e0f7fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.cyan-mode .login-container,
+.cyan-mode .register-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+
+.cyan-mode input[type='email'],
+.cyan-mode input[type='password'],
+.cyan-mode input[type='text'] {
+  background-color: #b2ebf2;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+
+.cyan-mode button {
+  background-color: #00838f;
+}
+
+
+.cyan-mode button:hover {
+  background-color: #006064;
+}
+.cyan-mode .dashboard-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+.cyan-mode .card {
+  background-color: #b2ebf2;
+}
+
+.cyan-mode thead {
+  background-color: #006064;
+}
+
+
+.cyan-mode td {
+  border-color: #4dd0e1;
+}
+
+
+.cyan-mode tbody tr:nth-child(even) {
+  background-color: #b2ebf2;
+}
+.cyan-mode .categories-container,
+.cyan-mode .expenses-container,
+.cyan-mode .deposits-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+
+
+.cyan-mode .modal-content {
+  background-color: #b2ebf2;
+}
+.cyan-mode .profile-container {
+  background-color: #e0f7fa;
+  border-color: #4dd0e1;
+  color: #006064;
+}
+
+
+.cyan-mode .avatar {
+  background-color: #4dd0e1;
+}
+.cyan-mode .admin-users-container {
+  background-color: #e0f7fa;
+  color: #00838f;
+}
+.cyan-mode .navbar {
+  background-color: #006064;
+}
+.cyan-mode .loader-container {
+  background-color: rgba(224, 247, 250, 0.8);
+}
+
+
+.cyan-mode .loader {
+  border-top-color: #00838f;
+}
+.cyan-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.teal-mode .hero-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+.teal-mode .about-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .projects-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .project-card {
+  background-color: #b2dfdb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.teal-mode .contact-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .form-group input,
+.teal-mode .form-group textarea {
+  background-color: #e0f2f1;
+  color: #004d40;
+  border: 1px solid #80cbc4;
+}
+
+
+.teal-mode .footer {
+  background-color: #004d40;
+  color: #e0f2f1;
+}
+.teal-mode .timeline-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .timeline::after {
+  background-color: #80cbc4;
+}
+
+.teal-mode .timeline-item::after {
+  background-color: #b2dfdb;
+  border-color: #00695c;
+}
+
+
+.teal-mode .left::before {
+  border-color: transparent transparent transparent #b2dfdb;
+}
+
+.teal-mode .right::before {
+  border-color: transparent #b2dfdb transparent transparent;
+}
+
+
+.teal-mode .content {
+  background-color: #e0f2f1;
+}
+.teal-mode .skills-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .skills-list li {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+.teal-mode .services-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .service-card {
+  background-color: #e0f2f1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .testimonials-section {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .testimonial-card {
+  background-color: #b2dfdb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .blog-section {
+  background-color: #b2dfdb;
+  color: #004d40;
+}
+
+
+.teal-mode .blog-post {
+  background-color: #e0f2f1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.teal-mode .login-container,
+.teal-mode .register-container {
+  background-color: #e0f2f1;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+
+.teal-mode input[type='email'],
+.teal-mode input[type='password'],
+.teal-mode input[type='text'] {
+  background-color: #b2dfdb;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+.teal-mode button {
+  background-color: #00695c;
+}
+
+
+.teal-mode button:hover {
+  background-color: #004d40;
+}
+.teal-mode .dashboard-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .card {
+  background-color: #b2dfdb;
+}
+
+.teal-mode thead {
+  background-color: #004d40;
+}
+
+.teal-mode td {
+  border-color: #80cbc4;
+}
+
+
+.teal-mode tbody tr:nth-child(even) {
+  background-color: #b2dfdb;
+}
+.teal-mode .categories-container,
+.teal-mode .expenses-container,
+.teal-mode .deposits-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+
+
+.teal-mode .modal-content {
+  background-color: #b2dfdb;
+}
+.teal-mode .profile-container {
+  background-color: #e0f2f1;
+  border-color: #80cbc4;
+  color: #004d40;
+}
+
+
+.teal-mode .avatar {
+  background-color: #80cbc4;
+}
+.teal-mode .admin-users-container {
+  background-color: #e0f2f1;
+  color: #00695c;
+}
+.teal-mode .navbar {
+  background-color: #004d40;
+}
+.teal-mode .loader-container {
+  background-color: rgba(224, 242, 241, 0.8);
+}
+
+
+.teal-mode .loader {
+  border-top-color: #00695c;
+}
+.teal-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.lime-mode .hero-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .about-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+.lime-mode .projects-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .project-card {
+  background-color: #f0f4c3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.lime-mode .contact-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .form-group input,
+.lime-mode .form-group textarea {
+  background-color: #f9fbe7;
+  color: #827717;
+  border: 1px solid #e6ee9c;
+}
+
+
+.lime-mode .footer {
+  background-color: #827717;
+  color: #f9fbe7;
+}
+.lime-mode .timeline-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+.lime-mode .timeline::after {
+  background-color: #e6ee9c;
+}
+
+
+.lime-mode .timeline-item::after {
+  background-color: #f0f4c3;
+  border-color: #9e9d24;
+}
+
+.lime-mode .left::before {
+  border-color: transparent transparent transparent #f0f4c3;
+}
+
+
+.lime-mode .right::before {
+  border-color: transparent #f0f4c3 transparent transparent;
+}
+
+
+.lime-mode .content {
+  background-color: #f9fbe7;
+}
+.lime-mode .skills-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .skills-list li {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+.lime-mode .services-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .service-card {
+  background-color: #f9fbe7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .testimonials-section {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .testimonial-card {
+  background-color: #f0f4c3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .blog-section {
+  background-color: #f0f4c3;
+  color: #827717;
+}
+
+
+.lime-mode .blog-post {
+  background-color: #f9fbe7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.lime-mode .login-container,
+.lime-mode .register-container {
+  background-color: #f9fbe7;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+
+.lime-mode input[type='email'],
+.lime-mode input[type='password'],
+.lime-mode input[type='text'] {
+  background-color: #f0f4c3;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+.lime-mode button {
+  background-color: #9e9d24;
+}
+
+
+.lime-mode button:hover {
+  background-color: #827717;
+}
+.lime-mode .dashboard-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+.lime-mode .card {
+  background-color: #f0f4c3;
+}
+
+
+.lime-mode thead {
+  background-color: #827717;
+}
+
+.lime-mode td {
+  border-color: #e6ee9c;
+}
+
+
+.lime-mode tbody tr:nth-child(even) {
+  background-color: #f0f4c3;
+}
+.lime-mode .categories-container,
+.lime-mode .expenses-container,
+.lime-mode .deposits-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+
+
+.lime-mode .modal-content {
+  background-color: #f0f4c3;
+}
+.lime-mode .profile-container {
+  background-color: #f9fbe7;
+  border-color: #e6ee9c;
+  color: #827717;
+}
+
+
+.lime-mode .avatar {
+  background-color: #e6ee9c;
+}
+.lime-mode .admin-users-container {
+  background-color: #f9fbe7;
+  color: #9e9d24;
+}
+.lime-mode .navbar {
+  background-color: #827717;
+}
+.lime-mode .loader-container {
+  background-color: rgba(249, 251, 231, 0.8);
+}
+
+
+.lime-mode .loader {
+  border-top-color: #9e9d24;
+}
+.lime-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.amber-mode .hero-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .about-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+.amber-mode .projects-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .project-card {
+  background-color: #ffecb3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.amber-mode .contact-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .form-group input,
+.amber-mode .form-group textarea {
+  background-color: #fff8e1;
+  color: #ff6f00;
+  border: 1px solid #ffe082;
+}
+
+
+.amber-mode .footer {
+  background-color: #ff6f00;
+  color: #fff8e1;
+}
+.amber-mode .timeline-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .timeline::after {
+  background-color: #ffe082;
+}
+
+.amber-mode .timeline-item::after {
+  background-color: #ffecb3;
+  border-color: #ff8f00;
+}
+
+
+.amber-mode .left::before {
+  border-color: transparent transparent transparent #ffecb3;
+}
+
+.amber-mode .right::before {
+  border-color: transparent #ffecb3 transparent transparent;
+}
+
+
+.amber-mode .content {
+  background-color: #fff8e1;
+}
+.amber-mode .skills-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .skills-list li {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+.amber-mode .services-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .service-card {
+  background-color: #fff8e1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .testimonials-section {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .testimonial-card {
+  background-color: #ffecb3;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .blog-section {
+  background-color: #ffecb3;
+  color: #ff6f00;
+}
+
+
+.amber-mode .blog-post {
+  background-color: #fff8e1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.amber-mode .login-container,
+.amber-mode .register-container {
+  background-color: #fff8e1;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+
+.amber-mode input[type='email'],
+.amber-mode input[type='password'],
+.amber-mode input[type='text'] {
+  background-color: #ffecb3;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+.amber-mode button {
+  background-color: #ff8f00;
+}
+
+
+.amber-mode button:hover {
+  background-color: #ff6f00;
+}
+.amber-mode .dashboard-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+.amber-mode .card {
+  background-color: #ffecb3;
+}
+
+
+.amber-mode thead {
+  background-color: #ff6f00;
+}
+
+.amber-mode td {
+  border-color: #ffe082;
+}
+
+
+.amber-mode tbody tr:nth-child(even) {
+  background-color: #ffecb3;
+}
+.amber-mode .categories-container,
+.amber-mode .expenses-container,
+.amber-mode .deposits-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+
+
+.amber-mode .modal-content {
+  background-color: #ffecb3;
+}
+.amber-mode .profile-container {
+  background-color: #fff8e1;
+  border-color: #ffe082;
+  color: #ff6f00;
+}
+
+
+.amber-mode .avatar {
+  background-color: #ffe082;
+}
+.amber-mode .admin-users-container {
+  background-color: #fff8e1;
+  color: #ff8f00;
+}
+.amber-mode .navbar {
+  background-color: #ff6f00;
+}
+.amber-mode .loader-container {
+  background-color: rgba(255, 248, 225, 0.8);
+}
+
+
+.amber-mode .loader {
+  border-top-color: #ff8f00;
+}
+.amber-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.deep-orange-mode .hero-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+.deep-orange-mode .about-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .projects-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .project-card {
+  background-color: #ffccbc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.deep-orange-mode .contact-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .form-group input,
+.deep-orange-mode .form-group textarea {
+  background-color: #fbe9e7;
+  color: #bf360c;
+  border: 1px solid #ffab91;
+}
+
+
+.deep-orange-mode .footer {
+  background-color: #bf360c;
+  color: #fbe9e7;
+}
+.deep-orange-mode .timeline-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+.deep-orange-mode .timeline::after {
+  background-color: #ffab91;
+}
+
+
+.deep-orange-mode .timeline-item::after {
+  background-color: #ffccbc;
+  border-color: #d84315;
+}
+
+.deep-orange-mode .left::before {
+  border-color: transparent transparent transparent #ffccbc;
+}
+
+
+.deep-orange-mode .right::before {
+  border-color: transparent #ffccbc transparent transparent;
+}
+
+
+.deep-orange-mode .content {
+  background-color: #fbe9e7;
+}
+.deep-orange-mode .skills-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .skills-list li {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+.deep-orange-mode .services-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .service-card {
+  background-color: #fbe9e7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .testimonials-section {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .testimonial-card {
+  background-color: #ffccbc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .blog-section {
+  background-color: #ffccbc;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .blog-post {
+  background-color: #fbe9e7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-orange-mode .login-container,
+.deep-orange-mode .register-container {
+  background-color: #fbe9e7;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode input[type='email'],
+.deep-orange-mode input[type='password'],
+.deep-orange-mode input[type='text'] {
+  background-color: #ffccbc;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+.deep-orange-mode button {
+  background-color: #d84315;
+}
+
+
+.deep-orange-mode button:hover {
+  background-color: #bf360c;
+}
+.deep-orange-mode .dashboard-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+.deep-orange-mode .card {
+  background-color: #ffccbc;
+}
+
+
+.deep-orange-mode thead {
+  background-color: #bf360c;
+}
+
+.deep-orange-mode td {
+  border-color: #ffab91;
+}
+
+
+.deep-orange-mode tbody tr:nth-child(even) {
+  background-color: #ffccbc;
+}
+.deep-orange-mode .categories-container,
+.deep-orange-mode .expenses-container,
+.deep-orange-mode .deposits-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+
+.deep-orange-mode .modal-content {
+  background-color: #ffccbc;
+}
+.deep-orange-mode .profile-container {
+  background-color: #fbe9e7;
+  border-color: #ffab91;
+  color: #bf360c;
+}
+
+
+.deep-orange-mode .avatar {
+  background-color: #ffab91;
+}
+.deep-orange-mode .admin-users-container {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+.deep-orange-mode .navbar {
+  background-color: #bf360c;
+}
+.deep-orange-mode .loader-container {
+  background-color: rgba(251, 233, 231, 0.8);
+}
+
+
+.deep-orange-mode .loader {
+  border-top-color: #d84315;
+}
+.deep-orange-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.brown-mode .hero-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .about-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+.brown-mode .projects-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .project-card {
+  background-color: #d7ccc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.brown-mode .contact-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .form-group input,
+.brown-mode .form-group textarea {
+  background-color: #efebe9;
+  color: #3e2723;
+  border: 1px solid #bcaaa4;
+}
+
+
+.brown-mode .footer {
+  background-color: #3e2723;
+  color: #efebe9;
+}
+.brown-mode .timeline-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+.brown-mode .timeline::after {
+  background-color: #bcaaa4;
+}
+
+
+.brown-mode .timeline-item::after {
+  background-color: #d7ccc8;
+  border-color: #5d4037;
+}
+
+.brown-mode .left::before {
+  border-color: transparent transparent transparent #d7ccc8;
+}
+
+.brown-mode .right::before {
+  border-color: transparent #d7ccc8 transparent transparent;
+}
+
+
+.brown-mode .content {
+  background-color: #efebe9;
+}
+.brown-mode .skills-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .skills-list li {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+.brown-mode .services-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .service-card {
+  background-color: #efebe9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .testimonials-section {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .testimonial-card {
+  background-color: #d7ccc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .blog-section {
+  background-color: #d7ccc8;
+  color: #3e2723;
+}
+
+
+.brown-mode .blog-post {
+  background-color: #efebe9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.brown-mode .login-container,
+.brown-mode .register-container {
+  background-color: #efebe9;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+
+.brown-mode input[type='email'],
+.brown-mode input[type='password'],
+.brown-mode input[type='text'] {
+  background-color: #d7ccc8;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+.brown-mode button {
+  background-color: #5d4037;
+}
+
+
+.brown-mode button:hover {
+  background-color: #3e2723;
+}
+.brown-mode .dashboard-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .card {
+  background-color: #d7ccc8;
+}
+
+.brown-mode thead {
+  background-color: #3e2723;
+}
+
+.brown-mode td {
+  border-color: #bcaaa4;
+}
+
+
+.brown-mode tbody tr:nth-child(even) {
+  background-color: #d7ccc8;
+}
+.brown-mode .categories-container,
+.brown-mode .expenses-container,
+.brown-mode .deposits-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+
+
+.brown-mode .modal-content {
+  background-color: #d7ccc8;
+}
+.brown-mode .profile-container {
+  background-color: #efebe9;
+  border-color: #bcaaa4;
+  color: #3e2723;
+}
+
+
+.brown-mode .avatar {
+  background-color: #bcaaa4;
+}
+.brown-mode .admin-users-container {
+  background-color: #efebe9;
+  color: #5d4037;
+}
+.brown-mode .navbar {
+  background-color: #3e2723;
+}
+.brown-mode .loader-container {
+  background-color: rgba(239, 235, 233, 0.8);
+}
+
+
+.brown-mode .loader {
+  border-top-color: #5d4037;
+}
+.brown-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.grey-mode .hero-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .about-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+.grey-mode .projects-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .project-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.grey-mode .contact-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+.grey-mode .form-group input,
+.grey-mode .form-group textarea {
+  background-color: #fafafa;
+  color: #212121;
+  border: 1px solid #eeeeee;
+}
+
+
+.grey-mode .footer {
+  background-color: #212121;
+  color: #fafafa;
+}
+.grey-mode .timeline-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+.grey-mode .timeline::after {
+  background-color: #eeeeee;
+}
+
+
+.grey-mode .timeline-item::after {
+  background-color: #f5f5f5;
+  border-color: #424242;
+}
+
+.grey-mode .left::before {
+  border-color: transparent transparent transparent #f5f5f5;
+}
+
+.grey-mode .right::before {
+  border-color: transparent #f5f5f5 transparent transparent;
+}
+
+
+.grey-mode .content {
+  background-color: #fafafa;
+}
+.grey-mode .skills-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .skills-list li {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+.grey-mode .services-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+
+.grey-mode .service-card {
+  background-color: #fafafa;
+  box-shadow: 0 4px 6px rgba(0, 0, .1);
+}
+.grey-mode .testimonials-section {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .testimonial-card {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.grey-mode .blog-section {
+  background-color: #f5f5f5;
+  color: #212121;
+}
+
+
+.grey-mode .blog-post {
+  background-color: #fafafa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.grey-mode .login-container,
+.grey-mode .register-container {
+  background-color: #fafafa;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+
+.grey-mode input[type='email'],
+.grey-mode input[type='password'],
+.grey-mode input[type='text'] {
+  background-color: #f5f5f5;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+.grey-mode button {
+  background-color: #424242;
+}
+
+
+.grey-mode button:hover {
+  background-color: #212121;
+}
+.grey-mode .dashboard-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .card {
+  background-color: #f5f5f5;
+}
+
+.grey-mode thead {
+  background-color: #212121;
+}
+
+.grey-mode td {
+  border-color: #eeeeee;
+}
+
+
+.grey-mode tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.grey-mode .categories-container,
+.grey-mode .expenses-container,
+.grey-mode .deposits-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+
+
+.grey-mode .modal-content {
+  background-color: #f5f5f5;
+}
+.grey-mode .profile-container {
+  background-color: #fafafa;
+  border-color: #eeeeee;
+  color: #212121;
+}
+
+
+.grey-mode .avatar {
+  background-color: #eeeeee;
+}
+.grey-mode .admin-users-container {
+  background-color: #fafafa;
+  color: #424242;
+}
+.grey-mode .navbar {
+  background-color: #212121;
+}
+.grey-mode .loader-container {
+  background-color: rgba(250, 250, 250, 0.8);
+}
+
+
+.grey-mode .loader {
+  border-top-color: #424242;
+}
+.grey-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.blue-grey-mode .hero-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+.blue-grey-mode .about-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .projects-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .project-card {
+  background-color: #cfd8dc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.blue-grey-mode .contact-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .form-group input,
+.blue-grey-mode .form-group textarea {
+  background-color: #eceff1;
+  color: #263238;
+  border: 1px solid #b0bec5;
+}
+
+
+.blue-grey-mode .footer {
+  background-color: #263238;
+  color: #eceff1;
+}
+.blue-grey-mode .timeline-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+.blue-grey-mode .timeline::after {
+  background-color: #b0bec5;
+}
+
+
+.blue-grey-mode .timeline-item::after {
+  background-color: #cfd8dc;
+  border-color: #455a64;
+}
+
+.blue-grey-mode .left::before {
+  border-color: transparent transparent transparent #cfd8dc;
+}
+
+
+.blue-grey-mode .right::before {
+  border-color: transparent #cfd8dc transparent transparent;
+}
+
+.blue-grey-mode .content {
+  background-color: #eceff1;
+}
+.blue-grey-mode .skills-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .skills-list li {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+.blue-grey-mode .services-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .service-card {
+  background-color: #eceff1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .testimonials-section {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .testimonial-card {
+  background-color: #cfd8dc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .blog-section {
+  background-color: #cfd8dc;
+  color: #263238;
+}
+
+
+.blue-grey-mode .blog-post {
+  background-color: #eceff1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.blue-grey-mode .login-container,
+.blue-grey-mode .register-container {
+  background-color: #eceff1;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+
+.blue-grey-mode input[type='email'],
+.blue-grey-mode input[type='password'],
+.blue-grey-mode input[type='text'] {
+  background-color: #cfd8dc;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+.blue-grey-mode button {
+  background-color: #455a64;
+}
+
+
+.blue-grey-mode button:hover {
+  background-color: #263238;
+}
+.blue-grey-mode .dashboard-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+.blue-grey-mode .card {
+  background-color: #cfd8dc;
+}
+
+
+.blue-grey-mode thead {
+  background-color: #263238;
+}
+
+.blue-grey-mode td {
+  border-color: #b0bec5;
+}
+
+
+.blue-grey-mode tbody tr:nth-child(even) {
+  background-color: #cfd8dc;
+}
+.blue-grey-mode .categories-container,
+.blue-grey-mode .expenses-container,
+.blue-grey-mode .deposits-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+
+
+.blue-grey-mode .modal-content {
+  background-color: #cfd8dc;
+}
+.blue-grey-mode .profile-container {
+  background-color: #eceff1;
+  border-color: #b0bec5;
+  color: #263238;
+}
+
+
+.blue-grey-mode .avatar {
+  background-color: #b0bec5;
+}
+.blue-grey-mode .admin-users-container {
+  background-color: #eceff1;
+  color: #455a64;
+}
+.blue-grey-mode .navbar {
+  background-color: #263238;
+}
+.blue-grey-mode .loader-container {
+  background-color: rgba(236, 239, 241, 0.8);
+}
+
+
+.blue-grey-mode .loader {
+  border-top-color: #455a64;
+}
+.blue-grey-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.red-mode .hero-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .about-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+.red-mode .projects-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .project-card {
+  background-color: #ffcdd2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.red-mode .contact-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .form-group input,
+.red-mode .form-group textarea {
+  background-color: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+
+.red-mode .footer {
+  background-color: #b71c1c;
+  color: #ffebee;
+}
+.red-mode .timeline-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+.red-mode .timeline::after {
+  background-color: #ef9a9a;
+}
+
+
+.red-mode .timeline-item::after {
+  background-color: #ffcdd2;
+  border-color: #c62828;
+}
+
+.red-mode .left::before {
+  border-color: transparent transparent transparent #ffcdd2;
+}
+
+.red-mode .right::before {
+  border-color: transparent #ffcdd2 transparent transparent;
+}
+
+
+.red-mode .content {
+  background-color: #ffebee;
+}
+.red-mode .skills-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .skills-list li {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+.red-mode .services-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .service-card {
+  background-color: #ffebee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .testimonials-section {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .testimonial-card {
+  background-color: #ffcdd2;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .blog-section {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+
+.red-mode .blog-post {
+  background-color: #ffebee;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.red-mode .login-container,
+.red-mode .register-container {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+
+.red-mode input[type='email'],
+.red-mode input[type='password'],
+.red-mode input[type='text'] {
+  background-color: #ffcdd2;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+.red-mode button {
+  background-color: #c62828;
+}
+
+
+.red-mode button:hover {
+  background-color: #b71c1c;
+}
+.red-mode .dashboard-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.red-mode .card {
+  background-color: #ffcdd2;
+}
+
+
+.red-mode thead {
+  background-color: #b71c1c;
+}
+
+.red-mode td {
+  border-color: #ef9a9a;
+}
+
+
+.red-mode tbody tr:nth-child(even) {
+  background-color: #ffcdd2;
+}
+.red-mode .categories-container,
+.red-mode .expenses-container,
+.red-mode .deposits-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+
+.red-mode .modal-content {
+  background-color: #ffcdd2;
+}
+.red-mode .profile-container {
+  background-color: #ffebee;
+  border-color: #ef9a9a;
+  color: #b71c1c;
+}
+
+
+.red-mode .avatar {
+  background-color: #ef9a9a;
+}
+.red-mode .admin-users-container {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.red-mode .navbar {
+  background-color: #b71c1c;
+}
+.red-mode .loader-container {
+  background-color: rgba(255, 235, 238, 0.8);
+}
+
+
+.red-mode .loader {
+  border-top-color: #c62828;
+}
+.red-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.deep-purple-mode .hero-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.deep-purple-mode .about-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+.deep-purple-mode .projects-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .project-card {
+  background-color: #d1c4e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.deep-purple-mode .contact-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .form-group input,
+.deep-purple-mode .form-group textarea {
+  background-color: #ede7f6;
+  color: #311b92;
+  border: 1px solid #b39ddb;
+}
+
+
+.deep-purple-mode .footer {
+  background-color: #311b92;
+  color: #ede7f6;
+}
+.deep-purple-mode .timeline-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+.deep-purple-mode .timeline::after {
+  background-color: #b39ddb;
+}
+
+
+.deep-purple-mode .timeline-item::after {
+  background-color: #d1c4e9;
+  border-color: #4527a0;
+}
+
+.deep-purple-mode .left::before {
+  border-color: transparent transparent transparent #d1c4e9;
+}
+
+
+.deep-purple-mode .right::before {
+  border-color: transparent #d1c4e9 transparent transparent;
+}
+
+
+.deep-purple-mode .content {
+  background-color: #ede7f6;
+}
+.deep-purple-mode .skills-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .skills-list li {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+.deep-purple-mode .services-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .service-card {
+  background-color: #ede7f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .testimonials-section {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .testimonial-card {
+  background-color: #d1c4e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .blog-section {
+  background-color: #d1c4e9;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .blog-post {
+  background-color: #ede7f6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deep-purple-mode .login-container,
+.deep-purple-mode .register-container {
+  background-color: #ede7f6;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode input[type='email'],
+.deep-purple-mode input[type='password'],
+.deep-purple-mode input[type='text'] {
+  background-color: #d1c4e9;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode button {
+  background-color: #4527a0;
+}
+
+
+.deep-purple-mode button:hover {
+  background-color: #311b92;
+}
+.deep-purple-mode .dashboard-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+.deep-purple-mode .card {
+  background-color: #d1c4e9;
+}
+
+.deep-purple-mode thead {
+  background-color: #311b92;
+}
+
+
+.deep-purple-mode td {
+  border-color: #b39ddb;
+}
+
+
+.deep-purple-mode tbody tr:nth-child(even) {
+  background-color: #d1c4e9;
+}
+.deep-purple-mode .categories-container,
+.deep-purple-mode .expenses-container,
+.deep-purple-mode .deposits-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+
+
+.deep-purple-mode .modal-content {
+  background-color: #d1c4e9;
+}
+.deep-purple-mode .profile-container {
+  background-color: #ede7f6;
+  border-color: #b39ddb;
+  color: #311b92;
+}
+
+
+.deep-purple-mode .avatar {
+  background-color: #b39ddb;
+}
+.deep-purple-mode .admin-users-container {
+  background-color: #ede7f6;
+  color: #4527a0;
+}
+.deep-purple-mode .navbar {
+  background-color: #311b92;
+}
+.deep-purple-mode .loader-container {
+  background-color: rgba(237, 231, 246, 0.8);
+}
+
+
+.deep-purple-mode .loader {
+  border-top-color: #4527a0;
+}
+.deep-purple-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.indigo-mode .hero-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .about-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+.indigo-mode .projects-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .project-card {
+  background-color: #c5cae9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.indigo-mode .contact-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+
+.indigo-mode .form-group input,
+.indigo-mode .form-group textarea {
+  background-color: #e8eaf6;
+  color: #1a237e;
+  border: 1px solid #9fa8da;
+}
+
+
+.indigo-mode .footer {
+  background-color: #1a237e;
+  color: #e8eaf6;
+}
+.indigo-mode .timeline-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+.indigo-mode .timeline::after {
+  background-color: #9fa8da;
+}
+
+
+.indigo-mode .timeline-item::after {
+  background-color: #c5cae9;
+  border-color: #283593;
+}
+
+.indigo-mode .left::before {
+  border-color: transparent transparent transparent #c5cae9;
+}
+
+
+.indigo-mode .right::before {
+  border-color: transparent #c5cae9 transparent transparent;
+}
+
+
+.indigo-mode .content {
+  background-color: #e8eaf6;
+}
+.indigo-mode .skills-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .skills-list li {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+.indigo-mode .services-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+
+.indigo-mode .service-card {
+  background-color: #e8eaf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .testimonials-section {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .testimonial-card {
+  background-color: #c5cae9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .blog-section {
+  background-color: #c5cae9;
+  color: #1a237e;
+}
+
+
+.indigo-mode .blog-post {
+  background-color: #e8eaf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.indigo-mode .login-container,
+.indigo-mode .register-container {
+  background-color: #e8eaf6;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode input[type='email'],
+.indigo-mode input[type='password'],
+.indigo-mode input[type='text'] {
+  background-color: #c5cae9;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode button {
+  background-color: #283593;
+}
+
+
+.indigo-mode button:hover {
+  background-color: #1a237e;
+}
+.indigo-mode .dashboard-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+.indigo-mode .card {
+  background-color: #c5cae9;
+}
+
+
+.indigo-mode thead {
+  background-color: #1a237e;
+}
+
+.indigo-mode td {
+  border-color: #9fa8da;
+}
+
+
+.indigo-mode tbody tr:nth-child(even) {
+  background-color: #c5cae9;
+}
+.indigo-mode .categories-container,
+.indigo-mode .expenses-container,
+.indigo-mode .deposits-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+
+
+.indigo-mode .modal-content {
+  background-color: #c5cae9;
+}
+.indigo-mode .profile-container {
+  background-color: #e8eaf6;
+  border-color: #9fa8da;
+  color: #1a237e;
+}
+
+
+.indigo-mode .avatar {
+  background-color: #9fa8da;
+}
+.indigo-mode .admin-users-container {
+  background-color: #e8eaf6;
+  color: #283593;
+}
+.indigo-mode .navbar {
+  background-color: #1a237e;
+}
+.indigo-mode .loader-container {
+  background-color: rgba(232, 234, 246, 0.8);
+}
+
+
+.indigo-mode .loader {
+  border-top-color: #283593;
+}
+.indigo-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.light-blue-mode .hero-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+.light-blue-mode .about-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .projects-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .project-card {
+  background-color: #b3e5fc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-blue-mode .contact-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .form-group input,
+.light-blue-mode .form-group textarea {
+  background-color: #e1f5fe;
+  color: #01579b;
+  border: 1px solid #81d4fa;
+}
+
+
+.light-blue-mode .footer {
+  background-color: #01579b;
+  color: #e1f5fe;
+}
+.light-blue-mode .timeline-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+.light-blue-mode .timeline::after {
+  background-color: #81d4fa;
+}
+
+
+.light-blue-mode .timeline-item::after {
+  background-color: #b3e5fc;
+  border-color: #0277bd;
+}
+
+.light-blue-mode .left::before {
+  border-color: transparent transparent transparent #b3e5fc;
+}
+
+
+.light-blue-mode .right::before {
+  border-color: transparent #b3e5fc transparent transparent;
+}
+
+
+.light-blue-mode .content {
+  background-color: #e1f5fe;
+}
+.light-blue-mode .skills-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .skills-list li {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+.light-blue-mode .services-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .service-card {
+  background-color: #e1f5fe;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .testimonials-section {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .testimonial-card {
+  background-color: #b3e5fc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .blog-section {
+  background-color: #b3e5fc;
+  color: #01579b;
+}
+
+
+.light-blue-mode .blog-post {
+  background-color: #e1f5fe;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-blue-mode .login-container,
+.light-blue-mode .register-container {
+  background-color: #e1f5fe;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+
+.light-blue-mode input[type='email'],
+.light-blue-mode input[type='password'],
+.light-blue-mode input[type='text'] {
+  background-color: #b3e5fc;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+.light-blue-mode button {
+  background-color: #0277bd;
+}
+
+
+.light-blue-mode button:hover {
+  background-color: #01579b;
+}
+.light-blue-mode .dashboard-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .card {
+  background-color: #b3e5fc;
+}
+
+.light-blue-mode thead {
+  background-color: #01579b;
+}
+
+.light-blue-mode td {
+  border-color: #81d4fa;
+}
+
+
+.light-blue-mode tbody tr:nth-child(even) {
+  background-color: #b3e5fc;
+}
+.light-blue-mode .categories-container,
+.light-blue-mode .expenses-container,
+.light-blue-mode .deposits-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+
+
+.light-blue-mode .modal-content {
+  background-color: #b3e5fc;
+}
+.light-blue-mode .profile-container {
+  background-color: #e1f5fe;
+  border-color: #81d4fa;
+  color: #01579b;
+}
+
+
+.light-blue-mode .avatar {
+  background-color: #81d4fa;
+}
+.light-blue-mode .admin-users-container {
+  background-color: #e1f5fe;
+  color: #0277bd;
+}
+.light-blue-mode .navbar {
+  background-color: #01579b;
+}
+.light-blue-mode .loader-container {
+  background-color: rgba(225, 245, 254, 0.8);
+}
+
+
+.light-blue-mode .loader {
+  border-top-color: #0277bd;
+}
+.light-blue-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.light-green-mode .hero-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+.light-green-mode .about-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .projects-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .project-card {
+  background-color: #dcedc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.light-green-mode .contact-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .form-group input,
+.light-green-mode .form-group textarea {
+  background-color: #f1f8e9;
+  color: #33691e;
+  border: 1px solid #c5e1a5;
+}
+
+
+.light-green-mode .footer {
+  background-color: #33691e;
+  color: #f1f8e9;
+}
+.light-green-mode .timeline-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .timeline::after {
+  background-color: #c5e1a5;
+}
+
+
+.light-green-mode .timeline-item::after {
+  background-color: #dcedc8;
+  border-color: #558b2f;
+}
+
+.light-green-mode .left::before {
+  border-color: transparent transparent transparent #dcedc8;
+}
+
+.light-green-mode .right::before {
+  border-color: transparent #dcedc8 transparent transparent;
+}
+
+
+.light-green-mode .content {
+  background-color: #f1f8e9;
+}
+.light-green-mode .skills-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .skills-list li {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+.light-green-mode .services-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .service-card {
+  background-color: #f1f8e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .testimonials-section {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .testimonial-card {
+  background-color: #dcedc8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .blog-section {
+  background-color: #dcedc8;
+  color: #33691e;
+}
+
+
+.light-green-mode .blog-post {
+  background-color: #f1f8e9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.light-green-mode .login-container,
+.light-green-mode .register-container {
+  background-color: #f1f8e9;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+
+.light-green-mode input[type='email'],
+.light-green-mode input[type='password'],
+.light-green-mode input[type='text'] {
+  background-color: #dcedc8;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+.light-green-mode button {
+  background-color: #558b2f;
+}
+
+
+.light-green-mode button:hover {
+  background-color: #33691e;
+}
+.light-green-mode .dashboard-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .card {
+  background-color: #dcedc8;
+}
+
+.light-green-mode thead {
+  background-color: #33691e;
+}
+
+.light-green-mode td {
+  border-color: #c5e1a5;
+}
+
+
+.light-green-mode tbody tr:nth-child(even) {
+  background-color: #dcedc8;
+}
+.light-green-mode .categories-container,
+.light-green-mode .expenses-container,
+.light-green-mode .deposits-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+
+.light-green-mode .modal-content {
+  background-color: #dcedc8;
+}
+.light-green-mode .profile-container {
+  background-color: #f1f8e9;
+  border-color: #c5e1a5;
+  color: #33691e;
+}
+
+
+.light-green-mode .avatar {
+  background-color: #c5e1a5;
+}
+.light-green-mode .admin-users-container {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+.light-green-mode .navbar {
+  background-color: #33691e;
+}
+.light-green-mode .loader-container {
+  background-color: rgba(241, 248, 233, 0.8);
+}
+
+
+.light-green-mode .loader {
+  border-top-color: #558b2f;
+}
+.light-green-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.yellow-mode .hero-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+.yellow-mode .about-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .projects-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .project-card {
+  background-color: #fff9c4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.yellow-mode .contact-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .form-group input,
+.yellow-mode .form-group textarea {
+  background-color: #fffde7;
+  color: #f57f17;
+  border: 1px solid #fff59d;
+}
+
+
+.yellow-mode .footer {
+  background-color: #f57f17;
+  color: #fffde7;
+}
+.yellow-mode .timeline-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+.yellow-mode .timeline::after {
+  background-color: #fff59d;
+}
+
+.yellow-mode .timeline-item::after {
+  background-color: #fff9c4;
+  border-color: #f57f17;
+}
+
+
+.yellow-mode .left::before {
+  border-color: transparent transparent transparent #fff9c4;
+}
+
+.yellow-mode .right::before {
+  border-color: transparent #fff9c4 transparent transparent;
+}
+
+
+.yellow-mode .content {
+  background-color: #fffde7;
+}
+.yellow-mode .skills-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .skills-list li {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+.yellow-mode .services-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .service-card {
+  background-color: #fffde7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .testimonials-section {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .testimonial-card {
+  background-color: #fff9c4;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .blog-section {
+  background-color: #fff9c4;
+  color: #f57f17;
+}
+
+
+.yellow-mode .blog-post {
+  background-color: #fffde7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.yellow-mode .login-container,
+.yellow-mode .register-container {
+  background-color: #fffde7;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+
+.yellow-mode input[type='email'],
+.yellow-mode input[type='password'],
+.yellow-mode input[type='text'] {
+  background-color: #fff9c4;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+.yellow-mode button {
+  background-color: #f57f17;
+}
+
+
+.yellow-mode button:hover {
+  background-color: #f57f17;
+}
+.yellow-mode .dashboard-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+.yellow-mode .card {
+  background-color: #fff9c4;
+}
+
+
+.yellow-mode thead {
+  background-color: #f57f17;
+}
+
+.yellow-mode td {
+  border-color: #fff59d;
+}
+
+
+.yellow-mode tbody tr:nth-child(even) {
+  background-color: #fff9c4;
+}
+.yellow-mode .categories-container,
+.yellow-mode .expenses-container,
+.yellow-mode .deposits-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+
+.yellow-mode .modal-content {
+  background-color: #fff9c4;
+}
+.yellow-mode .profile-container {
+  background-color: #fffde7;
+  border-color: #fff59d;
+  color: #f57f17;
+}
+
+
+.yellow-mode .avatar {
+  background-color: #fff59d;
+}
+.yellow-mode .admin-users-container {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+.yellow-mode .navbar {
+  background-color: #f57f17;
+}
+.yellow-mode .loader-container {
+  background-color: rgba(255, 253, 231, 0.8);
+}
+
+
+.yellow-mode .loader {
+  border-top-color: #f57f17;
+}
+.yellow-mode .protected-route {
+  /* / Add any specific styles for protected routes if needed / */
+}
+.black-mode .hero-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+
+.black-mode .about-section {
+  background-color: #424242;
+  color: #ffffff;
+}
+
+
+.black-mode .projects-section {
+  background-color: #212121;
+  color: #ffffff;
+}
+
+.black-mode .project-card {
+  background-color: #424242;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+
+.black-mode .contact-section {
+  background-color: #424242
+}
