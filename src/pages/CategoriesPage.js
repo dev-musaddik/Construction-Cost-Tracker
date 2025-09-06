@@ -5,6 +5,9 @@ import CategoryModal from "../components/CategoryModal";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import CategoriesSkeleton from "../components/CategoriesSkeleton";
+import DataLoader from "../components/DataLoader";
+import { useLoading } from "../context/LoadingContext";
+import CombinedLoader from "../components/CombinedLoader";
 
 const CategoriesPage = () => {
   const { t } = useTranslation();
@@ -14,6 +17,7 @@ const CategoriesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentCategory, setCurrentCategory] = useState(null);
 
+  const { navigationLoading } = useLoading();
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -90,12 +94,24 @@ const CategoriesPage = () => {
     return <p className="text-red-500">{error}</p>;
   }
 
-  if(loading){
-   return <CategoriesSkeleton Count={5} />
-  }
-
+  // if(loading){
+  //  return <CategoriesSkeleton Count={5} />
+  // }
+  
   return (
     <div className="container mx-auto p-4">
+    {(!navigationLoading && loading ) ?
+    (
+    <>
+      {/* <DataLoader /> */}
+      <CombinedLoader/>
+      <CategoriesSkeleton Count={5} />
+    </>
+  )
+  
+  :
+  
+   <>
       <h1 className="text-3xl font-bold mb-4">{t("categories")}</h1>
       <div className="w-full flex justify-end">
       <button
@@ -168,6 +184,10 @@ const CategoriesPage = () => {
           </Droppable>
         </DragDropContext>
       )}
+      </>
+  
+  }
+     
 
       <CategoryModal
         isOpen={isModalOpen}

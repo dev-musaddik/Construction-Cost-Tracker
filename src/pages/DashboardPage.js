@@ -35,6 +35,12 @@ import { Router } from "lucide-react";
 import { fmtMoney } from "../lib/utils";
 import SkeletonCard from "../components/SkeletonCard";
 import PieChartSkeleton from "../components/PieChartSkeleton";
+import { dummyExpenses } from "../components/dummyExpenses";
+import axios from "axios";
+import DataLoader from "../components/DataLoader";
+import { useLoading } from "../context/LoadingContext";
+import SignatureLoading from "../components/SignatureLoading ";
+import CombinedLoader from "../components/CombinedLoader";
 
 const COLORS = [
   "#0088FE",
@@ -60,7 +66,7 @@ const ymdLocal = (d = new Date()) => {
 };
 
 // ----------------------------- DateFilterBar ------------------------------
-function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart }) {
+function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loading }) {
   console.log(onApply);
   const { t } = useTranslation();
   const [mode, setMode] = useState("day"); // 'day' | 'range'
@@ -79,8 +85,10 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart }) {
     }
   };
 
+  //   //send data
+
   const presetBtn = (label, value, onClick) => (
-    <Button
+    <Button loading={loading} text={label}
       type="button"
       variant={preset === value ? "default" : "outline"}
       onClick={onClick}
@@ -94,14 +102,15 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart }) {
       <div className="flex gap-3 items-center flex-wrap">
         <span className="text-sm font-medium">{t("mode")}:</span>
         <div className="flex gap-2 flex-wrap">
-          <Button
+          <Button loading={loading}   text={t("singleDay")}
             type="button"
             variant={mode === "day" ? "default" : "outline"}
             onClick={() => setMode("day")}
+          
           >
             {t("singleDay")}
           </Button>
-          <Button
+          <Button loading={loading} text={t("dateRange")}
             type="button"
             variant={mode === "range" ? "default" : "outline"}
             onClick={() => setMode("range")}
@@ -151,7 +160,7 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart }) {
         {presetBtn(t("today"), "today", () => onPreset("today"))}
         {presetBtn(t("thisWeek"), "weekly", () => onPreset("weekly"))}
         {presetBtn(t("thisMonth"), "monthly", () => onPreset("monthly"))}
-        <div className="flex items-center gap-2">
+        {/* <div className="flex items-center gap-2">
           <label className="text-sm">{t("weekStarts")}</label>
           <select
             value={weekStart}
@@ -161,8 +170,8 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart }) {
             <option value="mon">{t("mon")}</option>
             <option value="sun">{t("sun")}</option>
           </select>
-        </div>
-        <Button type="button" onClick={apply}>
+        </div> */}
+        <Button loading={loading} text={t("apply")} type="button" variant="apply" onClick={apply}>
           {t("apply")}
         </Button>
       </div>
@@ -186,6 +195,8 @@ const DashboardPage = () => {
 
   // all data set for add before money
   const [allDataBalance, setAllDataBalance] = useState();
+  const { navigationLoading } = useLoading();
+  console.log(navigationLoading)
 
   const buildParams = useCallback(() => {
     console.groupCollapsed("%c[DashboardPage] buildParams", "color:#f59e0b");
@@ -269,6 +280,42 @@ const DashboardPage = () => {
 
   const { allDataTotalBalance = [] } = allDataBalance || {};
 
+  const sendData = async () => {
+    try {
+      const userString = localStorage.getItem("user"); // JSON string
+      if (!userString) {
+        console.error("No user found in localStorage");
+        return; // stop execution
+      }
+
+      const user = JSON.parse(userString); // now it's an object
+      console.log(user.token); // prints your JWT
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      // Loop through expenses inside the same scope as config
+      for (const expense of dummyExpenses) {
+        await axios.post(
+          "https://construction-cost-tracker-server-g2.vercel.app/api/expenses",
+          expense,
+          config
+        );
+      }
+
+      console.log("All expenses sent!");
+    } catch (err) {
+      console.error(
+        "Error sending expenses:",
+        err.response?.data || err.message
+      );
+    }
+  };
+
   const formattedExpensesOverTime = useMemo(
     () =>
       (expensesOverTime || [])
@@ -310,11 +357,11 @@ const DashboardPage = () => {
 
   return (
     <div className="container mx-auto p-4 transition-all duration-300 ease-in-out">
-      {loading ? (
+      {/* {navigationLoading?'' : loading && <DataLoader/>} */}
+      {navigationLoading?'' : loading && <CombinedLoader/>}
+      {/* <CombinedLoader/> */}
         <h1 className="text-3xl font-bold mb-2">{t("dashboard")}</h1>
-      ) : (
-        <h1 className="text-3xl font-bold mb-2">{t("dashboard")}</h1>
-      )}
+      
       {loading ? (
         <div className="flex items-center">
           <p className="text-sm text-gray-500 mb-4">Range:</p>
@@ -340,9 +387,11 @@ const DashboardPage = () => {
         preset={preset}
         weekStart={weekStart}
         setWeekStart={setWeekStart}
+        loading={loading}
       />
+      {/* <Button loading={loading} onClick={sendData}>Send Dummy Expenses</Button> */}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <StatCard
           loading={loading}
           label={t("totalExpenses")}
@@ -373,15 +422,15 @@ const DashboardPage = () => {
       </div>
 
       <div className="flex justify-end mb-4 space-x-4 mt-6">
-        <Button onClick={() => setIsDepositModalOpen(true)}>
+        <Button loading={loading} text={t("addDeposit")} onClick={() => setIsDepositModalOpen(true)}>
           {t("addDeposit")}
         </Button>
-        <Button onClick={() => setIsExpenseModalOpen(true)}>
+        <Button loading={loading} text={t("addExpense")} onClick={() => setIsExpenseModalOpen(true)}>
           {t("addExpense")}
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 mb-4">
+      <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mt-4 mb-4">
         {loading ? (
           <>
             <SkeletonCard type="expense" items={expenses.length} />
@@ -492,37 +541,62 @@ const DashboardPage = () => {
         }}
       />
 
-      <ExpenseModal
-        isOpen={isExpenseModalOpen}
-        onClose={() => setIsExpenseModalOpen(false)}
-        onSave={async (expenseData) => {
-          try {
-            if (expenseData._id) {
-              await expenseService.updateExpense(
-                expenseData._id,
-                expenseData.description,
-                expenseData.amount,
-                expenseData.category,
-                expenseData.date
-              );
-              toast.success(t("expenseUpdated"));
-            } else {
-              await expenseService.createExpense(
-                expenseData.description,
-                expenseData.amount,
-                expenseData.category,
-                expenseData.date
-              );
-              toast.success(t("expenseAdded"));
-            }
-            setIsExpenseModalOpen(false);
-            const controller = new AbortController();
-            fetchDashboardData(controller.signal);
-          } catch (e) {
-            toast.error(t("failedToSaveExpense"));
-          }
-        }}
-      />
+<ExpenseModal
+  isOpen={isExpenseModalOpen}
+  onClose={() => setIsExpenseModalOpen(false)}
+  onSave={async (expenseData) => {
+    try {
+      // ✅ Check for missing fields
+      if (
+        !expenseData.description ||
+        !expenseData.amount ||
+        !expenseData.category ||
+        !expenseData.date
+      ) {
+        toast.error(t("pleaseFillInAllFields"));
+        return;
+      }
+
+      // ✅ Validate amount
+      const amountNum = Number(expenseData.amount);
+      if (!Number.isFinite(amountNum) || amountNum <= 0) {
+        toast.error(t("pleaseEnterAValidAmount"));
+        return;
+      }
+
+      // ✅ If expense already exists → update
+      if (expenseData._id) {
+        await expenseService.updateExpense(
+          expenseData._id,
+          expenseData.description,
+          expenseData.amount,
+          expenseData.category,
+          expenseData.date
+        );
+        toast.success(t("expenseUpdated"));
+      } 
+      // ✅ Otherwise → create new expense
+      else {
+        await expenseService.createExpense(
+          expenseData.description,
+          expenseData.amount,
+          expenseData.category,
+          expenseData.date
+        );
+        toast.success(t("expenseAdded"));
+      }
+
+      // ✅ Close modal & refresh data
+      setIsExpenseModalOpen(false);
+      const controller = new AbortController();
+      fetchDashboardData(controller.signal);
+
+    } catch (e) {
+      toast.error(t("failedToSaveExpense"));
+    }
+  }}
+/>
+
     </div>
   );
 };

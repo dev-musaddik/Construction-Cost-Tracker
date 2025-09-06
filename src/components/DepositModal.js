@@ -4,6 +4,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import DataLoader from './DataLoader';
 
 // Get today in YYYY-MM-DD format (adjusted for timezone)
 const todayStr = () => {
@@ -25,6 +26,7 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState(todayStr()); // default to today
+  const [loading,setLoading]=useState(false);
 
   useEffect(() => {
     if (deposit) {
@@ -42,29 +44,42 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
     }
   }, [deposit, isOpen]);
 
-  const handleSave = () => {
+
+  const handleSave = async () => {
     if (!description || !amount) {
-      toast.error(t('pleaseFillInAllFields'));
+      toast.error("Please fill in all fields");
       return;
     }
 
     const amountNum = Number(amount);
     if (!Number.isFinite(amountNum) || amountNum <= 0) {
-      toast.error(t('pleaseEnterAValidAmount'));
+      toast.error("Please enter a valid amount");
       return;
     }
 
-    onSave({
-      ...(deposit || {}),
-      description,
-      amount: amountNum,
-      date: date || todayStr(), // ensure date is never empty
-    });
+    try {
+      setLoading(true); // ✅ Start loading
+
+      // Call onSave and wait for completion (in case it's async)
+      await onSave({
+        ...(deposit || {}),
+        description,
+        amount: amountNum,
+        date: date || todayStr(), // ensure date is never empty
+      });
+
+      toast.success("Saved successfully!");
+    } catch (error) {
+      toast.error("Failed to save. Please try again.");
+    } finally {
+      setLoading(false); // ✅ Stop loading
+    }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
+        {loading&&<DataLoader/>}
         <DialogHeader>
           <DialogTitle>{deposit ? t('editDeposit') : t('addDeposit')}</DialogTitle>
         </DialogHeader>
@@ -98,10 +113,10 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
         </div>
 
         <DialogFooter>
-          <Button type="button" onClick={onClose} variant="outline">
+          <Button type="button"  onClick={onClose} loading={loading} variant="outline" >
             {t('cancel')}
           </Button>
-          <Button type="button" onClick={handleSave}>
+          <Button type="button" onClick={handleSave} circle={loading} loading={loading} text={t('saveChanges')}>
             {t('saveChanges')}
           </Button>
         </DialogFooter>

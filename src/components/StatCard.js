@@ -90,9 +90,9 @@ function StatCard({
             {label}
           </div>
           {loading ? (
-                <div className="mt-1.5 text-3xl font-extrabold inline-block w-40 h-6 bg-gray-300 animate-pulse" />
+                <div className="mt-1.5 sm:text-3xl text-xl font-extrabold inline-block w-40 h-6 bg-gray-300 animate-pulse" />
           ) : (
-            <div className="mt-1.5 text-3xl font-extrabold leading-none tracking-tight text-slate-900">
+            <div className="mt-1.5 sm:text-3xl text-xl font-extrabold leading-none tracking-tight text-slate-900">
               {formatValue(value)}
             </div>
           )}

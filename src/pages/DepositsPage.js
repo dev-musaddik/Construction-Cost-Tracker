@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { Button } from "../components/ui/button";
 import { useTranslation } from "react-i18next";
 import DESkeleton from "../components/DESkeleton";
+import { useLoading } from "../context/LoadingContext";
+import DataLoader from "../components/DataLoader";
+import CombinedLoader from "../components/CombinedLoader";
 
 const normalizeDeposits = (res) => {
   // Accept either { data: [ ... ] } or { data: { deposits: [ ... ] } }
@@ -21,6 +24,8 @@ const DepositsPage = () => {
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentDeposit, setCurrentDeposit] = useState(null);
+  //
+  const { navigationLoading } = useLoading();
 
   const fetchDeposits = useCallback(async () => {
     setLoading(true);
@@ -89,24 +94,14 @@ const DepositsPage = () => {
     }
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="container mx-auto p-4">
-  //       <h1 className="text-3xl font-bold mb-4">{t("deposits")}</h1>
-  //       <div className="flex flex-wrap gap-4 mb-4 items-end">
-  //         <Skeleton className="h-10 w-[200px]" />
-  //       </div>
-  //       <div className="overflow-x-auto">
-  //         <Skeleton className="h-[400px] w-full" />
-  //       </div>
-  //     </div>
-  //   );
-  // }
+
 
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <div className="container mx-auto p-4">
+      {/* {navigationLoading?'' : loading && <DataLoader/>} */}
+      {navigationLoading?'' : loading && <CombinedLoader/>}
       <h1 className="text-3xl font-bold mb-4">{t("deposits")}</h1>
       <div className="flex flex-wrap gap-4 mb-4 items-end">
         <Button onClick={handleAddDeposit} className="min-w-[120px]">

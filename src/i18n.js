@@ -177,7 +177,7 @@ i18n
           selectACategory: "Select a category",
           save: "Save",
           total_expenses: "Total Expenses",
-  current_page_expenses: "Current Page Expenses"
+          current_page_expenses: "Current Page Expenses",
         },
       },
       bn: {

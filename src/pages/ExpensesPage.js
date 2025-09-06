@@ -18,6 +18,9 @@ import StatCard from "../components/StatCard";
 import DashboardAPI from "../services/dashboardService";
 import EmptyState from "../components/EmptyState";
 import DESkeleton from "../components/DESkeleton";
+import DataLoader from "../components/DataLoader";
+import { useLoading } from "../context/LoadingContext";
+import CombinedLoader from "../components/CombinedLoader";
 
 const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
 const ExpensesPage = () => {
@@ -106,6 +109,10 @@ const ExpensesPage = () => {
 
   const [loadingExpenses, setLoadingExpenses] = useState(false);
   const [loadingCategories, setLoadingCategories] = useState(false);
+
+  //navigationLoading
+  const { navigationLoading } = useLoading(); 
+
   // Optional combined loading for legacy UI:
   useEffect(() => {
     setLoading(loadingExpenses || loadingCategories);
@@ -339,7 +346,8 @@ const ExpensesPage = () => {
 
   return (
     <>
-      {/* {loading && <SkeletonLoader />} */}
+      {/* {navigationLoading?'' : loading && <DataLoader/>} */}
+      {navigationLoading?'' : loading && <CombinedLoader/>}
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">{t("expenses")}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

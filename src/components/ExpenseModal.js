@@ -18,6 +18,8 @@ import {
 } from "./ui/select";
 import categoryService from "../services/categoryService";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import DataLoader from "./DataLoader";
 
 const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
   const { t } = useTranslation();
@@ -26,6 +28,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
   const [date, setDate] = useState("");
   const [category, setCategory] = useState(""); // holds category code (preferred) or _id fallback
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
 
@@ -39,9 +42,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
         : new Date().toISOString().split("T")[0];
       setDate(ymd);
       // ✅ FIX: use expense.category (singular) and prefer code
-      setCategory(
-        expense.category?.code ?? expense.category?._id ?? ""
-      );
+      setCategory(expense.category?.code ?? expense.category?._id ?? "");
     } else {
       setDescription("");
       setAmount("");
@@ -60,18 +61,19 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
         // Default selection on create: first category
         if (!category && list.length > 0) setCategory(categoryValueOf(list[0]));
       } catch (error) {
-        console.error(t('failedToFetchCategoriesModal'), error);
+        console.error(t("failedToFetchCategoriesModal"), error);
       }
     };
     fetchCategories();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSave = () => {
-    let selected = category;
-    console.log(selected)
+  const handleSave = async () => {
+    if (loading) return; // ✅ Prevent multiple clicks
 
-    // If user somehow selected an ObjectId, try map to its code (server expects code)
+    let selected = category;
+
+    // If user somehow selected an ObjectId, map it to its code
     if (/^[0-9a-fA-F]{24}$/.test(selected)) {
       const found = categories.find((c) => c._id === selected);
       if (found?.code) selected = found.code;
@@ -85,38 +87,55 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       category: selected,
     };
 
-    // Basic validations
-    if (!payload.description) return console.warn(t('missingDescription'));
-    if (!payload.amount || Number.isNaN(payload.amount) || payload.amount <= 0)
-      return console.warn(t('invalidAmount'));
-    if (!payload.date || payload.date.length !== 10)
-      return console.warn(t('invalidDate'));
-    if (!payload.category)
-      return console.warn(t('missingCategory'));
+    // ✅ Basic validations
+    if (!payload.description) return toast.error(t("missingDescription"));
 
-    onSave(payload);
+    // ✅ Check description length (at least 3 chars)
+    if (payload.description.length < 3) {
+      return toast.error(t("descriptionMinLength")); // e.g. "Description must be at least 3 characters"
+    }
+
+    if (!payload.amount || Number.isNaN(payload.amount) || payload.amount <= 0)
+      return toast.error(t("invalidAmount"));
+
+    if (!payload.date || payload.date.length !== 10)
+      return toast.error(t("invalidDate"));
+
+    if (!payload.category) return toast.error(t("missingCategory"));
+
+    try {
+      setLoading(true); // ✅ Start loading
+
+      await onSave(payload);
+    } catch (error) {
+      console.error(error);
+      toast.error(error);
+    } finally {
+      setLoading(false); // ✅ Stop loading
+    }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
+        {loading && <DataLoader />}
         <DialogHeader>
-          <DialogTitle>{expense ? t('editExpense') : t('addExpense')}</DialogTitle>
+          <DialogTitle>
+            {expense ? t("editExpense") : t("addExpense")}
+          </DialogTitle>
           {/* a11y: description to avoid console warning */}
-          <DialogDescription>
-            {t('expenseModalDescription')}
-          </DialogDescription>
+          <DialogDescription>{t("expenseModalDescription")}</DialogDescription>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
           <Input
-            placeholder={t('description')}
+            placeholder={t("description")}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
 
           <Input
-            placeholder={t('amount')}
+            placeholder={t("amount")}
             type="number"
             inputMode="decimal"
             value={amount}
@@ -131,11 +150,14 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
 
           <Select value={category} onValueChange={setCategory}>
             <SelectTrigger>
-              <SelectValue placeholder={t('selectACategory')} />
+              <SelectValue placeholder={t("selectACategory")} />
             </SelectTrigger>
             <SelectContent>
               {categories.map((cat) => (
-                <SelectItem key={cat._id || cat.code} value={categoryValueOf(cat)}>
+                <SelectItem
+                  key={cat._id || cat.code}
+                  value={categoryValueOf(cat)}
+                >
                   {cat.name}
                   {cat.code ? ` (${cat.code})` : ""}
                 </SelectItem>
@@ -145,7 +167,22 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
         </div>
 
         <DialogFooter>
-          <Button onClick={handleSave}>{t('save')}</Button>
+          <Button
+            type="button"
+            onClick={onClose}
+            loading={loading}
+            variant="outline"
+          >
+            {t("cancel")}
+          </Button>
+          <Button
+            loading={loading}
+            circle={loading}
+            text={t("save")}
+            onClick={handleSave}
+          >
+            {t("save")}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

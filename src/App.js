@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
@@ -15,14 +15,35 @@ import usePageLoader from './hooks/usePageLoader';
 import Loader from './components/Loader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useLoading } from './context/LoadingContext';
+import CombinedLoader from './components/CombinedLoader';
 
 function App() {
   const { user } = useAuth();
   const loading = usePageLoader();
+  const { setNavigationLoading } = useLoading();
+  const [initialLoad, setInitialLoad] = useState(false);
 
+  // ✅ Set navigation loading inside useEffect to prevent re-renders
+  useEffect(() => {
+    setNavigationLoading(loading);
+  }, [loading, setNavigationLoading]);
+
+  // ✅ Detect full page refresh
+  useEffect(() => {
+    const navType = performance.getEntriesByType("navigation")[0]?.type;
+
+    // If the page is reloaded OR directly opened in a new tab
+    if (navType === "reload" || navType === "navigate") {
+      setInitialLoad(true);
+    } else {
+      setInitialLoad(false);
+    }
+  }, []);
   return (
     <>
       {/* {loading && <Loader />} */}
+      {loading && <CombinedLoader solidBg={initialLoad} />}
       <Navbar />
       <main className="py-3">
         <div className="container mx-auto">
