@@ -11,6 +11,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { PlusCircle, MinusCircle, CalendarDays, Clock } from "lucide-react";
+import { fmtMoney } from "../lib/utils";
 
 // ---- Helpers ----
 const toNumber = (v) => {
@@ -35,21 +36,7 @@ const formatTime = (d) =>
     minute: "2-digit",
   }).format(d);
 
-const formatCurrency = (amount, currency) => {
-  try {
-    if (currency) {
-      return new Intl.NumberFormat(undefined, {
-        style: "currency",
-        currency,
-      }).format(amount);
-    }
-    return new Intl.NumberFormat(undefined, {
-      maximumFractionDigits: 2,
-    }).format(amount);
-  } catch {
-    return `${amount}`;
-  }
-};
+
 
 const groupByDay = (items) => {
   const sorted = [...items].sort((a, b) => normalizeDate(b) - normalizeDate(a));
@@ -104,7 +91,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {t("itemsCount", { defaultValue: "{{count}} items", count })} ·{" "}
             {t("total", { defaultValue: "Total" })}{" "}
-            {formatCurrency(total, currency)}
+            {fmtMoney(total, currency)}
           </p>
         </div>
       </header>
@@ -152,7 +139,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
                       </div>
                       <div className="shrink-0 text-right">
                         <span className="text-sm font-semibold text-green-800">
-                          +{formatCurrency(toNumber(d.amount), currency)}
+                          +{fmtMoney(toNumber(d.amount), currency)}
                         </span>
                       </div>
                     </li>
