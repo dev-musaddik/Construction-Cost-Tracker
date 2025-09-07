@@ -15,7 +15,7 @@ const CategorySelectionPage = () => {
         const userString = localStorage.getItem("user");
         const user = JSON.parse(userString);
 
-        const response = await axios.get("http://localhost:5000/api/categories", {
+        const response = await axios.get("https://construction-cost-tracker-server-g2.vercel.app/api/categories", {
           headers: {
             Authorization: `Bearer ${user.token}`,
             "Content-Type": "application/json",
