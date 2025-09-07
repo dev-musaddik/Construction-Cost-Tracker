@@ -178,6 +178,19 @@ i18n
           save: "Save",
           total_expenses: "Total Expenses",
           current_page_expenses: "Current Page Expenses",
+
+          //Contract page
+          contractExpenses: "Contract Expenses",
+          categories: "Categories",
+          totalExpenses: "Total Expenses for this Category",
+          agreementAmount: "Agreement Amount",
+          enterAmount: "Enter Amount",
+          agreementReached: "Agreement reached.",
+          remaining: "Remaining",
+          noExpenses: "No expenses found for this category.",
+          amount: "Amount",
+          date: "Date",
+          category: "Category",
         },
       },
       bn: {
@@ -355,6 +368,20 @@ i18n
           addADepositHint: "ডিপোজিট যোগ করার নির্দেশনা",
           total_expenses: "মোট খরচ",
           current_page_expenses: "বর্তমান পৃষ্ঠা খরচ",
+
+          // Contract page
+
+          contractExpenses: "চুক্তির খরচ",
+          categories: "বিভাগসমূহ",
+          totalExpenses: "এই বিভাগের মোট খরচ",
+          agreementAmount: "চুক্তি রাশি",
+          enterAmount: "রাশি লিখুন",
+          agreementReached: "চুক্তি সম্পন্ন হয়েছে।",
+          remaining: "বাকি",
+          noExpenses: "এই বিভাগের জন্য কোনো খরচ পাওয়া যায়নি।",
+          amount: "পরিমাণ",
+          date: "তারিখ",
+          category: "বিভাগ",
         },
       },
     },

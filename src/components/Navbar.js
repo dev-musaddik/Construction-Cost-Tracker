@@ -108,6 +108,7 @@ export default function Navbar() {
     { to: "/expenses", label: t("entries"), icon: Receipt },
     { to: "/deposits", label: t("deposits"), icon: Wallet },
     { to: "/categories", label: t("categories"), icon: Tags },
+    { to: "/contract", label: t("contract"), icon: Tags },
   ];
 
   return (

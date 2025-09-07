@@ -20,6 +20,7 @@ import categoryService from "../services/categoryService";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import DataLoader from "./DataLoader";
+import CombinedLoader from "./CombinedLoader";
 
 const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
   const { t } = useTranslation();
@@ -29,12 +30,13 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
   const [category, setCategory] = useState(""); // holds category code (preferred) or _id fallback
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [isContract, setIsContract] = useState(false); // New state for isContract
   const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
 
   // Populate fields when opening (EDIT vs CREATE)
   useEffect(() => {
     if (expense) {
+      console.log(expense)
       setDescription(expense.description ?? "");
       setAmount(String(expense.amount ?? ""));
       const ymd = expense.date
@@ -43,11 +45,13 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       setDate(ymd);
       // ✅ FIX: use expense.category (singular) and prefer code
       setCategory(expense.category?.code ?? expense.category?._id ?? "");
+      setIsContract(expense.isContract ?? false); // Populate isContract from expense
     } else {
       setDescription("");
       setAmount("");
       setDate(new Date().toISOString().split("T")[0]);
       setCategory("");
+      setIsContract(false); // Default to false on create
     }
   }, [expense]);
 
@@ -85,6 +89,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       amount: Number(amount),
       date,
       category: selected,
+      isContract,
     };
 
     // ✅ Basic validations
@@ -112,13 +117,19 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       toast.error(error);
     } finally {
       setLoading(false); // ✅ Stop loading
+      setDescription("");
+      setAmount("");
+      setDate("");
+      setCategory("");
+      setIsContract('');
     }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
-        {loading && <DataLoader />}
+        {/* {loading && <DataLoader />} */}
+        {loading && <CombinedLoader />}
         <DialogHeader>
           <DialogTitle>
             {expense ? t("editExpense") : t("addExpense")}
@@ -164,6 +175,19 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
               ))}
             </SelectContent>
           </Select>
+          {/* New checkbox for isContract */}
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="isContract"
+              name="isContract"
+              checked={isContract}
+              onChange={() => setIsContract((prev) => !prev)} // Toggle the value
+            />
+            <label htmlFor="isContract" className="ml-2">
+              {t("isContract")}
+            </label>
+          </div>
         </div>
 
         <DialogFooter>

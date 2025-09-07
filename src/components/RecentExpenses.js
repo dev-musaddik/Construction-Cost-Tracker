@@ -91,7 +91,7 @@ function RecentExpenses({ expenses = [], currency = "USD", maxItems = 20 }) {
   }, [expenses, maxItems]);
 
   return (
-    <section className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat p-6 font-[Patrick Hand,Comic Sans MS,cursive]">
+    <section className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat sm:p-6 p-1 font-[Patrick Hand,Comic Sans MS,cursive]">
       <header className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-slate-100 dark:text-slate-900 flex items-center gap-2">
@@ -127,16 +127,16 @@ function RecentExpenses({ expenses = [], currency = "USD", maxItems = 20 }) {
                   {formatDate(date)}
                 </span>
               </div>
-              <ul className="divide-y divide-slate-100 overflow-hidden rounded-xl ">
+              <ul className="divide-y divide-slate-100 overflow-hidden rounded-xl">
                 {items.map((e, idx) => {
                   const dt = normalizeDate(e);
                   const id = e._id || `${key}-${idx}`;
                   return (
                     <li
                       key={id}
-                      className="flex items-center justify-between gap-3 bg-transparent px-3 py-3 transition hover:bg-rose-50/50 dark:bg-transparent dark:hover:bg-rose-900/10"
+                      className="flex items-center justify-between gap-3 bg-transparent sm:px-3 px-1 py-3  transition hover:bg-rose-50/50 dark:bg-transparent dark:hover:bg-rose-900/10"
                     >
-                      <div className="min-w-0">
+                      <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium text-slate-100 dark:text-slate-800">
                           {e.description ||
                             t("expense", { defaultValue: "Expense" })}

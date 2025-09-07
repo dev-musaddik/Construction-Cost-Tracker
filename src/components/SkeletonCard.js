@@ -16,7 +16,7 @@ const SkeletonCard = ({ type, items = 3 }) => {
 
   return (
     <div className="space-y-6">
-      <div className="animate-pulse bg-gray-200 rounded-xl p-4">
+      <div className="animate-pulse bg-gray-200 rounded-xl p-4 max-w-full overflow-hidden">
         {/* Header with dynamic title */}
         <div className="flex items-center justify-between mb-4">
           <div className="h-6 bg-gray-300 w-32 rounded-md"></div>

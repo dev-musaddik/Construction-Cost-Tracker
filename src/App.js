@@ -17,6 +17,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLoading } from './context/LoadingContext';
 import CombinedLoader from './components/CombinedLoader';
+import ContractExpensesPage from './pages/ContractExpensesPage ';
+import CategorySelectionPage from './pages/CategorySelectionPage';
 
 function App() {
   const { user } = useAuth();
@@ -86,6 +88,23 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/contract"
+              element={
+                <ProtectedRoute>
+                  <ContractExpensesPage />
+                </ProtectedRoute>
+              }
+            />
+           
+            {/* <Route
+              path="/contract-expenses/:categoryId"
+              element={
+                <ProtectedRoute>
+                  <ContractExpensesPage />
+                </ProtectedRoute>
+              }
+            /> */}
             <Route
               path="/profile"
               element={

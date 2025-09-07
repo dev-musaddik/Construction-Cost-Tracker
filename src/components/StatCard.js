@@ -3,15 +3,20 @@ import { useEffect, useState } from "react";
 function formatValue(v) {
   if (typeof v === "number") {
     try {
+      // Round the value to the nearest integer
+      const roundedValue = Math.round(v);
+
+      // Format the rounded integer value
       return new Intl.NumberFormat(undefined, {
-        maximumFractionDigits: 2,
-      }).format(v);
+        maximumFractionDigits: 0, // Ensures no decimal places
+      }).format(roundedValue);
     } catch (e) {
-      return String(v);
+      return String(v); // Return the value as a string in case of an error
     }
   }
   return v;
 }
+
 
 function StatCard({
   label,
@@ -26,37 +31,42 @@ function StatCard({
     allDataTotalBalance !== null &&
     allDataTotalBalance !== "";
 
-  useEffect(() => {
-    if (!showPrev) return;
-
-    // Check if value is a valid string or number before sanitizing
-    if (!value || isNaN(value.replace(/[^\d.-]/g, ""))) {
-      console.error("Invalid value:", value);
-      return; // Avoid processing if value is invalid
-    }
-
-    // Remove the Taka symbol, spaces, and commas, then convert to a number
-    const sanitizedValue = parseFloat(value.replace(/[^\d.-]/g, ""));
-
-    // Log sanitized value to debug
-    console.log("Sanitized value:", sanitizedValue);
-
-    const computed = allDataTotalBalance - sanitizedValue;
-
-    // Log computed value to debug
-    console.log("Computed value:", computed);
-
-    if (isNaN(computed)) {
-      console.error("Computed value is NaN");
-      return;
-    }
-
-    // Set the new beforeBalance if computed value is different
-    setBeforeBalance((prev) => {
-      if (prev === computed) return prev;
-      return computed;
-    });
-  }, [showPrev, allDataTotalBalance, value]);
+    useEffect(() => {
+      if (!showPrev) return;
+    
+      // Check if value is a valid string or number before sanitizing
+      if (!value || isNaN(value.replace(/[^\d.-]/g, ""))) {
+        console.error("Invalid value:", value);
+        return; // Avoid processing if value is invalid
+      }
+    
+      // Remove the Taka symbol, spaces, and commas, then convert to a number
+      const sanitizedValue = parseFloat(value.replace(/[^\d.-]/g, ""));
+    
+      // Round sanitized value to the nearest integer
+      const roundedSanitizedValue = Math.round(sanitizedValue);
+    
+      // Log sanitized and rounded value to debug
+      console.log("Sanitized and rounded value:", roundedSanitizedValue);
+    
+      const computed = allDataTotalBalance - roundedSanitizedValue;
+    
+      // Log computed value to debug
+      console.log("Computed value:", computed);
+    
+      if (isNaN(computed)) {
+        console.error("Computed value is NaN");
+        return;
+      }
+    
+      // Set the new beforeBalance if computed value is different
+      setBeforeBalance((prev) => {
+        const roundedComputed = Math.round(computed);
+        if (prev === roundedComputed) return prev;
+        return roundedComputed;
+      });
+    }, [showPrev, allDataTotalBalance, value]);
+    
 
   const StatCardSkeleton = () => (
     <div className="bg-gray-200 animate-pulse h-24 rounded-lg p-4">

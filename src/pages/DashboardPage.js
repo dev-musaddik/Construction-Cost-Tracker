@@ -66,7 +66,14 @@ const ymdLocal = (d = new Date()) => {
 };
 
 // ----------------------------- DateFilterBar ------------------------------
-function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loading }) {
+function DateFilterBar({
+  onApply,
+  onPreset,
+  preset,
+  weekStart,
+  setWeekStart,
+  loading,
+}) {
   console.log(onApply);
   const { t } = useTranslation();
   const [mode, setMode] = useState("day"); // 'day' | 'range'
@@ -88,7 +95,9 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loa
   //   //send data
 
   const presetBtn = (label, value, onClick) => (
-    <Button loading={loading} text={label}
+    <Button
+      loading={loading}
+      text={label}
       type="button"
       variant={preset === value ? "default" : "outline"}
       onClick={onClick}
@@ -102,15 +111,18 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loa
       <div className="flex gap-3 items-center flex-wrap">
         <span className="text-sm font-medium">{t("mode")}:</span>
         <div className="flex gap-2 flex-wrap">
-          <Button loading={loading}   text={t("singleDay")}
+          <Button
+            loading={loading}
+            text={t("singleDay")}
             type="button"
             variant={mode === "day" ? "default" : "outline"}
             onClick={() => setMode("day")}
-          
           >
             {t("singleDay")}
           </Button>
-          <Button loading={loading} text={t("dateRange")}
+          <Button
+            loading={loading}
+            text={t("dateRange")}
             type="button"
             variant={mode === "range" ? "default" : "outline"}
             onClick={() => setMode("range")}
@@ -155,7 +167,7 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loa
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 md:ml-auto items-center w-full md:w-auto">
+      <div className="flex flex-wrap gap-2 md:ml-auto items-center w-full md:w-auto mx-auto">
         {presetBtn(t("allTime"), "all", () => onPreset("all"))}
         {presetBtn(t("today"), "today", () => onPreset("today"))}
         {presetBtn(t("thisWeek"), "weekly", () => onPreset("weekly"))}
@@ -171,7 +183,13 @@ function DateFilterBar({ onApply, onPreset, preset, weekStart, setWeekStart ,loa
             <option value="sun">{t("sun")}</option>
           </select>
         </div> */}
-        <Button loading={loading} text={t("apply")} type="button" variant="apply" onClick={apply}>
+        <Button
+          loading={loading}
+          text={t("apply")}
+          type="button"
+          variant="apply"
+          onClick={apply}
+        >
           {t("apply")}
         </Button>
       </div>
@@ -196,7 +214,7 @@ const DashboardPage = () => {
   // all data set for add before money
   const [allDataBalance, setAllDataBalance] = useState();
   const { navigationLoading } = useLoading();
-  console.log(navigationLoading)
+  console.log(navigationLoading);
 
   const buildParams = useCallback(() => {
     console.groupCollapsed("%c[DashboardPage] buildParams", "color:#f59e0b");
@@ -229,25 +247,38 @@ const DashboardPage = () => {
     async (signal) => {
       try {
         setLoading(true);
-        setError("");
+        setError(""); // Reset any previous errors
         const params = buildParams();
         console.log(params);
-        // Service returns data directly
-        const data = await DashboardAPI.getDashboardData(params, { signal });
-        const allData = await DashboardAPI.getDashboardData();
-        setAllDataBalance(allData.balance || null);
-        setDashboardData(data || null);
+
+        // API call 1 for dashboard data
+        try {
+          const data = await DashboardAPI.getDashboardData(params, { signal });
+          setDashboardData(data || null);
+        } catch (err) {
+          console.error("Failed to fetch dashboard data", err);
+          setError("Failed to fetch dashboard data.");
+          toast.error("Failed to fetch dashboard data.");
+        }
+
+        // API call 2 for all data balance
+        try {
+          const allData = await DashboardAPI.getDashboardData(); // This is a second API request
+          setAllDataBalance(allData.balance || null);
+        } catch (err) {
+          console.error("Failed to fetch balance data", err);
+          setError("Failed to fetch balance data.");
+          toast.error("Failed to fetch balance data.");
+        }
       } catch (err) {
-        if (err?.name === "CanceledError" || err?.code === "ERR_CANCELED")
-          return;
-        console.error(err);
-        setError(t("failedToFetchDashboardData"));
-        toast.error(t("failedToFetchDashboardData"));
+        console.error("Unexpected error occurred", err);
+        setError("Unexpected error occurred. Please try again.");
+        toast.error("Unexpected error occurred. Please try again.");
       } finally {
         setLoading(false);
       }
     },
-    [buildParams, t]
+    [buildParams]
   );
 
   // Initial & reactive fetch with abort safety
@@ -358,10 +389,15 @@ const DashboardPage = () => {
   return (
     <div className="container mx-auto p-4 transition-all duration-300 ease-in-out">
       {/* {navigationLoading?'' : loading && <DataLoader/>} */}
-      {navigationLoading?'' : loading && <CombinedLoader/>}
+      {loading && !navigationLoading && (
+        <div className="fixed top-0 left-0 w-screen h-screen z-50 flex items-center justify-center">
+          <CombinedLoader />
+        </div>
+      )}
+
       {/* <CombinedLoader/> */}
-        <h1 className="text-3xl font-bold mb-2">{t("dashboard")}</h1>
-      
+      <h1 className="text-3xl font-bold mb-2">{t("dashboard")}</h1>
+
       {loading ? (
         <div className="flex items-center">
           <p className="text-sm text-gray-500 mb-4">Range:</p>
@@ -422,10 +458,20 @@ const DashboardPage = () => {
       </div>
 
       <div className="flex justify-end mb-4 space-x-4 mt-6">
-        <Button loading={loading} text={t("addDeposit")} onClick={() => setIsDepositModalOpen(true)}>
+        <Button
+          loading={loading}
+          text={t("addDeposit")}
+          onClick={() => setIsDepositModalOpen(true)}
+          variant="apply"
+        >
           {t("addDeposit")}
         </Button>
-        <Button loading={loading} text={t("addExpense")} onClick={() => setIsExpenseModalOpen(true)}>
+        <Button
+          loading={loading}
+          text={t("addExpense")}
+          onClick={() => setIsExpenseModalOpen(true)}
+          variant="destructive"
+        >
           {t("addExpense")}
         </Button>
       </div>
@@ -433,8 +479,8 @@ const DashboardPage = () => {
       <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mt-4 mb-4">
         {loading ? (
           <>
-            <SkeletonCard type="expense" items={expenses.length} />
-            <SkeletonCard type="deposit" items={deposits.length} />
+            <SkeletonCard type="expense" items={5} />
+            <SkeletonCard type="deposit" items={5} />
           </>
         ) : (
           <>
@@ -446,9 +492,9 @@ const DashboardPage = () => {
       {loading ? (
         <PieChartSkeleton items={expensesByCategory.length} />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white shadow-md rounded p-4">
-            <h2 className="text-xl font-semibold mb-2">
+            <h2 className="text-xl md:text-2xl font-semibold mb-2">
               {t("expensesByCategory")}
             </h2>
             {expensesByCategory.length === 0 ? (
@@ -456,7 +502,7 @@ const DashboardPage = () => {
                 {t("noExpensesByCategory")}
               </p>
             ) : (
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
                   <Pie
                     data={expensesByCategory}
@@ -481,33 +527,33 @@ const DashboardPage = () => {
             )}
           </div>
 
-          {/* <div className="bg-white shadow-md rounded p-4">
-          <h2 className="text-xl font-semibold mb-2">
-            {t("expensesOverTimeMonthly")}
-          </h2>
-          {formattedExpensesOverTime.length === 0 ? (
-            <p className="text-sm text-gray-500">{t("noExpensesOverTime")}</p>
-          ) : (
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart
-                data={formattedExpensesOverTime}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip formatter={(val) => fmtMoney(val)} />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="total"
-                  stroke="#8884d8"
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          )}
-        </div> */}
+          <div className="bg-white shadow-md rounded p-4">
+            <h2 className="text-xl md:text-2xl font-semibold mb-2">
+              {t("expensesOverTimeMonthly")}
+            </h2>
+            {formattedExpensesOverTime.length === 0 ? (
+              <p className="text-sm text-gray-500">{t("noExpensesOverTime")}</p>
+            ) : (
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart
+                  data={formattedExpensesOverTime}
+                  margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip formatter={(val) => fmtMoney(val)} />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="total"
+                    stroke="#8884d8"
+                    activeDot={{ r: 6 }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            )}
+          </div>
         </div>
       )}
       {/* Modals */}
@@ -541,62 +587,62 @@ const DashboardPage = () => {
         }}
       />
 
-<ExpenseModal
-  isOpen={isExpenseModalOpen}
-  onClose={() => setIsExpenseModalOpen(false)}
-  onSave={async (expenseData) => {
-    try {
-      // ✅ Check for missing fields
-      if (
-        !expenseData.description ||
-        !expenseData.amount ||
-        !expenseData.category ||
-        !expenseData.date
-      ) {
-        toast.error(t("pleaseFillInAllFields"));
-        return;
-      }
+      <ExpenseModal
+        isOpen={isExpenseModalOpen}
+        onClose={() => setIsExpenseModalOpen(false)}
+        onSave={async (expenseData) => {
+          try {
+            // ✅ Check for missing fields
+            if (
+              !expenseData.description ||
+              !expenseData.amount ||
+              !expenseData.category ||
+              !expenseData.date
+            ) {
+              toast.error(t("pleaseFillInAllFields"));
+              return;
+            }
 
-      // ✅ Validate amount
-      const amountNum = Number(expenseData.amount);
-      if (!Number.isFinite(amountNum) || amountNum <= 0) {
-        toast.error(t("pleaseEnterAValidAmount"));
-        return;
-      }
+            // ✅ Validate amount
+            const amountNum = Number(expenseData.amount);
+            if (!Number.isFinite(amountNum) || amountNum <= 0) {
+              toast.error(t("pleaseEnterAValidAmount"));
+              return;
+            }
 
-      // ✅ If expense already exists → update
-      if (expenseData._id) {
-        await expenseService.updateExpense(
-          expenseData._id,
-          expenseData.description,
-          expenseData.amount,
-          expenseData.category,
-          expenseData.date
-        );
-        toast.success(t("expenseUpdated"));
-      } 
-      // ✅ Otherwise → create new expense
-      else {
-        await expenseService.createExpense(
-          expenseData.description,
-          expenseData.amount,
-          expenseData.category,
-          expenseData.date
-        );
-        toast.success(t("expenseAdded"));
-      }
+            // ✅ If expense already exists → update
+            if (expenseData._id) {
+              await expenseService.updateExpense(
+                expenseData._id,
+                expenseData.description,
+                expenseData.amount,
+                expenseData.category,
+                expenseData.date,
+                expenseData.isContract
+              );
+              toast.success(t("expenseUpdated"));
+            }
+            // ✅ Otherwise → create new expense
+            else {
+              await expenseService.createExpense(
+                expenseData.description,
+                expenseData.amount,
+                expenseData.category,
+                expenseData.date,
+                expenseData.isContract
+              );
+              toast.success(t("expenseAdded"));
+            }
 
-      // ✅ Close modal & refresh data
-      setIsExpenseModalOpen(false);
-      const controller = new AbortController();
-      fetchDashboardData(controller.signal);
-
-    } catch (e) {
-      toast.error(t("failedToSaveExpense"));
-    }
-  }}
-/>
-
+            // ✅ Close modal & refresh data
+            setIsExpenseModalOpen(false);
+            const controller = new AbortController();
+            fetchDashboardData(controller.signal);
+          } catch (e) {
+            toast.error(t("failedToSaveExpense"));
+          }
+        }}
+      />
     </div>
   );
 };

@@ -50,3 +50,34 @@ code {
 .animate-draw {
   animation: draw 3s ease-in-out infinite;
 }
+
+
+/* con */
+.contract-expenses-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.category-group {
+  margin-bottom: 20px;
+}
+
+.category-group h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+.category-group ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.category-group li {
+  padding: 5px 0;
+  font-size: 16px;
+}
+
+.category-group h3 {
+  font-weight: bold;
+  margin-top: 10px;
+}

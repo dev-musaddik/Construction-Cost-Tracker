@@ -21,6 +21,7 @@ import DESkeleton from "../components/DESkeleton";
 import DataLoader from "../components/DataLoader";
 import { useLoading } from "../context/LoadingContext";
 import CombinedLoader from "../components/CombinedLoader";
+import Pagination from "../components/Pagination";
 
 const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
 const ExpensesPage = () => {
@@ -111,7 +112,7 @@ const ExpensesPage = () => {
   const [loadingCategories, setLoadingCategories] = useState(false);
 
   //navigationLoading
-  const { navigationLoading } = useLoading(); 
+  const { navigationLoading } = useLoading();
 
   // Optional combined loading for legacy UI:
   useEffect(() => {
@@ -120,6 +121,7 @@ const ExpensesPage = () => {
 
   // Fetch expenses whenever filters (page, sort, date, keyword, etc.) change:
   useEffect(() => {
+    console.log(expenses);
     let mounted = true; // prevents setState after unmount / stale responses
 
     const fetchExpensesData = async () => {
@@ -174,7 +176,7 @@ const ExpensesPage = () => {
 
   // Fetch categories once (or when translation t changes)
   useEffect(() => {
-    let mounted = true;
+    let mounted = true; // prevents setState after unmount / stale responses
 
     const fetchCategoriesData = async () => {
       setLoadingCategories(true);
@@ -187,6 +189,7 @@ const ExpensesPage = () => {
       } catch (err) {
         if (!mounted) return;
         console.error("[ExpensesPage] getCategories error:", err);
+        setError(t("failedToFetchCategories"));
         toast.error(t("failedToFetchCategories"));
       } finally {
         if (mounted) setLoadingCategories(false);
@@ -196,20 +199,17 @@ const ExpensesPage = () => {
     fetchCategoriesData();
 
     return () => {
-      mounted = false;
+      mounted = false; // Cleanup to avoid updating state after component unmounts
     };
   }, [t]);
 
   //dashboard data for total expense
   const fetchDashboardData = useCallback(
     async (signal) => {
-      // setDashboardLoading(true);
-      // setDashboardError("");
       try {
         const params = {};
         const data = await DashboardAPI.getDashboardData(params, { signal });
         const total = data.expenses.reduce((s, d) => s + d.amount, 0);
-        // assuming API returns { balance, ... }
         setAllDataBalance(total ?? null);
         console.log(total);
       } catch (err) {
@@ -217,14 +217,12 @@ const ExpensesPage = () => {
           return;
         }
         console.error("[Dashboard] error:", err);
-        // setDashboardError(t("failedToFetchDashboardData"));
         toast.error(t("failedToFetchDashboardData"));
-      } finally {
-        // setDashboardLoading(false);
       }
     },
     [filters, t]
   );
+  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -267,7 +265,8 @@ const ExpensesPage = () => {
           expenseData.description,
           expenseData.amount,
           expenseData.category,
-          expenseData.date
+          expenseData.date,
+          expenseData.isContract
         );
         toast.success(t("expenseUpdatedSuccess"));
       } else {
@@ -275,7 +274,8 @@ const ExpensesPage = () => {
           expenseData.description,
           expenseData.amount,
           expenseData.category,
-          expenseData.date
+          expenseData.date,
+          expenseData.isContract
         );
         toast.success(t("expenseAddedSuccess"));
       }
@@ -290,7 +290,8 @@ const ExpensesPage = () => {
   };
 
   const handleExportCsv = () => {
-    const url = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/export/csv";
+    const url =
+      "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/export/csv";
     console.debug("[ExpensesPage] export CSV ->", url);
     window.open(url, "_blank");
   };
@@ -347,7 +348,7 @@ const ExpensesPage = () => {
   return (
     <>
       {/* {navigationLoading?'' : loading && <DataLoader/>} */}
-      {navigationLoading?'' : loading && <CombinedLoader/>}
+      {navigationLoading ? "" : loading && <CombinedLoader />}
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">{t("expenses")}</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -589,22 +590,27 @@ const ExpensesPage = () => {
           // Your normal content for when there are expenses
 
           <div className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat p-6 font-[Patrick Hand,Comic Sans MS,cursive]">
-            <table className="min-w-full bg-transparent ">
+            <table className="min-w-full bg-transparent">
               <thead>
                 <tr className="bg-transparent border-b-2 border-gray-300">
                   <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
+                    {" "}
                     {t("description")}
                   </th>
                   <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
+                    {" "}
                     {t("amount")}
                   </th>
                   <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
+                    {" "}
                     {t("category")}
                   </th>
                   <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
+                    {" "}
                     {t("date")}
                   </th>
                   <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
+                    {" "}
                     {t("actions")}
                   </th>
                 </tr>
@@ -613,7 +619,7 @@ const ExpensesPage = () => {
                 {expenses.map((expense) => (
                   <tr
                     key={expense._id}
-                    className="hover:bg-slate-100/30 transition-colors border-b border-gray-200"
+                    className="hover:bg-blue-100/30 transition-colors border-b border-gray-200"
                   >
                     <td className="py-3 px-4 text-slate-800 italic">
                       {expense.description}
@@ -653,10 +659,7 @@ const ExpensesPage = () => {
                 ))}
               </tbody>
               <tfoot>
-                <tr
-                  className="border-t-2 border-gray-500
-"
-                >
+                <tr className="border-t-2 border-gray-500">
                   <td className="py-2 px-4 font-bold">{t("Total")}</td>
                   <td className="py-2 px-4 font-bold">
                     {expenses
@@ -671,28 +674,15 @@ const ExpensesPage = () => {
                 </tr>
               </tfoot>
             </table>
-            {pages > 1 && (
-              <div className="flex justify-center mt-6 gap-2">
-                {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
-                  <Button
-                    key={p}
-                    variant={p === filters.pageNumber ? "outline" : "default"}
-                    onClick={() =>
-                      handleFilterChange("pageNumber", p, { keepPage: true })
-                    }
-                    className={`rounded-full px-4 py-2 text-sm font-bold transition-all shadow-sm border font-[inherit] ${
-                      {
-                        true: "bg-sky-100 text-sky-700 border-sky-300",
-                        false:
-                          "bg-white text-slate-600 border-slate-300 hover:bg-slate-50 hover:text-slate-900",
-                      }[p === filters.pageNumber]
-                    }`}
-                  >
-                    {p}
-                  </Button>
-                ))}
-              </div>
-            )}
+
+            {/* Pagination Controls */}
+            <Pagination
+              pages={pages}
+              currentPage={filters.pageNumber}
+              onPageChange={(page) =>
+                handleFilterChange("pageNumber", page, { keepPage: true })
+              }
+            />
           </div>
         )}
 

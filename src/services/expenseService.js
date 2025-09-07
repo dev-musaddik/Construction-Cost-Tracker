@@ -2,7 +2,8 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses"; // <- no trailing slash (we'll add it per call)
+// const API_URL = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses"; // <- no trailing slash (we'll add it per call)
+const API_URL = "http://localhost:5000/api/expenses"; // <- no trailing slash (we'll add it per call)
 
 // Build query params, skipping empty/undefined
 const buildParams = (paramsObj = {}) => {
@@ -77,8 +78,8 @@ const getExpense = async (id) => {
   }
 };
 
-const createExpense = async (description, amount, category, date) => {
-  const payload = { description, amount, category, date };
+const createExpense = async (description, amount, category, date ,isContract) => {
+  const payload = { description, amount, category, date ,isContract};
   const url = `${API_URL}`;
   console.log("[expenseService] CREATE expense:", payload, "->", url);
   try {
@@ -99,9 +100,9 @@ const createExpense = async (description, amount, category, date) => {
   }
 };
 
-const updateExpense = async (id, description, amount, category, date) => {
+const updateExpense = async (id, description, amount, category, date , isContract) => {
   const url = `${API_URL}/${id}`;
-  const payload = { description, amount, category, date };
+  const payload = { description, amount, category, date ,isContract};
   console.log(
     "[expenseService] UPDATE expense:",
     { id, ...payload },

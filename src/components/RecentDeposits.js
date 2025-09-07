@@ -92,7 +92,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
   }, [deposits, maxItems]);
 
   return (
-    <section className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat p-6 font-[Patrick Hand,Comic Sans MS,cursive]">
+    <section className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat sm:p-6 p-2 font-[Patrick Hand,Comic Sans MS,cursive]">
       <header className="mb-4 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-slate-100 dark:text-slate-900 flex items-center gap-2">
@@ -125,7 +125,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
               {/* Date Header */}
               <div className="mb-2 flex items-center gap-2 text-xs font-medium text-black/80">
                 <CalendarDays className="h-4 w-4 text-black/80" />
-                <span className="rounded-full bg-transparent backdrop-blur-md px-2 py-0.5 border border-black/20">
+                <span className="rounded-full bg-transparent backdrop-blur-md sm:px-2 px-1 py-0.5 border border-black/20">
                   {formatDate(date)}
                 </span>
               </div>
@@ -138,7 +138,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
                   return (
                     <li
                       key={id}
-                      className="flex items-center justify-between gap-3 bg-transparent px-3 py-3 transition hover:bg-rose-50/50 dark:bg-transparent dark:hover:bg-rose-900/10"
+                      className="flex items-center justify-between gap-3 bg-transparent sm:px-3 px-1 py-3 transition hover:bg-rose-50/50 dark:bg-transparent dark:hover:bg-rose-900/10"
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium text-black">

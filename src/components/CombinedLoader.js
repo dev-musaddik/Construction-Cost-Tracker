@@ -45,7 +45,7 @@ const CombinedLoader = ({ solidBg }) => {
     // The z-50 ensures it's on top of all other content.
     // backdrop-blur-sm creates a subtle blur effect on the content underneath.
     <div
-    className={`fixed inset-0 z-50 flex flex-col items-center justify-center backdrop-blur-[1px] ${
+    className={`fixed inset-0 w-auto z-50 flex flex-col items-center justify-center backdrop-blur-[1px] ${
       solidBg ? "bg-white" : "bg-white/30"
     }`}
   >
@@ -65,7 +65,7 @@ const CombinedLoader = ({ solidBg }) => {
       </div> */}
 
       {/* Signature Animation */}
-      <div className="relative sm:w-full w-40 max-w-md mt-8">
+      <div className="relative sm:w-full w-40 max-w-md mt-8 overflow-hidden">
         <svg 
           ref={canvasRef}
           viewBox="100 320 410 60" 
