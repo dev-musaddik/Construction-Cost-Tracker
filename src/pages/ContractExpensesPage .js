@@ -11,51 +11,51 @@ const ContractExpensesPage = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [agreementAmounts, setAgreementAmounts] = useState({}); // Store agreement amounts for each category
-  // ✅ Fetch categories from expenses API
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const userString = localStorage.getItem("user");
-        const user = JSON.parse(userString);
+//   // ✅ Fetch categories from expenses API
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       try {
+//         const userString = localStorage.getItem("user");
+//         const user = JSON.parse(userString);
 
-        const response = await axios.get(
-          "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/contract/",
-          {
-            params: { isContract: true },
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+//         const response = await axios.get(
+//           "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/contract/",
+//           {
+//             params: { isContract: true },
+//             headers: {
+//               Authorization: `Bearer ${user.token}`,
+//               "Content-Type": "application/json",
+//             },
+//           }
+//         );
 
-        const fetchedExpenses = response.data.expenses || [];
+//         const fetchedExpenses = response.data.expenses || [];
 
-        // ✅ Extract unique categories from expenses
-        const uniqueCategories = [
-          ...new Map(
-            fetchedExpenses
-              .filter((item) => item.category) // Prevent null categories
-              .map((item) => [item.category._id, item.category])
-          ).values(),
-        ];
+//         // ✅ Extract unique categories from expenses
+//         const uniqueCategories = [
+//           ...new Map(
+//             fetchedExpenses
+//               .filter((item) => item.category) // Prevent null categories
+//               .map((item) => [item.category._id, item.category])
+//           ).values(),
+//         ];
 
-        setCategories(uniqueCategories);
+//         setCategories(uniqueCategories);
 
-        // ✅ Auto-select first category if available
-        if (uniqueCategories.length > 0) {
-          setSelectedCategory(uniqueCategories[0]._id);
-        }
-      } catch (err) {
-        console.error("Error fetching categories:", err);
-        setError(t("noExpenses"));
-      } finally {
-        setLoading(false);
-      }
-    };
+//         // ✅ Auto-select first category if available
+//         if (uniqueCategories.length > 0) {
+//           setSelectedCategory(uniqueCategories[0]._id);
+//         }
+//       } catch (err) {
+//         console.error("Error fetching categories:", err);
+//         setError(t("noExpenses"));
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
 
-    fetchCategories();
-  }, [t]);
+//     fetchCategories();
+//   }, [t]);
 
   // ✅ Fetch expenses for selected category
   useEffect(() => {
@@ -93,38 +93,38 @@ const ContractExpensesPage = () => {
 
     fetchContractExpenses();
   }, [selectedCategory, t]);
-  //   // Fetch categories on mount
-  //   useEffect(() => {
-  //     const fetchCategories = async () => {
-  //       try {
-  //         const userString = localStorage.getItem("user");
-  //         const user = JSON.parse(userString);
+    // Fetch categories on mount
+    useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          const userString = localStorage.getItem("user");
+          const user = JSON.parse(userString);
 
-  //         const response = await axios.get(
-  //           "https://construction-cost-tracker-server-g2.vercel.app/api/categories",
-  //           {
-  //             params:{isContract: true},
-  //             headers: {
-  //               Authorization: `Bearer ${user.token}`,
-  //               "Content-Type": "application/json",
-  //             },
-  //           }
+          const response = await axios.get(
+            "https://construction-cost-tracker-server-g2.vercel.app/api/categories",
+            {
+              params:{isContract: true},
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+                "Content-Type": "application/json",
+              },
+            }
 
-  //         );
+          );
 
-  //         setCategories(response.data);
-  //         console.log(response)
-  //         if (response.data.length > 0) {
-  //           setSelectedCategory(response?.data[0]._id);
-  //         }
-  //       } catch (err) {
-  //         console.error("Error fetching categories:", err);
-  //         setError(t("noExpenses"));
-  //       }
-  //     };
+          setCategories(response.data);
+          console.log(response)
+          if (response.data.length > 0) {
+            setSelectedCategory(response?.data[0]._id);
+          }
+        } catch (err) {
+          console.error("Error fetching categories:", err);
+          setError(t("noExpenses"));
+        }
+      };
 
-  //     fetchCategories();
-  //   }, [t]);
+      fetchCategories();
+    }, [t]);
 
   // Fetch expenses whenever selected category changes
 
