@@ -101,6 +101,7 @@ function DateFilterBar({
       type="button"
       variant={preset === value ? "default" : "outline"}
       onClick={onClick}
+      className='flex-1 min-w-[220px] w-full sm:w-auto'
     >
       {label}
     </Button>
@@ -167,7 +168,7 @@ function DateFilterBar({
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2 md:ml-auto items-center w-full md:w-auto mx-auto">
+      <div className="mb-4 flex flex-wrap gap-4 w-full justify-start">
         {presetBtn(t("allTime"), "all", () => onPreset("all"))}
         {presetBtn(t("today"), "today", () => onPreset("today"))}
         {presetBtn(t("thisWeek"), "weekly", () => onPreset("weekly"))}
