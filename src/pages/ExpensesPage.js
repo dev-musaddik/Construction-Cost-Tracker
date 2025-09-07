@@ -395,7 +395,7 @@ const ExpensesPage = () => {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t("selectCategory")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 <SelectItem value="all">{t("all")}</SelectItem>
                 {categories.map((cat) => (
                   <SelectItem
@@ -460,7 +460,7 @@ const ExpensesPage = () => {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t("sortBy")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 <SelectItem value="createdAt">{t("date")}</SelectItem>
                 <SelectItem value="amount">{t("amount")}</SelectItem>
                 <SelectItem value="date">
@@ -486,7 +486,7 @@ const ExpensesPage = () => {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t("sortOrder")} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 <SelectItem value="desc">{t("descending")}</SelectItem>
                 <SelectItem value="asc">{t("ascending")}</SelectItem>
               </SelectContent>
@@ -511,7 +511,7 @@ const ExpensesPage = () => {
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 {[5, 10, 20, 50].map((n) => (
                   <SelectItem key={n} value={String(n)}>
                     {n}

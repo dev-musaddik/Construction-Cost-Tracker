@@ -163,17 +163,18 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
             <SelectTrigger>
               <SelectValue placeholder={t("selectACategory")} />
             </SelectTrigger>
-            <SelectContent>
-              {categories.map((cat) => (
-                <SelectItem
-                  key={cat._id || cat.code}
-                  value={categoryValueOf(cat)}
-                >
-                  {cat.name}
-                  {cat.code ? ` (${cat.code})` : ""}
-                </SelectItem>
-              ))}
-            </SelectContent>
+            <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
+  {categories.map((cat) => (
+    <SelectItem
+      key={cat._id || cat.code}
+      value={categoryValueOf(cat)}
+      className="hover:bg-blue-500 hover:text-white"
+    >
+      {cat.name}
+      {cat.code ? ` (${cat.code})` : ""}
+    </SelectItem>
+  ))}
+</SelectContent>
           </Select>
           {/* New checkbox for isContract */}
           <div className="flex items-center">
