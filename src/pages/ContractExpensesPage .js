@@ -19,8 +19,8 @@ const ContractExpensesPage = () => {
         const user = JSON.parse(userString);
 
         const response = await axios.get(
-          "https://construction-cost-tracker-server-g2.vercel.app/api/categories",
-        //   "http://localhost:5000/api/expenses/contract/",
+        //   "https://construction-cost-tracker-server-g2.vercel.app/api/categories",
+          "http://localhost:5000/api/expenses/contract/",
           {
             params:{isContract: true},
             headers: {
