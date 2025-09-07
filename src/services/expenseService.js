@@ -2,8 +2,8 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-// const API_URL = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses"; // <- no trailing slash (we'll add it per call)
-const API_URL = "http://localhost:5000/api/expenses"; // <- no trailing slash (we'll add it per call)
+const API_URL = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses"; // <- no trailing slash (we'll add it per call)
+// const API_URL = "http://localhost:5000/api/expenses"; // <- no trailing slash (we'll add it per call)
 
 // Build query params, skipping empty/undefined
 const buildParams = (paramsObj = {}) => {
