@@ -524,12 +524,6 @@ const ExpensesPage = () => {
           {/* Buttons */}
           <div className="flex flex-wrap gap-2">
             <Button
-              onClick={handleAddExpense}
-              className="min-w-[120px] bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
-            >
-              {t("addExpense")}
-            </Button>
-            <Button
               onClick={handleExportCsv}
               variant="outline"
               className="min-w-[120px] border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
@@ -551,18 +545,18 @@ const ExpensesPage = () => {
               {t("exportExcel")}
             </Button>
             <Button
+              onClick={handleAddExpense}
+              className="min-w-[120px] bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+              variant="destructive"
+            >
+              {t("addExpense")}
+            </Button>
+            <Button
               onClick={resetFilters}
               variant="secondary"
               className="min-w-[120px] bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-md"
             >
               {t("reset")}
-            </Button>
-            <Button
-              variant="default"
-              size="lg"
-              className="min-w-[120px] hover:bg-primary/90 focus:ring-2 focus:ring-blue-500"
-            >
-              {t("addExpense")}
             </Button>
           </div>
         </div>
