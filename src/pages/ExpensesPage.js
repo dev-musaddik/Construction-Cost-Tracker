@@ -376,7 +376,7 @@ const ExpensesPage = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-wrap gap-4 mb-4 items-end justify-between">
+        <div className="flex flex-wrap gap-4 mb-4 mx-auto">
           {/* Category Filter */}
           <div className="flex-1 min-w-[150px]">
             <label
@@ -522,31 +522,31 @@ const ExpensesPage = () => {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 w-full justify-start">
             <Button
               onClick={handleExportCsv}
               variant="outline"
-              className="min-w-[120px] border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
+              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
             >
               {t("exportCsv")}
             </Button>
             <Button
               onClick={handleExportPdf}
               variant="outline"
-              className="min-w-[120px] border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
+              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
             >
               {t("exportPdf")}
             </Button>
             <Button
               onClick={handleExportExcel}
               variant="outline"
-              className="min-w-[120px] border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
+              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
             >
               {t("exportExcel")}
             </Button>
             <Button
               onClick={handleAddExpense}
-              className="min-w-[120px] bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
+              className="flex-1 min-w-[120px] inline-flex bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
               variant="destructive"
             >
               {t("addExpense")}
@@ -554,7 +554,7 @@ const ExpensesPage = () => {
             <Button
               onClick={resetFilters}
               variant="secondary"
-              className="min-w-[120px] bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-md"
+              className="flex-1 min-w-[120px] inline-flex bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-md"
             >
               {t("reset")}
             </Button>

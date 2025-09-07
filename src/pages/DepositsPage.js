@@ -6,7 +6,6 @@ import { Button } from "../components/ui/button";
 import { useTranslation } from "react-i18next";
 import DESkeleton from "../components/DESkeleton";
 import { useLoading } from "../context/LoadingContext";
-import DataLoader from "../components/DataLoader";
 import CombinedLoader from "../components/CombinedLoader";
 
 const normalizeDeposits = (res) => {
@@ -40,9 +39,10 @@ const DepositsPage = () => {
       const normalizedDeposits = normalizeDeposits(response);
       setDeposits(normalizedDeposits);
       setFilteredDeposits(normalizedDeposits); // Initially set filtered deposits to all deposits
+      toast.success(t("depositsFetchedSuccess")); // Success toast when deposits are fetched
     } catch (err) {
       setError(t("failedToFetchDeposits"));
-      toast.error(t("failedToFetchDeposits"));
+      toast.error(t("failedToFetchDeposits")); // Error toast if fetching fails
       setDeposits([]);
       setFilteredDeposits([]);
     } finally {
@@ -68,10 +68,10 @@ const DepositsPage = () => {
     if (window.confirm(t("confirmDeleteDeposit"))) {
       try {
         await depositService.deleteDeposit(id);
-        toast.success(t("depositDeletedSuccess"));
+        toast.success(t("depositDeletedSuccess")); // Success toast for successful deletion
         await fetchDeposits();
       } catch (err) {
-        toast.error(t("failedToDeleteDeposit"));
+        toast.error(t("failedToDeleteDeposit")); // Error toast for failed deletion
       }
     }
   };
@@ -85,19 +85,19 @@ const DepositsPage = () => {
           depositData.amount,
           depositData.date
         );
-        toast.success(t("depositUpdatedSuccess"));
+        toast.success(t("depositUpdatedSuccess")); // Success toast when deposit is updated
       } else {
         await depositService.createDeposit(
           depositData.description,
           depositData.amount,
           depositData.date
         );
-        toast.success(t("depositAddedSuccess"));
+        toast.success(t("depositAddedSuccess")); // Success toast for new deposit
       }
       setIsModalOpen(false);
       await fetchDeposits();
     } catch (err) {
-      toast.error(t("failedToSaveDeposit"));
+      toast.error(t("failedToSaveDeposit")); // Error toast for save failure
     }
   };
 
@@ -137,13 +137,21 @@ const DepositsPage = () => {
     setFilteredDeposits(filtered);
   };
 
+  // Apply filter when "Apply Filters" button is clicked
   const handleApplyFilters = () => {
-    filterDeposits(); // Apply filter when the "Apply" button is clicked
+    filterDeposits(); // Trigger filter when the "Apply Filters" button is clicked
   };
 
-  useEffect(() => {
-    filterDeposits(); // Apply filter every time filter criteria changes
-  }, [descriptionFilter, minAmount, maxAmount, startDate, endDate, deposits]);
+  // Reset all filter criteria
+  const resetFilters = () => {
+    setDescriptionFilter("");
+    setMinAmount("");
+    setMaxAmount("");
+    setStartDate("");
+    setEndDate("");
+    setFilteredDeposits(deposits); // Show all deposits when filters are reset
+    toast.info(t("filtersReset")); // Optionally show a toast that filters have been reset
+  };
 
   if (error) return <p className="text-red-500">{error}</p>;
 
@@ -153,15 +161,15 @@ const DepositsPage = () => {
       <h1 className="text-3xl font-bold mb-4">{t("deposits")}</h1>
 
       <div className="flex flex-wrap gap-4 mb-4 items-end">
-        <Button onClick={handleAddDeposit} className="min-w-[120px]">
+        <Button onClick={handleAddDeposit} className="min-w-[220px]">
           {t("addDeposit")}
         </Button>
       </div>
 
       {/* Filters Section */}
-      <div className="mb-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="mb-4 flex flex-wrap gap-4 w-full justify-start">
         {/* Description Filter */}
-        <div className="flex flex-col">
+        <div className="flex-1 min-w-[220px] w-full sm:w-auto">
           <label
             htmlFor="descriptionFilter"
             className="mb-2 text-sm font-medium text-gray-700"
@@ -180,7 +188,7 @@ const DepositsPage = () => {
         </div>
 
         {/* Min Amount */}
-        <div className="flex flex-col">
+        <div className="flex-1 min-w-[220px] w-full sm:w-auto">
           <label
             htmlFor="minAmount"
             className="mb-2 text-sm font-medium text-gray-700"
@@ -199,7 +207,7 @@ const DepositsPage = () => {
         </div>
 
         {/* Max Amount */}
-        <div className="flex flex-col">
+        <div className="flex-1 min-w-[220px] w-full sm:w-auto">
           <label
             htmlFor="maxAmount"
             className="mb-2 text-sm font-medium text-gray-700"
@@ -218,7 +226,7 @@ const DepositsPage = () => {
         </div>
 
         {/* Start Date */}
-        <div className="flex flex-col">
+        <div className="flex-1 min-w-[220px] w-full sm:w-auto">
           <label
             htmlFor="startDate"
             className="mb-2 text-sm font-medium text-gray-700"
@@ -236,7 +244,7 @@ const DepositsPage = () => {
         </div>
 
         {/* End Date */}
-        <div className="flex flex-col">
+        <div className="flex-1 min-w-[220px] w-full sm:w-auto">
           <label
             htmlFor="endDate"
             className="mb-2 text-sm font-medium text-gray-700"
@@ -253,26 +261,21 @@ const DepositsPage = () => {
           />
         </div>
 
-        {/* Buttons Section */}
-        <div className="flex flex-row justify-center sm:flex-row items-end sm:items-end sm:col-span-2 md:col-span-1 lg:col-span-1 gap-3 p-1  text-sm">
+        {/* Apply Filters Button */}
+        <div className="flex flex-wrap gap-3 w-full justify-center sm:justify-start items-end sm:items-end p-1 text-sm">
           <Button
             variant="apply"
             onClick={handleApplyFilters}
-            className=""
+            className="w-full sm:w-auto"
           >
             {t("applyFilters")}
           </Button>
 
+          {/* Reset Filters Button */}
           <Button
             variant="destructive"
-            className=" p-2 rounded-lg text-white"
-            onClick={() => {
-              setDescriptionFilter("");
-              setMinAmount("");
-              setMaxAmount("");
-              setStartDate("");
-              setEndDate("");
-            }}
+            className="w-full sm:w-auto p-2 rounded-lg text-white"
+            onClick={resetFilters}
             aria-label={t("resetFilters")}
           >
             {t("resetFilters")}
