@@ -101,7 +101,7 @@ function DateFilterBar({
       type="button"
       variant={preset === value ? "default" : "outline"}
       onClick={onClick}
-      className='flex-1 min-w-[220px] w-full sm:w-auto'
+      className='flex-1 min-w-[80px] w-full sm:w-auto'
     >
       {label}
     </Button>
