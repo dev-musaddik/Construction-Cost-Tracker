@@ -22,6 +22,7 @@ import DataLoader from "../components/DataLoader";
 import { useLoading } from "../context/LoadingContext";
 import CombinedLoader from "../components/CombinedLoader";
 import Pagination from "../components/Pagination";
+import { fmtMoney } from "../lib/utils";
 
 const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
 const ExpensesPage = () => {
@@ -222,7 +223,6 @@ const ExpensesPage = () => {
     },
     [filters, t]
   );
-  
 
   useEffect(() => {
     const controller = new AbortController();
@@ -351,13 +351,17 @@ const ExpensesPage = () => {
       {navigationLoading ? "" : loading && <CombinedLoader />}
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">{t("expenses")}</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
           {/* Total Expenses */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-2">
               {t("total_expenses")}
             </h2>
-            <StatCard value={allDataBalance} />
+            {loading ? (
+              <div className="h-6 bg-gray-300 animate-pulse rounded"></div> // Skeleton loader
+            ) : (
+              <StatCard value={fmtMoney(allDataBalance)} />
+            )}
           </div>
 
           {/* Current Page Expenses */}
@@ -365,7 +369,11 @@ const ExpensesPage = () => {
             <h2 className="text-xl font-semibold mb-2">
               {t("current_page_expenses")}
             </h2>
-            <StatCard value={totalExpensesAmount} />
+            {loading ? (
+              <div className="h-6 bg-gray-300 animate-pulse rounded"></div> // Skeleton loader
+            ) : (
+              <StatCard value={fmtMoney(totalExpensesAmount)} />
+            )}
           </div>
         </div>
         <div className="flex flex-wrap gap-4 mb-4 items-end justify-between">
