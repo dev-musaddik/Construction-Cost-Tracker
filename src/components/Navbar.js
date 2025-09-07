@@ -1,9 +1,3 @@
-// A unique, responsive, professional & beautiful Navbar
-// - Drop-in replacement for your current Navbar
-// - Uses TailwindCSS + your existing contexts (Auth/Theme/i18n)
-// - No external UI libs required except your Button and lucide-react icons
-//   npm i lucide-react
-
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -26,14 +20,6 @@ import {
   User,
 } from "lucide-react";
 
-function getInitial(name) {
-  if (!name) return "";
-  const parts = String(name).trim().split(/\s+/);
-  const first = parts[0]?.[0] ?? "";
-  const last = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? "" : "";
-  return (first + last).toUpperCase();
-}
-
 const NavItem = ({ to, icon: Icon, label }) => (
   <NavLink
     to={to}
@@ -46,7 +32,9 @@ const NavItem = ({ to, icon: Icon, label }) => (
       ].join(" ")
     }
   >
-    {Icon && <Icon className="h-4 w-4 opacity-80 transition group-hover:opacity-100" />}
+    {Icon && (
+      <Icon className="h-4 w-4 opacity-80 transition group-hover:opacity-100" />
+    )}
     <span>{label}</span>
   </NavLink>
 );
@@ -64,6 +52,27 @@ export default function Navbar() {
 
   const userMenuRef = useRef(null);
   const mobileRef = useRef(null);
+  // Define getInitial function
+  function getInitial(name) {
+    if (!name) return "";
+    const parts = String(name).trim().split(/\s+/);
+    const first = parts[0]?.[0] ?? "";
+    const last = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? "" : "";
+    return (first + last).toUpperCase();
+  }
+// Sync the mobile menu state with localStorage
+useEffect(() => {
+  const storedMobileOpen = localStorage.getItem("mobileOpen");
+  
+  // If there's a value in localStorage, use it. If not, set the default to false (closed)
+  setMobileOpen(storedMobileOpen === "true");
+}, []); // This runs only on the initial render
+
+// Update localStorage whenever mobileOpen state changes
+useEffect(() => {
+  localStorage.setItem("mobileOpen", mobileOpen);  // Save the current state of mobileOpen to localStorage
+}, [mobileOpen]); // This runs whenever mobileOpen state changes
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -90,7 +99,8 @@ export default function Navbar() {
         if (!isToggler) setMobileOpen(false);
       }
     };
-    if (userMenuOpen || mobileOpen) document.addEventListener("mousedown", onClick);
+    if (userMenuOpen || mobileOpen)
+      document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, [userMenuOpen, mobileOpen]);
 
@@ -137,11 +147,18 @@ export default function Navbar() {
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {mobileOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
 
             <h1 className="flex items-center gap-2 text-xl font-extrabold tracking-tight">
-              <Link to="/" className="group inline-flex items-center gap-2 text-slate-900 dark:text-slate-100">
+              <Link
+                to="/"
+                className="group inline-flex items-center gap-2 text-slate-900 dark:text-slate-100"
+              >
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-sky-500 to-indigo-500 text-white shadow-sm ring-1 ring-white/40 dark:ring-black/20">
                   <Building2 className="h-4 w-4" />
                 </span>
@@ -151,7 +168,10 @@ export default function Navbar() {
           </div>
 
           {/* Center: Desktop Nav */}
-          <nav className="hidden md:flex md:items-center md:gap-1" aria-label="Primary">
+          <nav
+            className="hidden md:flex md:items-center md:gap-1"
+            aria-label="Primary"
+          >
             {user && (
               <ul className="flex items-center gap-1">
                 {navLinks.map((l) => (
@@ -161,7 +181,11 @@ export default function Navbar() {
                 ))}
                 {user?.role === "admin" && (
                   <li>
-                    <NavItem to="/admin/users" icon={Shield} label="Admin Panel" />
+                    <NavItem
+                      to="/admin/users"
+                      icon={Shield}
+                      label="Admin Panel"
+                    />
                   </li>
                 )}
               </ul>
@@ -171,7 +195,12 @@ export default function Navbar() {
           {/* Right: Actions */}
           <div className="flex items-center gap-2">
             {/* Language */}
-            <Button variant="ghost" size="sm" onClick={switchLanguage} className="hidden sm:inline-flex">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={switchLanguage}
+              className="hidden sm:inline-flex"
+            >
               <Globe className="mr-2 h-4 w-4" />
               {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
@@ -184,7 +213,11 @@ export default function Navbar() {
               onClick={toggleTheme}
               className="relative"
             >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {theme === "dark" ? (
+                <Sun className="h-4 w-4" />
+              ) : (
+                <Moon className="h-4 w-4" />
+              )}
               <span className="sr-only">Toggle Theme</span>
             </Button>
 
@@ -197,7 +230,9 @@ export default function Navbar() {
                   aria-haspopup="menu"
                   aria-expanded={userMenuOpen}
                 >
-                  <span className="hidden text-sm text-slate-700 dark:text-slate-200 sm:inline">{t("welcome", { defaultValue: "Welcome" })}, {user.name}</span>
+                  <span className="hidden text-sm text-slate-700 dark:text-slate-200 sm:inline">
+                    {t("welcome", { defaultValue: "Welcome" })}, {user.name}
+                  </span>
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-700 ring-1 ring-white/50 dark:bg-slate-800 dark:text-slate-200 dark:ring-black/30">
                     {getInitial(user.name) || <User className="h-4 w-4" />}
                   </span>
@@ -211,7 +246,9 @@ export default function Navbar() {
                   >
                     <div className="px-3 py-2 text-xs text-slate-500 dark:text-slate-400">
                       {t("signedInAs", { defaultValue: "Signed in as" })}
-                      <div className="truncate font-medium text-slate-900 dark:text-slate-100">{user.email || user.name}</div>
+                      <div className="truncate font-medium text-slate-900 dark:text-slate-100">
+                        {user.email || user.name}
+                      </div>
                     </div>
                     <div className="my-1 h-px bg-slate-100 dark:bg-slate-800" />
                     <button
@@ -243,14 +280,14 @@ export default function Navbar() {
       <div
         className={[
           "md:hidden",
-          mobileOpen ? "pointer-events-auto" : "pointer-events-none",
+          mobileOpen === true ? "pointer-events-auto" : "pointer-events-none",
         ].join(" ")}
       >
         {/* overlay */}
         <div
           className={[
             "fixed inset-0 z-40 bg-black/30 transition-opacity",
-            mobileOpen ? "opacity-100" : "opacity-0",
+            mobileOpen === true ? "opacity-100" : "opacity-0",
           ].join(" ")}
         />
 
@@ -259,18 +296,26 @@ export default function Navbar() {
           ref={mobileRef}
           className={[
             "fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs flex-col gap-2 border-r border-slate-200 bg-gray-500 p-4 shadow-xl transition-transform dark:border-slate-800",
-            mobileOpen ? "translate-x-0" : "-translate-x-full",
+            mobileOpen ? "translate-x-0" : "-translate-x-full", // Show/Hide based on mobileOpen state
           ].join(" ")}
           aria-label="Mobile navigation"
         >
           <div className="mb-2 flex items-center justify-between">
-            <Link to="/" className="inline-flex items-center gap-2 text-base font-bold text-slate-900 dark:text-slate-100">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-base font-bold text-slate-900 dark:text-slate-100"
+            >
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-sky-500 to-indigo-500 text-white shadow-sm">
                 <Building2 className="h-4 w-4" />
               </span>
               Construction Cost Tracker
             </Link>
-            <Button variant="ghost" size="icon" onClick={() => setMobileOpen(false)} aria-label="Close menu">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+            >
               <X className="h-5 w-5" />
             </Button>
           </div>
@@ -286,7 +331,11 @@ export default function Navbar() {
               ))}
               {user?.role === "admin" && (
                 <li>
-                  <NavItem to="/admin/users" icon={Shield} label="Admin Panel" />
+                  <NavItem
+                    to="/admin/users"
+                    icon={Shield}
+                    label="Admin Panel"
+                  />
                 </li>
               )}
             </ul>
@@ -304,8 +353,13 @@ export default function Navbar() {
           )}
 
           <div className="mt-auto space-y-2 pt-4 bg-gray-500 text-white">
-            <Button variant="outline" className="w-full" onClick={switchLanguage}>
-              <Globe className="mr-2 h-4 w-4" /> {i18n.language === "en" ? "বাংলা" : "English"}
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={switchLanguage}
+            >
+              <Globe className="mr-2 h-4 w-4" />{" "}
+              {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
             <Button variant="ghost" className="w-full" onClick={toggleTheme}>
               {theme === "dark" ? (
@@ -319,7 +373,11 @@ export default function Navbar() {
               )}
             </Button>
             {user && (
-              <Button className="w-full" variant="destructive" onClick={handleLogout}>
+              <Button
+                className="w-full"
+                variant="destructive"
+                onClick={handleLogout}
+              >
                 <LogOut className="mr-2 h-4 w-4" /> {t("logout")}
               </Button>
             )}
