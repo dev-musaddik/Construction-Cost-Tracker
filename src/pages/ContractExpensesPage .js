@@ -44,6 +44,7 @@ console.log("Unique Categories:", uniqueCategories);
 setCategories(uniqueCategories)
 
         if (response.data.length > 0) {
+            setSelectedCategory(response?.data[0]._id);
         }
       } catch (err) {
         console.error("Error fetching categories:", err);
