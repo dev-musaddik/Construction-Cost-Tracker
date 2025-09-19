@@ -1,6 +1,6 @@
-import axios from 'axios';
-import authHeader from './auth-header';
-import axiosInstance from '../api/axiosConfig';
+import axios from "axios";
+import authHeader from "./auth-header";
+import axiosInstance from "../api/axiosConfig";
 
 /**
  * Base API client
@@ -8,7 +8,7 @@ import axiosInstance from '../api/axiosConfig';
  * - Keeps credentials for cookie-based auth
  */
 const api = axios.create({
-  baseURL:  'https://construction-cost-tracker-server-g2.vercel.app/api',
+  baseURL: "https://construction-cost-tracker-server-g2.vercel.app/api",
   withCredentials: true,
 });
 
@@ -16,7 +16,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   // Prefer your existing helper if available
   const hdrs = authHeader?.();
-  if (hdrs && typeof hdrs === 'object') {
+  if (hdrs && typeof hdrs === "object") {
     config.headers = { ...(config.headers || {}), ...hdrs };
   }
   return config;
@@ -28,17 +28,17 @@ api.interceptors.request.use((config) => {
 
 // ✅ DO NOT use Date(...).toISOString() equality (breaks under TZ)
 function isValidYMD(s) {
-  if (typeof s !== 'string') return false;
+  if (typeof s !== "string") return false;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
-  const [y, m, d] = s.split('-').map(Number);
+  const [y, m, d] = s.split("-").map(Number);
   // Use UTC so local timezone won’t shift the calendar day
   const dt = new Date(Date.UTC(y, m - 1, d));
   return (
-  dt.getUTCFullYear() === y &&
-  dt.getUTCMonth() + 1 === m &&
-  dt.getUTCDate() === d
+    dt.getUTCFullYear() === y &&
+    dt.getUTCMonth() + 1 === m &&
+    dt.getUTCDate() === d
   );
-  }
+}
 /**
  * Build query params for the dashboard API.
  * Supports either a single day (date) OR a range (from/to), with optional filter.
@@ -56,21 +56,26 @@ export function buildDashboardParams({ filter, date, from, to } = {}) {
 
   if (date && (from || to)) {
     // Guard: forbid mixing single-day with range
-    console.warn('[dashboard] Provide either `date` OR `from`/`to`, not both. Using single `date`.');
+    console.warn(
+      "[dashboard] Provide either `date` OR `from`/`to`, not both. Using single `date`."
+    );
     from = undefined; // eslint-disable-line no-param-reassign
-    to = undefined;   // eslint-disable-line no-param-reassign
+    to = undefined; // eslint-disable-line no-param-reassign
   }
 
   if (date) {
-    if (!isValidYMD(date)) throw new Error('Invalid `date` format. Use YYYY-MM-DD.',date);
+    if (!isValidYMD(date))
+      throw new Error("Invalid `date` format. Use YYYY-MM-DD.", date);
     params.date = date;
   } else {
     if (from) {
-      if (!isValidYMD(from)) throw new Error('Invalid `from` format. Use YYYY-MM-DD.',from);
+      if (!isValidYMD(from))
+        throw new Error("Invalid `from` format. Use YYYY-MM-DD.", from);
       params.from = from;
     }
     if (to) {
-      if (!isValidYMD(to)) throw new Error('Invalid `to` format. Use YYYY-MM-DD.',to);
+      if (!isValidYMD(to))
+        throw new Error("Invalid `to` format. Use YYYY-MM-DD.", to);
       params.to = to;
     }
   }
@@ -97,24 +102,29 @@ export function buildDashboardParams({ filter, date, from, to } = {}) {
  */
 export function getDashboardData(params) {
   // The backend route is GET /api/dashboard
-  console.log(params)
-  return axiosInstance.get('/dashboard', { params }).then((res) => res.data);
+  console.log(params);
+  return axiosInstance
+    .get("/dashboard", {
+      headers: authHeader(), // Automatically adds the Authorization header
+      params: params,
+    })
+    .then((res) => res.data);
 }
 
 export const downloadDashboardPdf = async (params) => {
   try {
-    const response = await axiosInstance.get('/dashboard/download', {
+    const response = await axiosInstance.get("/dashboard/download", {
       params,
-      responseType: 'blob',
+      responseType: "blob",
     });
     const url = window.URL.createObjectURL(new Blob([response.data]));
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', 'dashboard.pdf');
+    link.setAttribute("download", "dashboard.pdf");
     document.body.appendChild(link);
     link.click();
   } catch (error) {
-    console.error('Error downloading PDF:', error);
+    console.error("Error downloading PDF:", error);
   }
 };
 
@@ -123,11 +133,14 @@ export const downloadDashboardPdf = async (params) => {
  */
 export const DashboardAPI = {
   getAll: () => getDashboardData({}),
-  getToday: () => getDashboardData(buildDashboardParams({ filter: 'today' })),
-  getThisWeek: () => getDashboardData(buildDashboardParams({ filter: 'weekly' })),
-  getThisMonth: () => getDashboardData(buildDashboardParams({ filter: 'monthly' })),
+  getToday: () => getDashboardData(buildDashboardParams({ filter: "today" })),
+  getThisWeek: () =>
+    getDashboardData(buildDashboardParams({ filter: "weekly" })),
+  getThisMonth: () =>
+    getDashboardData(buildDashboardParams({ filter: "monthly" })),
   getByDate: (date) => getDashboardData(buildDashboardParams({ date })),
-  getByRange: (from, to) => getDashboardData(buildDashboardParams({ from, to })),
+  getByRange: (from, to) =>
+    getDashboardData(buildDashboardParams({ from, to })),
 };
 
 export default { getDashboardData, buildDashboardParams };

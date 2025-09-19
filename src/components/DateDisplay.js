@@ -13,11 +13,11 @@ const DateDisplay = ({ date }) => {
   // Display relative dates (Today, Tomorrow, Yesterday)
   let displayText = formattedDate;
   if (isDateToday) {
-    displayText = 'today';
+    displayText = 'Today';
   } else if (isDateTomorrow) {
-    displayText = 'tomorrow';
+    displayText = 'Tomorrow';
   } else if (isDateYesterday) {
-    displayText = 'yesterday';
+    displayText = 'Yesterday';
   }
 
   return (
@@ -28,8 +28,7 @@ const DateDisplay = ({ date }) => {
         paddingLeft: '8px',
       }}
     >
-      {`date: ${displayText}`}
-      {isDateToday && <span style={{ fontStyle: 'italic', marginLeft: '8px' }}>today</span>}
+      {displayText}
     </span>
   );
 };
