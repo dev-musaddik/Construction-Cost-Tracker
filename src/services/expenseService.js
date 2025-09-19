@@ -3,7 +3,7 @@ import axios from "axios";
 import authHeader from "./auth-header";
 import axiosInstance from "../api/axiosConfig";
 
-const API_URL = "/api/expenses"; // <- no trailing slash (we'll add it per call)
+const API_URL = "/expenses"; // <- no trailing slash (we'll add it per call)
 // const API_URL = "http://localhost:5000/api/expenses"; // <- no trailing slash (we'll add it per call)
 
 // Build query params, skipping empty/undefined
