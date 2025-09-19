@@ -174,13 +174,12 @@ function DateFilterBar({ onApply, onPreset, preset, loading }) {
       )}
 
       <div className="mb-4 flex flex-wrap gap-4 w-full justify-start">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {presetBtn(t("allTime"), "all", () => handlePreset("all"))}
           {presetBtn(t("today"), "today", () => handlePreset("today"))}
           {presetBtn(t("thisWeek"), "weekly", () => handlePreset("weekly"))}
           {presetBtn(t("thisMonth"), "monthly", () => handlePreset("monthly"))}
-        </div>
-        <Button
+          <Button
           loading={loading}
           text={t("apply")}
           type="button"
@@ -189,6 +188,8 @@ function DateFilterBar({ onApply, onPreset, preset, loading }) {
         >
           {t("apply")}
         </Button>
+        </div>
+        
       </div>
     </div>
   );

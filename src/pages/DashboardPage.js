@@ -224,14 +224,14 @@ const DashboardPage = () => {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-end mb-4 space-x-4 mt-6">
-        <Button onClick={handleAddDeposit} className="min-w-[220px]">
+      <div className="mb-4 flex flex-wrap gap-4 w-full justify-center">
+        <Button onClick={handleAddDeposit} className="p-2">
           {t("addDeposit")}
         </Button>
-        <Button variant="destructive" onClick={handleAddExpense}>
+        <Button variant="destructive" onClick={handleAddExpense} className="p-2">
           {t("addExpense")}
         </Button>
-        <Button onClick={() => downloadDashboardPdf(query)} variant="outline">
+        <Button onClick={() => downloadDashboardPdf(query)} variant="outline" className="p-2">
           {t("downloadPdf")}
         </Button>
       </div>

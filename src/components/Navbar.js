@@ -194,7 +194,7 @@ useEffect(() => {
           </nav>
 
           {/* Right: Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center ">
             {/* Language */}
             <Button
               variant="ghost"
@@ -202,8 +202,8 @@ useEffect(() => {
               onClick={switchLanguage}
               className="inline-flex"
             >
-              <Globe className="mr-2 h-4 w-4" />
-              {i18n.language === "en" ? "বাংলা" : "English"}
+              <Globe className="h-4 w-4" />
+              <p className=" hidden sm:block">{i18n.language === "en" ? "বাংলা" : "English"}</p>
             </Button>
 
             {/* Theme */}
