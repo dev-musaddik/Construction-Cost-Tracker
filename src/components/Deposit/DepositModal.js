@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { toast } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
-import DataLoader from './DataLoader';
+import React, { useState, useEffect } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+import DataLoader from "../Loading/DataLoader";
+import CombinedLoader from "../Loading/CombinedLoader";
+import DateDisplay from "../DateDisplay";
 
 // Get today in YYYY-MM-DD format (adjusted for timezone)
 const todayStr = () => {
@@ -23,27 +31,26 @@ const formatDateForInput = (dateStr) => {
 
 const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
   const { t } = useTranslation();
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
   const [date, setDate] = useState(todayStr()); // default to today
-  const [loading,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (deposit) {
-      setDescription(deposit.description ?? '');
+      setDescription(deposit.description ?? "");
       setAmount(
         deposit.amount !== undefined && deposit.amount !== null
           ? String(deposit.amount)
-          : ''
+          : ""
       );
       setDate(formatDateForInput(deposit.date));
     } else {
-      setDescription('');
-      setAmount('');
+      setDescription("");
+      setAmount("");
       setDate(todayStr()); // reset to today when adding new
     }
   }, [deposit, isOpen]);
-
 
   const handleSave = async () => {
     if (!description || !amount) {
@@ -67,10 +74,9 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
         amount: amountNum,
         date: date || todayStr(), // ensure date is never empty
       });
-
-      toast.success("Saved successfully!");
     } catch (error) {
       toast.error("Failed to save. Please try again.");
+      console.log(error)
     } finally {
       setLoading(false); // ✅ Stop loading
     }
@@ -79,9 +85,14 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
-        {loading&&<DataLoader/>}
+        {/* {loading&&<DataLoader/>} */}
+        {/* {loading&&<CombinedLoader/>} */}
         <DialogHeader>
-          <DialogTitle>{deposit ? t('editDeposit') : t('addDeposit')}</DialogTitle>
+          <DialogTitle>
+            {deposit ? t("editDeposit") : t("addDeposit")}
+            {/* Date Display */}
+            <DateDisplay date={date} />
+          </DialogTitle>
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
@@ -96,7 +107,7 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder={t('description')}
+            placeholder={t("description")}
             className="col-span-3"
           />
           <Input
@@ -107,17 +118,28 @@ const DepositModal = ({ isOpen, onClose, onSave, deposit }) => {
             min="0"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder={t('amount')}
+            placeholder={t("amount")}
             className="col-span-3"
           />
         </div>
 
         <DialogFooter>
-          <Button type="button"  onClick={onClose} loading={loading} variant="outline" >
-            {t('cancel')}
+          <Button
+            type="button"
+            onClick={onClose}
+            loading={loading}
+            variant="outline"
+          >
+            {t("cancel")}
           </Button>
-          <Button type="button" onClick={handleSave} circle={loading} loading={loading} text={t('saveChanges')}>
-            {t('saveChanges')}
+          <Button
+            type="button"
+            onClick={handleSave}
+            circle={loading}
+            loading={loading}
+            text={t("saveChanges")}
+          >
+            {t("saveChanges")}
           </Button>
         </DialogFooter>
       </DialogContent>

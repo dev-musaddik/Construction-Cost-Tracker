@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,22 +6,26 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "./ui/dialog";
-import { Input } from "./ui/input";
+} from "../ui/dialog.jsx";
+import { Input } from "../ui/input";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
+import CombinedLoader from "../Loading/CombinedLoader";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import categoryService from "../services/categoryService";
-import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import DataLoader from "./DataLoader";
-import CombinedLoader from "./CombinedLoader";
+} from "../ui/select";
+
+import categoryService from "../../services/categoryService";
+import { Button } from "../ui/button.jsx";
+import DateDisplay from "../DateDisplay.js";
+// import { useDispatch } from "react-redux";
 
 const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
+  // const dispatch = useDispatch();
   const { t } = useTranslation();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
@@ -36,7 +39,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
   // Populate fields when opening (EDIT vs CREATE)
   useEffect(() => {
     if (expense) {
-      console.log(expense)
+      console.log(expense);
       setDescription(expense.description ?? "");
       setAmount(String(expense.amount ?? ""));
       const ymd = expense.date
@@ -44,7 +47,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
         : new Date().toISOString().split("T")[0];
       setDate(ymd);
       // ✅ FIX: use expense.category (singular) and prefer code
-      setCategory(expense.category?.code ?? expense.category?._id ?? "");
+      setCategory(expense?.category ?? expense.category?._id ?? "");
       setIsContract(expense.isContract ?? false); // Populate isContract from expense
     } else {
       setDescription("");
@@ -63,7 +66,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
         const list = Array.isArray(response?.data) ? response.data : [];
         setCategories(list);
         // Default selection on create: first category
-        if (!category && list.length > 0) setCategory(categoryValueOf(list[0]));
+        // if (!category && list.length > 0) setCategory(categoryValueOf(list[0]));
       } catch (error) {
         console.error(t("failedToFetchCategoriesModal"), error);
       }
@@ -77,10 +80,24 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
 
     let selected = category;
 
-    // If user somehow selected an ObjectId, map it to its code
+    // ✅ Debug: Check category before checking its ObjectId format
+    console.log("Selected category before check:", selected,category);
+
+    // ✅ Always send _id to the API, not code
     if (/^[0-9a-fA-F]{24}$/.test(selected)) {
-      const found = categories.find((c) => c._id === selected);
-      if (found?.code) selected = found.code;
+      // already an ObjectId, keep it
+      console.log("Selected is already an ObjectId:", selected);
+    } else {
+      // If user picked a code, find its _id
+      const found = categories.find((c) => c.code === selected);
+      console.log("Found category by code:", found);
+
+      if (found?._id) {
+        selected = found._id;
+        console.log("Updated selected category with _id:", selected);
+      } else {
+        console.log("No category found for the selected code.");
+      }
     }
 
     const payload = {
@@ -92,36 +109,57 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       isContract,
     };
 
+    // ✅ Debug: Check payload before validation
+    console.log("Payload before validation:", payload);
+
     // ✅ Basic validations
-    if (!payload.description) return toast.error(t("missingDescription"));
+    if (!payload.description) {
+      console.log("Validation error: Missing description");
+      return toast.error(t("missingDescription"));
+    }
 
     // ✅ Check description length (at least 3 chars)
     if (payload.description.length < 3) {
+      console.log("Validation error: Description too short");
       return toast.error(t("descriptionMinLength")); // e.g. "Description must be at least 3 characters"
     }
 
-    if (!payload.amount || Number.isNaN(payload.amount) || payload.amount <= 0)
+    if (
+      !payload.amount ||
+      Number.isNaN(payload.amount) ||
+      payload.amount <= 0
+    ) {
+      console.log("Validation error: Invalid amount", payload.amount);
       return toast.error(t("invalidAmount"));
+    }
 
-    if (!payload.date || payload.date.length !== 10)
+    if (!payload.date || payload.date.length !== 10) {
+      console.log("Validation error: Invalid date format", payload.date);
       return toast.error(t("invalidDate"));
+    }
 
-    if (!payload.category) return toast.error(t("missingCategory"));
+    if (!payload.category) {
+      console.log("Validation error: Missing category");
+      return toast.error(t("missingCategory"));
+    }
 
     try {
       setLoading(true); // ✅ Start loading
+      console.log("Saving data with payload:", payload);
 
       await onSave(payload);
+
+      console.log("Data saved successfully!");
     } catch (error) {
-      console.error(error);
-      toast.error(error);
+      console.error("Error during save operation:", error);
+      toast.error(error.message || error);
     } finally {
       setLoading(false); // ✅ Stop loading
       setDescription("");
       setAmount("");
-      setDate("");
       setCategory("");
-      setIsContract('');
+      setIsContract(false);
+      console.log("Form reset after save operation");
     }
   };
 
@@ -129,10 +167,13 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
         {/* {loading && <DataLoader />} */}
-        {loading && <CombinedLoader />}
+        {/* {loading && <CombinedLoader />} */}
         <DialogHeader>
           <DialogTitle>
             {expense ? t("editExpense") : t("addExpense")}
+            {/* Highlight date and show 'today', 'yesterday', 'tomorrow' */}
+            {/* Date Display */}
+            <DateDisplay date={date} />
           </DialogTitle>
           {/* a11y: description to avoid console warning */}
           <DialogDescription>{t("expenseModalDescription")}</DialogDescription>
@@ -164,17 +205,17 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
               <SelectValue placeholder={t("selectACategory")} />
             </SelectTrigger>
             <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
-  {categories.map((cat) => (
-    <SelectItem
-      key={cat._id || cat.code}
-      value={categoryValueOf(cat)}
-      className="hover:bg-blue-500 hover:text-white"
-    >
-      {cat.name}
-      {cat.code ? ` (${cat.code})` : ""}
-    </SelectItem>
-  ))}
-</SelectContent>
+              {categories.map((cat) => (
+                <SelectItem
+                  key={cat._id || cat.code}
+                  value={categoryValueOf(cat)}
+                  className="hover:bg-blue-500 hover:text-white"
+                >
+                  {cat.name}
+                  {cat.code ? ` (${cat.code})` : ""}
+                </SelectItem>
+              ))}
+            </SelectContent>
           </Select>
           {/* New checkbox for isContract */}
           <div className="flex items-center">

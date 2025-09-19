@@ -46,7 +46,7 @@ const CombinedLoader = ({ solidBg }) => {
     // backdrop-blur-sm creates a subtle blur effect on the content underneath.
     <div
     className={`fixed inset-0 w-auto z-50 flex flex-col items-center justify-center backdrop-blur-[1px] ${
-      solidBg ? "bg-white" : "bg-white/30"
+      solidBg ? "bg-white" : "bg-transparent"
     }`}
   >
       <div className="relative w-24 h-24">

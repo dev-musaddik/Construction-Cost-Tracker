@@ -1,8 +1,9 @@
 // services/expenseService.js
 import axios from "axios";
 import authHeader from "./auth-header";
+import axiosInstance from "../api/axiosConfig";
 
-const API_URL = "https://construction-cost-tracker-server-g2.vercel.app/api/expenses"; // <- no trailing slash (we'll add it per call)
+const API_URL = "/api/expenses"; // <- no trailing slash (we'll add it per call)
 // const API_URL = "http://localhost:5000/api/expenses"; // <- no trailing slash (we'll add it per call)
 
 // Build query params, skipping empty/undefined
@@ -42,7 +43,7 @@ const getExpenses = async (
   const url = `${API_URL}${qs}`;
   console.log("[expenseService] GET expenses:", url);
   try {
-    const res = await axios.get(url, {
+    const res = await  axiosInstance.get(url, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res;
@@ -62,7 +63,7 @@ const getExpense = async (id) => {
   const url = `${API_URL}/${id}`;
   console.log("[expenseService] GET expense by ID:", id, "->", url);
   try {
-    const res = await axios.get(url, {
+    const res = await  axiosInstance.get(url, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res;
@@ -83,7 +84,7 @@ const createExpense = async (description, amount, category, date ,isContract) =>
   const url = `${API_URL}`;
   console.log("[expenseService] CREATE expense:", payload, "->", url);
   try {
-    const res = await axios.post(url, payload, {
+    const res = await  axiosInstance.post(url, payload, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res;
@@ -110,7 +111,7 @@ const updateExpense = async (id, description, amount, category, date , isContrac
     url
   );
   try {
-    const res = await axios.put(url, payload, {
+    const res = await  axiosInstance.put(url, payload, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res;
@@ -131,7 +132,7 @@ const deleteExpense = async (id) => {
   const url = `${API_URL}/${id}`;
   console.log("[expenseService] DELETE expense ID:", id, "->", url);
   try {
-    const res = await axios.delete(url, {
+    const res = await  axiosInstance.delete(url, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res;
@@ -159,7 +160,7 @@ const getExpensesByDate = async (date, from, to) => {
   const qs = params.toString();
   if (qs) url += `?${qs}`;
   try {
-    const res = await axios.get(url, {
+    const res = await  axiosInstance.get(url, {
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     return res.data;

@@ -1,12 +1,13 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+import axiosInstance from '../api/axiosConfig';
 
-const API_URL = 'https://construction-cost-tracker-server-g2.vercel.app/api/deposits/';
+const API_URL = '/deposits/';
 
 const getDeposits = async () => {
   console.log('[depositService] GET all deposits:', API_URL);
   try {
-    const response = await axios.get(API_URL, { headers: authHeader() });
+    const response = await axiosInstance.get(API_URL, { headers: authHeader() });
     console.log('[depositService] Response:', response.data);
     return response;
   } catch (error) {
@@ -18,7 +19,7 @@ const getDeposits = async () => {
 const getDeposit = async (id) => {
   console.log('[depositService] GET deposit by ID:', id);
   try {
-    const response = await axios.get(API_URL + id, { headers: authHeader() });
+    const response = await axiosInstance.get(API_URL + id, { headers: authHeader() });
     console.log('[depositService] Response:', response.data);
     return response;
   } catch (error) {
@@ -30,7 +31,7 @@ const getDeposit = async (id) => {
 const createDeposit = async (description, amount,date) => {
   console.log('[depositService] CREATE deposit:', { description, amount,date });
   try {
-    const response = await axios.post(API_URL, { description, amount,date }, { headers: authHeader() });
+    const response = await axiosInstance.post(API_URL, { description, amount,date }, { headers: authHeader() });
     console.log('[depositService] Response:', response.data);
     return response;
   } catch (error) {
@@ -42,7 +43,7 @@ const createDeposit = async (description, amount,date) => {
 const updateDeposit = async (id, description, amount ,date) => {
   console.log('[depositService] UPDATE deposit:', { id, description, amount, date });
   try {
-    const response = await axios.put(API_URL + id, { description, amount,date }, { headers: authHeader() });
+    const response = await axiosInstance.put(API_URL + id, { description, amount,date }, { headers: authHeader() });
     console.log('[depositService] Response:', response.data);
     return response;
   } catch (error) {
@@ -54,7 +55,7 @@ const updateDeposit = async (id, description, amount ,date) => {
 const deleteDeposit = async (id) => {
   console.log('[depositService] DELETE deposit ID:', id);
   try {
-    const response = await axios.delete(API_URL + id, { headers: authHeader() });
+    const response = await axiosInstance.delete(API_URL + id, { headers: authHeader() });
     console.log('[depositService] Response:', response.data);
     return response;
   } catch (error) {

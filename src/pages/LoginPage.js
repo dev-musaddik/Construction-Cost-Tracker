@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useTranslation } from "react-i18next";
+import { Button } from "../components/ui/button";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false)
   const { login } = useAuth();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const isNew = localStorage.getItem("i18nextLng");
+  //   if (isNew=='bn') {
+  //     setPassword('demoPass');
+  //     setEmail('demoEmail@.com');
+  //   }
+  // }, []);
+
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
+      setLoading(true)
       await login(email, password);
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      setError('failedToLogIn');
+      setError("failedToLogIn");
+    }
+    finally{
+      setLoading(false)
     }
   };
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -29,14 +47,14 @@ const LoginPage = () => {
           onSubmit={submitHandler}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
-          <h1 className="text-2xl font-bold mb-4">{t('login')}</h1>
+          <h1 className="text-2xl font-bold mb-4">{t("login")}</h1>
           {error && <p className="text-red-500 text-xs italic">{t(error)}</p>}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="email"
             >
-              {t('email')}
+              {t("email")}
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -53,7 +71,7 @@ const LoginPage = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="password"
             >
-              {t('password')}
+              {t("password")}
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -66,17 +84,19 @@ const LoginPage = () => {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button
+            <Button
+              circle={loading}
+              loading={loading}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
-              {t('signIn')}
-            </button>
+              {t("signIn")}
+            </Button>
             <Link
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               to="/register"
             >
-              {t('registerText')}
+              {t("registerText")}
             </Link>
           </div>
         </form>

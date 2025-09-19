@@ -11,7 +11,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { PlusCircle, MinusCircle, CalendarDays, Clock } from "lucide-react";
-import { fmtMoney } from "../lib/utils";
+import { fmtMoney } from "../../lib/utils";
 
 // ---- Helpers ----
 const toNumber = (v) => {
@@ -65,7 +65,8 @@ const EmptyState = ({ title, subtitle, icon }) => (
 );
 
 // ---------- Recent Deposits ----------
-function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
+function RecentDeposits({ deposits = [], maxItems = 20 }) {
+  console.log(deposits)
   const { t } = useTranslation();
 
   const { grouped, total, count } = useMemo(() => {
@@ -91,7 +92,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
             {t("itemsCount", { defaultValue: "{{count}} items", count })} ·{" "}
             {t("total", { defaultValue: "Total" })}{" "}
-            {fmtMoney(total, currency)}
+            {fmtMoney(total)}
           </p>
         </div>
       </header>
@@ -139,7 +140,7 @@ function RecentDeposits({ deposits = [], currency = "USD", maxItems = 20 }) {
                       </div>
                       <div className="shrink-0 text-right">
                         <span className="text-sm font-semibold text-green-800">
-                          +{fmtMoney(toNumber(d.amount), currency)}
+                          +{fmtMoney(toNumber(d.amount))}
                         </span>
                       </div>
                     </li>

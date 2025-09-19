@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './ui/dialog';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { useTranslation } from 'react-i18next';
 
-const CategoryModal = ({ isOpen, onClose, onSave, category }) => {
+const CategoryModal = ({ isOpen, onClose, onSave, category ,loading}) => {
+  console.log(loading)
   const { t } = useTranslation();
   const [name, setName] = useState('');
 
@@ -39,7 +40,7 @@ const CategoryModal = ({ isOpen, onClose, onSave, category }) => {
           <Button type="button" onClick={onClose} variant="outline">
             {t('cancel')}
           </Button>
-          <Button type="submit" onClick={handleSave}>
+          <Button type="submit" onClick={handleSave} loading={loading} circle={loading}>
             {t('saveChanges')}
           </Button>
         </DialogFooter>

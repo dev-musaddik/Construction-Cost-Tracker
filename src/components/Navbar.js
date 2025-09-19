@@ -118,6 +118,7 @@ useEffect(() => {
     { to: "/expenses", label: t("entries"), icon: Receipt },
     { to: "/deposits", label: t("deposits"), icon: Wallet },
     { to: "/categories", label: t("categories"), icon: Tags },
+    { to: "/todos", label: t("todos"), icon: Tags },
     { to: "/contract", label: t("contract"), icon: Tags },
   ];
 
@@ -142,7 +143,7 @@ useEffect(() => {
               id="mobile-menu-toggle"
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle navigation menu"
               aria-expanded={mobileOpen}
@@ -169,7 +170,7 @@ useEffect(() => {
 
           {/* Center: Desktop Nav */}
           <nav
-            className="hidden md:flex md:items-center md:gap-1"
+            className="hidden lg:flex md:items-center md:gap-1"
             aria-label="Primary"
           >
             {user && (
@@ -199,14 +200,14 @@ useEffect(() => {
               variant="ghost"
               size="sm"
               onClick={switchLanguage}
-              className="hidden sm:inline-flex"
+              className="inline-flex"
             >
               <Globe className="mr-2 h-4 w-4" />
               {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
 
             {/* Theme */}
-            <Button
+            {/* <Button
               variant="ghost"
               size="icon"
               aria-label="Toggle theme"
@@ -219,7 +220,7 @@ useEffect(() => {
                 <Moon className="h-4 w-4" />
               )}
               <span className="sr-only">Toggle Theme</span>
-            </Button>
+            </Button> */}
 
             {user ? (
               <div className="relative" ref={userMenuRef}>
@@ -279,7 +280,7 @@ useEffect(() => {
       {/* Mobile Sheet */}
       <div
         className={[
-          "md:hidden",
+          "lg:hidden",
           mobileOpen === true ? "pointer-events-auto" : "pointer-events-none",
         ].join(" ")}
       >
@@ -361,7 +362,7 @@ useEffect(() => {
               <Globe className="mr-2 h-4 w-4" />{" "}
               {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
-            <Button variant="ghost" className="w-full" onClick={toggleTheme}>
+            {/* <Button variant="ghost" className="w-full" onClick={toggleTheme}>
               {theme === "dark" ? (
                 <>
                   <Sun className="mr-2 h-4 w-4" /> Light Mode
@@ -371,7 +372,7 @@ useEffect(() => {
                   <Moon className="mr-2 h-4 w-4" /> Dark Mode
                 </>
               )}
-            </Button>
+            </Button> */}
             {user && (
               <Button
                 className="w-full"

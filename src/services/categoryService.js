@@ -1,26 +1,26 @@
-import axios from 'axios';
 import authHeader from './auth-header';
+import axiosInstance from '../api/axiosConfig';
 
-const API_URL = 'https://construction-cost-tracker-server-g2.vercel.app/api/categories/';
+const API_URL = '/categories/';
 
 const getCategories = () => {
-  return axios.get(API_URL, { headers: authHeader() });
+  return axiosInstance.get(API_URL, { headers: authHeader() });
 };
 
 const getCategory = (id) => {
-  return axios.get(API_URL + id, { headers: authHeader() });
+  return axiosInstance.get(API_URL + id, { headers: authHeader() });
 };
 
 const createCategory = (name) => {
-  return axios.post(API_URL, { name }, { headers: authHeader() });
+  return axiosInstance.post(API_URL, { name }, { headers: authHeader() });
 };
 
 const updateCategory = (id, name) => {
-  return axios.put(API_URL + id, { name }, { headers: authHeader() });
+  return axiosInstance.put(API_URL + id, { name }, { headers: authHeader() });
 };
 
 const deleteCategory = (id) => {
-  return axios.delete(API_URL + id, { headers: authHeader() });
+  return axiosInstance.delete(API_URL + id, { headers: authHeader() });
 };
 
 const categoryService = {

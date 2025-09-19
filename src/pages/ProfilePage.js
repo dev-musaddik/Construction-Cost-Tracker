@@ -13,11 +13,13 @@ const ProfilePage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [dailyReports, setDailyReports] = useState(false);
 
   useEffect(() => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setDailyReports(user.dailyReports || false);
     }
   }, [user]);
 
@@ -34,21 +36,13 @@ const ProfilePage = () => {
         name,
         email,
         password: password || undefined,
+        dailyReports,
       });
       // Re-login to update user in context and localStorage with new token/data
       login(updatedUser.data.email, password || user.password);
       toast.success(t('profileUpdatedSuccess'));
     } catch (err) {
       toast.error(t('failedToUpdateProfile'));
-    }
-  };
-
-  const handleScheduleReport = async () => {
-    try {
-      await authService.scheduleDailyReport();
-      toast.success(t('dailyReportScheduledSuccess'));
-    } catch (err) {
-      toast.error(t('failedToScheduleDailyReport'));
     }
   };
 
@@ -106,20 +100,16 @@ const ProfilePage = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
+          <div className="flex items-center mb-6">
+            <input id="dailyReports" type="checkbox" checked={dailyReports} onChange={(e) => setDailyReports(e.target.checked)} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+            <label htmlFor="dailyReports" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('dailyReports')}</label>
+          </div>
           <div className="flex items-center justify-between">
             <Button type="submit">
               {t('updateProfile')}
             </Button>
           </div>
         </form>
-
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8">
-          <h2 className="text-xl font-bold mb-4">{t('scheduledReports')}</h2>
-          <p className="mb-4">{t('scheduleDailyReportInfo')}</p>
-          <Button onClick={handleScheduleReport}>
-            {t('scheduleDailyReport')}
-          </Button>
-        </div>
       </div>
     </div>
   );

@@ -191,10 +191,39 @@ i18n
           amount: "Amount",
           date: "Date",
           category: "Category",
+
+          //model
+          confirmUpdateDeposit: "Are you sure you want to update this deposit?",
+          confirmDeleteDeposit: "Are you sure you want to delete this deposit?",
+          depositUpdated: "Deposit updated successfully.",
+          depositAdded: "Deposit added successfully.",
+          depositDeleted: "Deposit deleted successfully.",
+          failedToSaveDeposit: "Failed to save deposit.",
+          failedToDeleteDeposit: "Failed to delete deposit.",
+
+          confirmAddCategory: "Are you sure you want to add this category?",
+          confirmUpdateCategory:
+            "Are you sure you want to update this category?",
+          confirmDeleteCategory:
+            "Are you sure you want to delete this category?",
+          categoryUpdated: "Category updated successfully.",
+          categoryAdded: "Category added successfully.",
+          categoryDeleted: "Category deleted successfully.",
+          failedToSaveCategory: "Failed to save category.",
+          failedToDeleteCategory: "Failed to delete category.",
         },
       },
       bn: {
         translation: {
+          confirmAddCategory: "আপনি কি এই ক্যাটাগরিটি যোগ করতে নিশ্চিত?",
+          confirmUpdateCategory: "আপনি কি এই ক্যাটাগরিটি আপডেট করতে নিশ্চিত?",
+          confirmDeleteCategory: "আপনি কি এই ক্যাটাগরিটি মুছে ফেলতে নিশ্চিত?",
+          categoryUpdated: "ক্যাটাগরি সফলভাবে আপডেট হয়েছে।",
+          categoryAdded: "ক্যাটাগরি সফলভাবে যোগ হয়েছে।",
+          categoryDeleted: "ক্যাটাগরি সফলভাবে মুছে ফেলা হয়েছে।",
+          failedToSaveCategory: "ক্যাটাগরি সেভ করতে ব্যর্থ।",
+          failedToDeleteCategory: "ক্যাটাগরি মুছে ফেলতে ব্যর্থ।",
+
           // Navbar
           dashboard: "ড্যাশবোর্ড",
           categories: "বিভাগ",
@@ -382,6 +411,15 @@ i18n
           amount: "পরিমাণ",
           date: "তারিখ",
           category: "বিভাগ",
+          //model
+          confirmUpdateDeposit:
+            "আপনি কি নিশ্চিত যে আপনি এই জমাটিকে আপডেট করতে চান?",
+          confirmDeleteDeposit: "আপনি কি নিশ্চিত যে আপনি এই জমাটিকে মুছতে চান?",
+          depositUpdated: "জমা সফলভাবে আপডেট করা হয়েছে।",
+          depositAdded: "জমা সফলভাবে যোগ করা হয়েছে।",
+          depositDeleted: "জমা সফলভাবে মুছে ফেলা হয়েছে।",
+          failedToSaveDeposit: "জমা সংরক্ষণ করতে ব্যর্থ হয়েছে।",
+          failedToDeleteDeposit: "জমা মুছতে ব্যর্থ হয়েছে।",
         },
       },
     },

@@ -1,9 +1,7 @@
-// pages/ExpensesPage.jsx
-import React, { useState, useEffect, useCallback } from "react";
-import expenseService from "../services/expenseService";
-import categoryService from "../services/categoryService";
-import ExpenseModal from "../components/ExpenseModal";
+import React, { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
 import {
@@ -13,478 +11,295 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { useTranslation } from "react-i18next";
 import StatCard from "../components/StatCard";
-import DashboardAPI from "../services/dashboardService";
-import EmptyState from "../components/EmptyState";
-import DESkeleton from "../components/DESkeleton";
-import DataLoader from "../components/DataLoader";
-import { useLoading } from "../context/LoadingContext";
-import CombinedLoader from "../components/CombinedLoader";
 import Pagination from "../components/Pagination";
+import EmptyState from "../components/EmptyState";
+import ExpenseModal from "../components/Expense/ExpenseModal";
+import CombinedLoader from "../components/Loading/CombinedLoader";
 import { fmtMoney } from "../lib/utils";
+import DESkeleton from "../components/Skeleton/DESkeleton";
+import { useHandleExpenseSave } from "../hooks/useHandleExpenseSave";
 
-const categoryValueOf = (cat) => (cat?.code ? cat.code : cat?._id);
-const ExpensesPage = () => {
+// ---------- helpers ----------
+const toDate = (x) => new Date(x ?? 0);
+const getCatId = (e) =>
+  typeof e?.category === "object" ? e.category?._id : e?.category;
+const getCatName = (e, map) =>
+  map.get(getCatId(e)) ?? e?.category?.name ?? e?.category ?? "—";
+
+export default function ExpensesPage() {
   const { t } = useTranslation();
-  const [expenses, setExpenses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentExpense, setCurrentExpense] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+
+  // pull from dashboard slice; support both `categories` and legacy `category` keys
+  const {
+    dashboardData,
+    categories: categoriesSlice,
+    category: categoryLegacy,
+    allDataBalance,
+    loading,
+    error,
+  } = useSelector((s) => s.dashboard);
+
+  // also read expense slice as a fallback if dashboardData not present
+  const expenseSlice = useSelector((s) => s.expense?.expenses);
+
   const [filters, setFilters] = useState({
     keyword: "",
-    categoryFilter: "all",
+    categoryId: "all",
     startDate: "",
     endDate: "",
-    sortBy: "createdAt",
+    sortBy: "date", // 'date' | 'amount' | 'createdAt'
     sortOrder: "desc",
     pageNumber: 1,
-    pageSize: 10, // NEW
+    pageSize: 10, // Default page size
   });
-  const [pages, setPages] = useState(1);
-  const [totalExpensesAmount, setTotalExpensesAmount] = useState("");
-  // all data set for add before money
-  const [allDataBalance, setAllDataBalance] = useState();
-  // useEffect(() => {
-  //   const fetchExpensesData = async () => {
-  //     setLoading(true);
-  //     try {
-  //       console.groupCollapsed(
-  //         "%c[ExpensesPage] fetchExpensesData",
-  //         "color:#3b82f6"
-  //       );
-  //       console.debug("filters =>", filters);
 
-  //       // Initialize totalAmount
-  //       let totalAmount = 0;
-  //       let allExpenses = [];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentExpense, setCurrentExpense] = useState(null);
+  const { handleExpenseSave, handleExpenseDelete } = useHandleExpenseSave();
 
-  //       // Loop through all pages and fetch expenses
-  //       // let page = 1;
-  //       // let hasNextPage = true;
+  // normalize categories list from dashboard
+  const categories = useMemo(() => {
+    const list =
+      dashboardData?.categories || categoriesSlice || categoryLegacy || [];
+    return Array.isArray(list) ? list : [];
+  }, [dashboardData, categoriesSlice, categoryLegacy]);
 
-  //       // while (hasNextPage) {
-  //         const res = await expenseService.getExpenses(
-  //           filters.keyword?.trim() || "",
-  //           filters.categoryFilter === "all"
-  //             ? undefined
-  //             : filters.categoryFilter,
-  //           filters.startDate || undefined,
-  //           filters.endDate || undefined,
-  //           filters.sortBy,
-  //           filters.sortOrder,
-  //           page,
-  //           filters.pageSize // pass pageSize to API
-  //         );
-  //         console.debug("response for page", page, "=>", res?.data);
+  // create a quick id->name map for O(1) lookups
+  const catIdToName = useMemo(() => {
+    const m = new Map();
+    for (const c of categories) m.set(c._id, c.name);
+    return m;
+  }, [categories]);
 
-  //         const fetchedExpenses = res?.data?.expenses || [];
-  //         allExpenses = allExpenses.concat(fetchedExpenses);
+  // normalize expenses
+  const expenses = useMemo(() => {
+    const fromDashboard = dashboardData?.expenses;
+    if (Array.isArray(fromDashboard) && fromDashboard.length)
+      return fromDashboard;
+    return Array.isArray(expenseSlice) ? expenseSlice : [];
+  }, [dashboardData, expenseSlice]);
 
-  //         // Calculate total amount for this page
-  //         totalAmount += fetchedExpenses.reduce(
-  //           (sum, expense) => sum + expense.amount,
-  //           0
-  //         );
+  // derived + filtered + sorted + paged (no mutations)
+  const { filtered, paged, pages, pageTotal } = useMemo(() => {
+    let list = Array.isArray(expenses) ? expenses : [];
 
-  //         // Check if there is a next page
-  //         hasNextPage = page < res?.data?.pages;
-  //         page++;
-  //       }
+    // keyword
+    const kw = filters.keyword.trim().toLowerCase();
+    if (kw)
+      list = list.filter((e) =>
+        (e.description ?? "").toLowerCase().includes(kw)
+      );
 
-  //       setExpenses(allExpenses); // Set all expenses
-  //       setTotalExpensesAmount(totalAmount); // Set the total amount
-  //       setPages(page - 1); // Set the number of pages
-  //     } catch (err) {
-  //       console.error("[ExpensesPage] getExpenses error:", err);
-  //       setError(t("failedToFetchExpenses"));
-  //       toast.error(t("failedToFetchExpenses"));
-  //     } finally {
-  //       console.groupEnd();
-  //       setLoading(false);
-  //     }
-  //   };
-
-  // Fetch dashboard data (with abort support)
-
-  const [loadingExpenses, setLoadingExpenses] = useState(false);
-  const [loadingCategories, setLoadingCategories] = useState(false);
-
-  //navigationLoading
-  const { navigationLoading } = useLoading();
-
-  // Optional combined loading for legacy UI:
-  useEffect(() => {
-    setLoading(loadingExpenses || loadingCategories);
-  }, [loadingExpenses, loadingCategories, setLoading]);
-
-  // Fetch expenses whenever filters (page, sort, date, keyword, etc.) change:
-  useEffect(() => {
-    console.log(expenses);
-    let mounted = true; // prevents setState after unmount / stale responses
-
-    const fetchExpensesData = async () => {
-      setExpenses([]);
-      console.log(filters);
-      setLoadingExpenses(true);
-      try {
-        console.groupCollapsed(
-          "%c[ExpensesPage] fetchExpensesData",
-          "color:#3b82f6"
-        );
-        console.debug("filters =>", filters);
-
-        const res = await expenseService.getExpenses(
-          filters.keyword?.trim() || "",
-          filters.categoryFilter === "all" ? undefined : filters.categoryFilter,
-          filters.startDate || undefined,
-          filters.endDate || undefined,
-          filters.sortBy,
-          filters.sortOrder,
-          filters.pageNumber,
-          filters.pageSize
-        );
-
-        const fetchedExpenses = res?.data?.expenses ?? [];
-        const totalForPage = fetchedExpenses.reduce(
-          (sum, e) => sum + (e.amount || 0),
-          0
-        );
-
-        if (!mounted) return;
-        setExpenses(fetchedExpenses);
-        setTotalExpensesAmount(totalForPage);
-        setPages(res?.data?.pages ?? 1);
-      } catch (err) {
-        if (!mounted) return;
-        console.error("[ExpensesPage] getExpenses error:", err);
-        setError(t("failedToFetchExpenses"));
-        toast.error(t("failedToFetchExpenses"));
-      } finally {
-        console.groupEnd();
-        if (mounted) setLoadingExpenses(false);
-      }
-    };
-
-    fetchExpensesData();
-
-    return () => {
-      mounted = false;
-    };
-  }, [filters, t]); // keep filters here because expenses depend on them
-
-  // Fetch categories once (or when translation t changes)
-  useEffect(() => {
-    let mounted = true; // prevents setState after unmount / stale responses
-
-    const fetchCategoriesData = async () => {
-      setLoadingCategories(true);
-      try {
-        const response = await categoryService.getCategories();
-        const list = Array.isArray(response?.data) ? response.data : [];
-        if (!mounted) return;
-        setCategories(list);
-        console.debug("[ExpensesPage] categories =>", list);
-      } catch (err) {
-        if (!mounted) return;
-        console.error("[ExpensesPage] getCategories error:", err);
-        setError(t("failedToFetchCategories"));
-        toast.error(t("failedToFetchCategories"));
-      } finally {
-        if (mounted) setLoadingCategories(false);
-      }
-    };
-
-    fetchCategoriesData();
-
-    return () => {
-      mounted = false; // Cleanup to avoid updating state after component unmounts
-    };
-  }, [t]);
-
-  //dashboard data for total expense
-  const fetchDashboardData = useCallback(
-    async (signal) => {
-      try {
-        const params = {};
-        const data = await DashboardAPI.getDashboardData(params, { signal });
-        const total = data.expenses.reduce((s, d) => s + d.amount, 0);
-        setAllDataBalance(total ?? null);
-        console.log(total);
-      } catch (err) {
-        if (err?.name === "CanceledError" || err?.code === "ERR_CANCELED") {
-          return;
-        }
-        console.error("[Dashboard] error:", err);
-        toast.error(t("failedToFetchDashboardData"));
-      }
-    },
-    [filters, t]
-  );
-
-  useEffect(() => {
-    const controller = new AbortController();
-    fetchDashboardData(controller.signal);
-    return () => controller.abort();
-  }, [fetchDashboardData]);
-
-  const handleAddExpense = () => {
-    setCurrentExpense(null);
-    setIsModalOpen(true);
-  };
-  const handleEditExpense = (expense) => {
-    setCurrentExpense(expense);
-    setIsModalOpen(true);
-  };
-
-  const handleDeleteExpense = async (id) => {
-    if (window.confirm(t("confirmDeleteExpense"))) {
-      try {
-        await expenseService.deleteExpense(id);
-        toast.success(t("expenseDeletedSuccess"));
-        setFilters((prev) => ({ ...prev, pageNumber: 1 }));
-      } catch (err) {
-        console.error("[ExpensesPage] deleteExpense error:", err);
-        toast.error(t("failedToDeleteExpense"));
-      }
+    // category by id (supports both id string and embedded object)
+    if (filters.categoryId !== "all") {
+      list = list.filter((e) => getCatId(e) === filters.categoryId);
     }
-  };
 
-  const handleSaveExpense = async (expenseData) => {
-    console.groupCollapsed(
-      "%c[ExpensesPage] handleSaveExpense",
-      "color:#16a34a"
-    );
-    console.debug("payload =>", expenseData);
-    try {
-      if (expenseData._id) {
-        await expenseService.updateExpense(
-          expenseData._id,
-          expenseData.description,
-          expenseData.amount,
-          expenseData.category,
-          expenseData.date,
-          expenseData.isContract
-        );
-        toast.success(t("expenseUpdatedSuccess"));
-      } else {
-        await expenseService.createExpense(
-          expenseData.description,
-          expenseData.amount,
-          expenseData.category,
-          expenseData.date,
-          expenseData.isContract
-        );
-        toast.success(t("expenseAddedSuccess"));
-      }
-      setIsModalOpen(false);
-      setFilters((prev) => ({ ...prev, pageNumber: 1 }));
-    } catch (err) {
-      console.error("[ExpensesPage] save error:", err);
-      toast.error(t("failedToSaveExpense"));
-    } finally {
-      console.groupEnd();
+    // date range inclusive
+    if (filters.startDate && filters.endDate) {
+      const s = new Date(filters.startDate);
+      const e = new Date(filters.endDate);
+      e.setHours(23, 59, 59, 999);
+      list = list.filter((row) => {
+        const d = toDate(row.date ?? row.createdAt);
+        return d >= s && d <= e;
+      });
     }
-  };
 
-  const handleExportCsv = () => {
-    const url =
-      "https://construction-cost-tracker-server-g2.vercel.app/api/expenses/export/csv";
-    console.debug("[ExpensesPage] export CSV ->", url);
-    window.open(url, "_blank");
-  };
-  const handleExportPdf = () => toast.info(t("pdfExportNotImplemented"));
-  const handleExportExcel = () => toast.info(t("excelExportNotImplemented"));
-
-  // Same filter handler you wrote, now also respects pageSize
-  const handleFilterChange = (field, value, { keepPage = false } = {}) => {
-    console.log(field, value, keepPage);
-    setFilters((prev) => {
-      let next = { ...prev, [field]: value };
-
-      if (field === "keyword") next.keyword = (value ?? "").toString();
-      if (field === "categoryFilter") next.categoryFilter = value || "all";
-
-      const isValidDate = (d) => !!d && !Number.isNaN(new Date(d).getTime());
-      if (field === "startDate" || field === "endDate") {
-        const { startDate, endDate } = next;
-        if (isValidDate(startDate) && isValidDate(endDate)) {
-          const start = new Date(startDate);
-          const end = new Date(endDate);
-          if (start > end) {
-            if (field === "startDate") {
-              toast.info(t("startAfterEndAdjusted"));
-              next.endDate = next.startDate;
-            } else {
-              toast.info(t("endBeforeStartAdjusted"));
-              next.startDate = next.endDate;
-            }
-          }
+    // sort safely
+    if (filters.sortBy) {
+      const cmp = (a, b) => {
+        const key = filters.sortBy;
+        let A;
+        let B;
+        if (key === "amount") {
+          A = Number(a.amount || 0);
+          B = Number(b.amount || 0);
+        } else if (key === "createdAt" || key === "date") {
+          A = toDate(a[key] ?? a.date ?? a.createdAt).getTime();
+          B = toDate(b[key] ?? b.date ?? a.createdAt).getTime();
+        } else {
+          A = (a[key] ?? "").toString().toLowerCase();
+          B = (b[key] ?? "").toString().toLowerCase();
         }
-      }
+        if (A < B) return filters.sortOrder === "asc" ? -1 : 1;
+        if (A > B) return filters.sortOrder === "asc" ? 1 : -1;
+        return 0;
+      };
+      list = [...list].sort(cmp);
+    }
 
-      if (!keepPage) next.pageNumber = 1;
-      return next;
-    });
+    // pagination
+    const total = list.length;
+    const pages = Math.max(1, Math.ceil(total / filters.pageSize));
+    const current = Math.min(filters.pageNumber, pages);
+    const start = (current - 1) * filters.pageSize;
+    const end = start + filters.pageSize;
+    const paged = list.slice(start, end);
+
+    const pageTotal = paged.reduce((s, e) => s + Number(e.amount || 0), 0);
+
+    return { filtered: list, paged, pages, pageTotal };
+  }, [expenses, filters]);
+
+  const handleFilterChange = (field, value) => {
+    setFilters((prev) => ({
+      ...prev,
+      [field]: value,
+      pageNumber: field === "pageNumber" ? value : 1,
+    }));
   };
 
   const resetFilters = () => {
     setFilters({
       keyword: "",
-      categoryFilter: "all",
+      categoryId: "all",
       startDate: "",
       endDate: "",
-      sortBy: "createdAt",
+      sortBy: "date",
       sortOrder: "desc",
       pageNumber: 1,
-      pageSize: 10,
+      pageSize: 10, // Reset to default page size
     });
   };
+
+  const handleAddExpense = () => {
+    setCurrentExpense(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEditExpense = (expense) => {
+    console.log(expense);
+    setCurrentExpense(expense);
+    setIsModalOpen(true);
+  };
+
+
+
+  const totalExpensesForTotalBalance = useMemo(() => {
+      return (
+        dashboardData?.expenses?.reduce(
+          (sum, expense) => sum + expense.amount,
+          0
+        ) || 0
+      );
+    }, [dashboardData]);
+  
 
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <>
-      {/* {navigationLoading?'' : loading && <DataLoader/>} */}
-      {navigationLoading ? "" : loading && <CombinedLoader />}
+      {loading && <CombinedLoader />}
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-4">{t("expenses")}</h1>
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-4">
-          {/* Total Expenses */}
+
+        {/* Overview */}
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-2">
               {t("total_expenses")}
             </h2>
-            {loading ? (
-              <div className="h-6 bg-gray-300 animate-pulse rounded"></div> // Skeleton loader
-            ) : (
-              <StatCard value={fmtMoney(allDataBalance)} />
-            )}
+            <StatCard value={fmtMoney(totalExpensesForTotalBalance)} />
           </div>
-
-          {/* Current Page Expenses */}
           <div className="bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-2">
               {t("current_page_expenses")}
             </h2>
-            {loading ? (
-              <div className="h-6 bg-gray-300 animate-pulse rounded"></div> // Skeleton loader
-            ) : (
-              <StatCard value={fmtMoney(totalExpensesAmount)} />
-            )}
+            <StatCard value={fmtMoney(pageTotal)} />
           </div>
         </div>
-        <div className="flex flex-wrap gap-4 mb-4 mx-auto">
-          {/* Category Filter */}
-          <div className="flex-1 min-w-[150px]">
-            <label
-              htmlFor="categoryFilter"
-              className="block text-sm font-medium text-gray-700"
-            >
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 mb-4">
+          <div className="flex-1 min-w-[220px]">
+            <label className="block text-sm font-medium text-gray-700">
+              {t("search")}
+            </label>
+            <Input
+              placeholder={t("searchByDescription")}
+              value={filters.keyword}
+              onChange={(e) => handleFilterChange("keyword", e.target.value)}
+            />
+          </div>
+
+          {/* Category filter by ID, label shows name */}
+          <div className="flex-1 min-w-[220px]">
+            <label className="block text-sm font-medium text-gray-700">
               {t("category")}
             </label>
             <Select
-              onValueChange={(value) =>
-                handleFilterChange("categoryFilter", value)
-              }
-              value={filters.categoryFilter}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              value={filters.categoryId}
+              onValueChange={(v) => handleFilterChange("categoryId", v)}
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger>
                 <SelectValue placeholder={t("selectCategory")} />
               </SelectTrigger>
               <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 <SelectItem value="all">{t("all")}</SelectItem>
-                {categories.map((cat) => (
-                  <SelectItem
-                    key={cat._id || cat.code}
-                    value={categoryValueOf(cat)}
-                  >
-                    {cat.name}
-                    {cat.code ? ` (${cat.code})` : ""}
+                {categories.map((c) => (
+                  <SelectItem key={c._id} value={c._id}>
+                    {c.name}{" "}
+                    <span className="text-xs text-gray-400">• {c._id}</span>
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           </div>
 
-          {/* Start Date */}
-          <div className="flex-1 min-w-[150px]">
-            <label
-              htmlFor="startDate"
-              className="block text-sm font-medium text-gray-700"
-            >
+          {/* Date range */}
+          <div className="flex-1 min-w-[180px]">
+            <label className="block text-sm font-medium text-gray-700">
               {t("startDate")}
             </label>
             <Input
-              id="startDate"
               type="date"
               value={filters.startDate}
               onChange={(e) => handleFilterChange("startDate", e.target.value)}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
             />
           </div>
-
-          {/* End Date */}
-          <div className="flex-1 min-w-[150px]">
-            <label
-              htmlFor="endDate"
-              className="block text-sm font-medium text-gray-700"
-            >
+          <div className="flex-1 min-w-[180px]">
+            <label className="block text-sm font-medium text-gray-700">
               {t("endDate")}
             </label>
             <Input
-              id="endDate"
               type="date"
               value={filters.endDate}
               onChange={(e) => handleFilterChange("endDate", e.target.value)}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
-          {/* Sort By */}
-          <div className="flex-1 min-w-[150px]">
-            <label
-              htmlFor="sortBy"
-              className="block text-sm font-medium text-gray-700"
-            >
+          {/* Sort by / order */}
+          <div className="flex-1 min-w-[160px]">
+            <label className="block text-sm font-medium text-gray-700">
               {t("sortBy")}
             </label>
             <Select
-              onValueChange={(value) => handleFilterChange("sortBy", value)}
               value={filters.sortBy}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              onValueChange={(v) => handleFilterChange("sortBy", v)}
             >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("sortBy")} />
+              <SelectTrigger>
+                <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
-                <SelectItem value="createdAt">{t("date")}</SelectItem>
+                <SelectItem value="date">{t("date")}</SelectItem>
+                <SelectItem value="createdAt">{t("createdAt")}</SelectItem>
                 <SelectItem value="amount">{t("amount")}</SelectItem>
-                <SelectItem value="date">
-                  {t("date")} ({t("transaction")})
-                </SelectItem>
               </SelectContent>
             </Select>
           </div>
-
-          {/* Sort Order */}
-          <div className="flex-1 min-w-[150px]">
-            <label
-              htmlFor="sortOrder"
-              className="block text-sm font-medium text-gray-700"
-            >
+          <div className="flex-1 min-w-[160px]">
+            <label className="block text-sm font-medium text-gray-700">
               {t("order")}
             </label>
             <Select
-              onValueChange={(value) => handleFilterChange("sortOrder", value)}
               value={filters.sortOrder}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+              onValueChange={(v) => handleFilterChange("sortOrder", v)}
             >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder={t("sortOrder")} />
+              <SelectTrigger>
+                <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
                 <SelectItem value="desc">{t("descending")}</SelectItem>
@@ -494,165 +309,96 @@ const ExpensesPage = () => {
           </div>
 
           {/* Page Size */}
-          <div className="flex-1 min-w-[120px]">
-            <label
-              htmlFor="pageSize"
-              className="block text-sm font-medium text-gray-700"
-            >
-              {t("pageSize") || "Page size"}
+          <div className="flex-1 min-w-[160px]">
+            <label className="block text-sm font-medium text-gray-700">
+              {t("pageSize")}
             </label>
             <Select
-              onValueChange={(value) =>
-                handleFilterChange("pageSize", Number(value))
+              value={filters.pageSize.toString()}
+              onValueChange={(v) =>
+                handleFilterChange("pageSize", parseInt(v, 10))
               }
-              value={String(filters.pageSize)}
-              className="border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
             >
-              <SelectTrigger className="w-full">
+              <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-transparent backdrop-blur-lg border border-yellow-200  rounded-md shadow-lg">
-                {[5, 10, 20, 50].map((n) => (
-                  <SelectItem key={n} value={String(n)}>
-                    {n}
-                  </SelectItem>
-                ))}
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+                <SelectItem value="50">50</SelectItem>
+                <SelectItem value="100">100</SelectItem>
               </SelectContent>
             </Select>
           </div>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap gap-2 w-full justify-start">
-            <Button
-              onClick={handleExportCsv}
-              variant="outline"
-              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
-            >
-              {t("exportCsv")}
-            </Button>
-            <Button
-              onClick={handleExportPdf}
-              variant="outline"
-              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
-            >
-              {t("exportPdf")}
-            </Button>
-            <Button
-              onClick={handleExportExcel}
-              variant="outline"
-              className="flex-1 min-w-[120px] inline-flex border border-gray-300 text-gray-700 hover:bg-gray-200 rounded-md focus:ring-2 focus:ring-gray-500"
-            >
-              {t("exportExcel")}
-            </Button>
-            <Button
-              onClick={handleAddExpense}
-              className="flex-1 min-w-[120px] inline-flex bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
-              variant="destructive"
-            >
-              {t("addExpense")}
-            </Button>
-            <Button
-              onClick={resetFilters}
-              variant="secondary"
-              className="flex-1 min-w-[120px] inline-flex bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-md"
-            >
-              {t("reset")}
-            </Button>
-          </div>
         </div>
 
+        {/* Actions */}
+        <div className="flex gap-4 mb-4">
+          <Button variant="outline" onClick={resetFilters}>
+            {t("reset")}
+          </Button>
+          <Button variant="destructive" onClick={handleAddExpense}>
+            {t("addExpense")}
+          </Button>
+        </div>
+
+        {/* Table */}
         {loading ? (
-          // 1. Show loader if still loading
-          // <SkeletonLoader />
-          <DESkeleton DE="Expenses" rows={15} />
-        ) : expenses.length === 0 ? (
+          <DESkeleton DE="Expenses" rows={10} />
+        ) : Array.isArray(expenses) && expenses.length === 0 ? (
           <EmptyState
-            icon={
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-12 h-12"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 10h6M9 14h6M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2z"
-                />
-              </svg>
-            }
             title={t("noExpensesFound")}
             subtitle={t("startAddingExpenses")}
             buttonLabel={t("addExpense")}
             onAction={handleAddExpense}
           />
+        ) : filtered.length === 0 ? (
+          <EmptyState
+            title={t("noResults")}
+            subtitle={t("tryAdjustingFilters")}
+            buttonLabel={t("reset")}
+            onAction={resetFilters}
+          />
         ) : (
-          // Your normal content for when there are expenses
-
-          <div className="overflow-x-auto bg-[url('https://www.transparenttextures.com/patterns/lined-paper.png')] bg-repeat p-6 font-[Patrick Hand,Comic Sans MS,cursive]">
+          <div className="overflow-x-auto">
             <table className="min-w-full bg-transparent">
               <thead>
-                <tr className="bg-transparent border-b-2 border-gray-300">
-                  <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
-                    {" "}
-                    {t("description")}
-                  </th>
-                  <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
-                    {" "}
-                    {t("amount")}
-                  </th>
-                  <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
-                    {" "}
-                    {t("category")}
-                  </th>
-                  <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
-                    {" "}
-                    {t("date")}
-                  </th>
-                  <th className="py-3 px-4 text-left font-bold text-slate-800 tracking-wide">
-                    {" "}
-                    {t("actions")}
-                  </th>
+                <tr className="bg-transparent">
+                  <th>{t("description")}</th>
+                  <th>{t("amount")}</th>
+                  <th>{t("category")}</th>
+                  <th>{t("date")}</th>
+                  <th>{t("actions")}</th>
                 </tr>
               </thead>
-              <tbody>
-                {expenses.map((expense) => (
-                  <tr
-                    key={expense._id}
-                    className="hover:bg-blue-100/30 transition-colors border-b border-gray-200"
-                  >
-                    <td className="py-3 px-4 text-slate-800 italic">
-                      {expense.description}
+              <tbody className="space-x-2" >
+                {paged.map((row) => (
+                  <tr key={row._id}>
+                    <td>{row.description}</td>
+                    <td>{fmtMoney(row.amount)}</td>
+                    <td>
+                      <div className="flex flex-col">
+                        <span>{getCatName(row, catIdToName)}</span>
+                        {/* Hide the category ID on small screens */}
+                        <span className="text-xs text-gray-400 hidden lg:flex">
+                          {getCatId(row)}
+                        </span>
+                      </div>
                     </td>
-                    <td className="py-3 px-4 text-slate-800 italic">
-                      {Number(expense.amount).toFixed(2)}
+                    <td>
+                      {toDate(row.date ?? row.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="py-3 px-4 text-slate-800 italic">
-                      {expense.category
-                        ? expense.category.name
-                        : t("notAvailable")}
-                    </td>
-                    <td className="py-3 px-4 text-slate-800 italic">
-                      {expense.date
-                        ? new Date(expense.date).toLocaleDateString()
-                        : new Date(expense.createdAt).toLocaleDateString()}
-                    </td>
-                    <td className="py-3 px-4 flex gap-2">
+                    <td className="flex flex-col sm:flex-row sm:space-x-2 sm:w-full">
                       <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => handleEditExpense(expense)}
-                        className="rounded-lg border-slate-400 hover:bg-sky-50 hover:text-sky-700 font-[inherit]"
+                        onClick={() => handleEditExpense(row)}
+                        className="w-full sm:w-auto p-2 auto mb-1 sm:mb-0"
                       >
                         {t("edit")}
                       </Button>
                       <Button
                         variant="destructive"
-                        size="sm"
-                        onClick={() => handleDeleteExpense(expense._id)}
-                        className="rounded-lg font-[inherit]"
+                        onClick={() => handleExpenseDelete(row._id)}
+                        className="w-full p-2 mb-2  sm:w-auto"
                       >
                         {t("delete")}
                       </Button>
@@ -660,43 +406,31 @@ const ExpensesPage = () => {
                   </tr>
                 ))}
               </tbody>
-              <tfoot>
-                <tr className="border-t-2 border-gray-500">
-                  <td className="py-2 px-4 font-bold">{t("Total")}</td>
-                  <td className="py-2 px-4 font-bold">
-                    {expenses
-                      .reduce(
-                        (sum, deposit) => sum + Number(deposit.amount ?? 0),
-                        0
-                      )
-                      .toFixed(2)}
-                  </td>
-                  <td className="py-2 px-4"></td>
-                  <td className="py-2 px-4"></td>
-                </tr>
-              </tfoot>
             </table>
-
-            {/* Pagination Controls */}
-            <Pagination
-              pages={pages}
-              currentPage={filters.pageNumber}
-              onPageChange={(page) =>
-                handleFilterChange("pageNumber", page, { keepPage: true })
-              }
-            />
           </div>
         )}
 
+        {/* Pagination */}
+        <Pagination
+          pages={pages}
+          currentPage={filters.pageNumber}
+          onPageChange={(p) => handleFilterChange("pageNumber", p)}
+        />
+
+        {/* Page Data */}
+        <div className="text-sm mb-4">
+          {t("currentPageData")} {filters.pageNumber} / {filtered.length}
+        </div>
+        {/* Modal */}
         <ExpenseModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          onSave={handleSaveExpense}
+          onSave={(expenseData) =>
+            handleExpenseSave(expenseData, setIsModalOpen)
+          }
           expense={currentExpense}
         />
       </div>
     </>
   );
-};
-
-export default ExpensesPage;
+}

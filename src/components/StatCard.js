@@ -17,56 +17,65 @@ function formatValue(v) {
   return v;
 }
 
-
 function StatCard({
   label,
   value,
   highlight = false,
   allDataTotalBalance,
   loading,
+  type,
 }) {
   const [beforeBalance, setBeforeBalance] = useState();
+
   const showPrev =
     allDataTotalBalance !== undefined &&
     allDataTotalBalance !== null &&
     allDataTotalBalance !== "";
 
-    useEffect(() => {
-      if (!showPrev) return;
-    
-      // Check if value is a valid string or number before sanitizing
-      if (!value || isNaN(value.replace(/[^\d.-]/g, ""))) {
-        console.error("Invalid value:", value);
-        return; // Avoid processing if value is invalid
-      }
-    
-      // Remove the Taka symbol, spaces, and commas, then convert to a number
-      const sanitizedValue = parseFloat(value.replace(/[^\d.-]/g, ""));
-    
-      // Round sanitized value to the nearest integer
-      const roundedSanitizedValue = Math.round(sanitizedValue);
-    
-      // Log sanitized and rounded value to debug
-      console.log("Sanitized and rounded value:", roundedSanitizedValue);
-    
-      const computed = allDataTotalBalance - roundedSanitizedValue;
-    
-      // Log computed value to debug
-      console.log("Computed value:", computed);
-    
-      if (isNaN(computed)) {
-        console.error("Computed value is NaN");
-        return;
-      }
-    
-      // Set the new beforeBalance if computed value is different
-      setBeforeBalance((prev) => {
-        const roundedComputed = Math.round(computed);
-        if (prev === roundedComputed) return prev;
-        return roundedComputed;
-      });
-    }, [showPrev, allDataTotalBalance, value]);
-    
+  useEffect(() => {
+    if (!showPrev) return;
+
+    // Check if value is a valid string or number before sanitizing
+    if (!value || (typeof value !== "string" && typeof value !== "number")) {
+      console.error("Invalid value:", value);
+      return; // Avoid processing if value is invalid
+    }
+
+    // If value is a number, convert it to a string for uniformity
+    const valueStr = typeof value === "number" ? String(value) : value;
+
+    // Remove the Taka symbol, spaces, and commas, then convert to a number
+    const sanitizedValue = parseFloat(valueStr.replace(/[^\d.-]/g, ""));
+
+    // If the sanitized value is NaN, log an error and return
+    if (isNaN(sanitizedValue)) {
+      console.error("Sanitized value is NaN:", sanitizedValue);
+      return;
+    }
+
+    // Round sanitized value to the nearest integer
+    const roundedSanitizedValue = Math.round(sanitizedValue);
+
+    // Log sanitized and rounded value to debug
+    console.log("Sanitized and rounded value:", roundedSanitizedValue);
+
+    const computed = allDataTotalBalance - roundedSanitizedValue;
+
+    // Log computed value to debug
+    console.log("Computed value:", computed);
+
+    if (isNaN(computed)) {
+      console.error("Computed value is NaN");
+      return;
+    }
+
+    // Set the new beforeBalance if computed value is different
+    setBeforeBalance((prev) => {
+      const roundedComputed = Math.round(computed);
+      if (prev === roundedComputed) return prev;
+      return roundedComputed;
+    });
+  }, [showPrev, allDataTotalBalance, value]);
 
   const StatCardSkeleton = () => (
     <div className="bg-gray-200 animate-pulse h-24 rounded-lg p-4">
@@ -78,10 +87,14 @@ function StatCard({
     <div
       className={[
         "group relative overflow-hidden rounded-2xl border p-5 shadow-sm transition-all duration-300",
-        "bg-white/90 backdrop-blur hover:bg-white",
         highlight
           ? "border-sky-300 ring-2 ring-sky-200/70 hover:ring-sky-300/80"
           : "border-slate-200 hover:shadow-md",
+        type === "totalBalance"
+          ? "bg-green-300/90 backdrop-blur hover:bg-green-300"
+          : type === "totalExpenses"
+          ? "bg-red-300/90 backdrop-blur hover:bg-red-300"
+          : "bg-white/90 backdrop-blur hover:bg-white",
       ].join(" ")}
       role="region"
       aria-label={`${label} stat`}
@@ -96,18 +109,18 @@ function StatCard({
 
       <div className="relative flex items-start justify-between gap-3">
         <div>
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-500/90">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-gray-800/90">
             {label}
           </div>
           {loading ? (
-                <div className="mt-1.5 sm:text-3xl text-xl font-extrabold inline-block w-40 h-6 bg-gray-300 animate-pulse" />
+            <div className="mt-1.5 sm:text-3xl text-xl font-extrabold inline-block w-40 h-6 bg-gray-300 animate-pulse" />
           ) : (
             <div className="mt-1.5 sm:text-3xl text-xl font-extrabold leading-none tracking-tight text-slate-900">
               {formatValue(value)}
             </div>
           )}
 
-          {(showPrev ) &&(
+          {showPrev && (
             <div className="mt-2 text-sm text-slate-600 flex items-center">
               <span className="mr-2 inline-block h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-slate-300" />
               <span className="text-slate-500 mr-2">Before balance:</span>{" "}

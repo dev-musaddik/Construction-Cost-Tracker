@@ -19,3 +19,16 @@ export const fmtMoney = (n) => {
   return '৳ ' + formatted;
 };
 
+// YYYY-MM-DD in local time (for <input type="date"/>)
+export const ymdLocal = (d = new Date()) => {
+  const off = d.getTimezoneOffset() * 60000;
+  return new Date(d.getTime() - off).toISOString().slice(0, 10);
+};
+
+// Format currency in user's locale, fallback USD if not specified
+
+export const monthLabel = (month, year) => {
+  if (!month || !year) return "Unknown";
+  const d = new Date(Number(year), Number(month) - 1, 1);
+  return d.toLocaleString(undefined, { month: "short", year: "numeric" });
+};

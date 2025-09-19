@@ -11,7 +11,7 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { PlusCircle, MinusCircle, CalendarDays, Clock } from "lucide-react";
-import { fmtMoney } from "../lib/utils";
+import { fmtMoney } from "../../lib/utils";
 
 // ---- Helpers ----
 const toNumber = (v) => {
@@ -64,6 +64,7 @@ const EmptyState = ({ title, subtitle, icon }) => (
 );
 // ---------- Recent Expenses ----------
 function RecentExpenses({ expenses = [], maxItems = 20 }) {
+  console.log(expenses)
   const { t } = useTranslation();
 
   const { grouped, total, count } = useMemo(() => {
