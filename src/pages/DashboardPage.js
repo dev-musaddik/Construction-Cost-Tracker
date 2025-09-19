@@ -21,6 +21,7 @@ import { downloadDashboardPdf } from "../services/dashboardService";
 
 import { useExpensesVisualizer } from "../hooks/useExpensesVisualizer";
 import { useDepositsVisualizer } from "../hooks/useDepositsVisualizer";
+import { DownloadDashboardButton } from "../components/DownloadDashboardButton ";
 
 const DashboardPage = () => {
   const { t } = useTranslation();
@@ -188,7 +189,11 @@ const DashboardPage = () => {
   return (
     <div className="container mx-auto p-4">
       {loading && <CombinedLoader />}
-      <h1 className="text-3xl font-bold mb-2">{t("dashboard")}</h1>
+      <div className="flex justify-between items-center">
+      <h1 className="text-3xl font-bold mb-2">{t("dashboard")}:</h1>
+
+      <DownloadDashboardButton query={query} />
+      </div>
       <DateFilterBar
         onApply={onApplyDates}
         onPreset={onPreset}
@@ -231,9 +236,8 @@ const DashboardPage = () => {
         <Button variant="destructive" onClick={handleAddExpense} className="p-2">
           {t("addExpense")}
         </Button>
-        <Button onClick={() => downloadDashboardPdf(query)} variant="outline" className="p-2">
-          {t("downloadPdf")}
-        </Button>
+       
+        
       </div>
 
       {/* Recent Expenses & Deposits */}

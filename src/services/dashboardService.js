@@ -114,6 +114,7 @@ export function getDashboardData(params) {
 export const downloadDashboardPdf = async (params) => {
   try {
     const response = await axiosInstance.get("/dashboard/download", {
+      headers:authHeader(),
       params,
       responseType: "blob",
     });
