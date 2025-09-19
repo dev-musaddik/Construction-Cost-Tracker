@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { fmtMoney, ymdLocal } from "../lib/utils";
@@ -133,7 +133,6 @@ const DashboardPage = () => {
       filteredExpenses,
     };
   }, [dashboardData, query]);
-
 
   //Visualizer
   const { formattedExpenses, formattedExpensesOverTime } =

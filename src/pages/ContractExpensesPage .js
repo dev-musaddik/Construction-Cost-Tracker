@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import CombinedLoader from "../components/Loading/CombinedLoader";
 import EmptyState from "../components/EmptyState";
 import { Input } from "../components/ui/input";
@@ -13,15 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import DashboardAPI from "../services/dashboardService";
-import {
-  setDashboardData,
-  setAllDataBalance,
-  setLoading,
-  setError,
-} from "../store/dashboardSlice";
-import { setDeposits } from "../store/depositSlice";
-import { setExpenses as setExpensesSlice } from "../store/expenseSlice";
+
 
 // ---- utils ----
 const toDate = (x) => new Date(x ?? 0);
@@ -35,7 +26,6 @@ const fmt = (n) =>
 
 export default function ContractExpensesPage() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const { dashboardData, loading, error } = useSelector((s) => s.dashboard);
 

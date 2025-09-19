@@ -1,5 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+import axiosInstance from '../api/axiosConfig';
 
 /**
  * Base API client
@@ -7,8 +8,7 @@ import authHeader from './auth-header';
  * - Keeps credentials for cookie-based auth
  */
 const api = axios.create({
-  // baseURL: (import.meta?.env?.VITE_API_URL || 'https://construction-cost-tracker-server-g2.vercel.app') + '/api',
-  baseURL: (import.meta?.env?.VITE_API_URL || 'http://localhost:5000') + '/api',
+  baseURL:  'https://construction-cost-tracker-server-g2.vercel.app/api',
   withCredentials: true,
 });
 
@@ -98,12 +98,12 @@ export function buildDashboardParams({ filter, date, from, to } = {}) {
 export function getDashboardData(params) {
   // The backend route is GET /api/dashboard
   console.log(params)
-  return api.get('/dashboard', { params }).then((res) => res.data);
+  return axiosInstance.get('/dashboard', { params }).then((res) => res.data);
 }
 
 export const downloadDashboardPdf = async (params) => {
   try {
-    const response = await api.get('/dashboard/download', {
+    const response = await axiosInstance.get('/dashboard/download', {
       params,
       responseType: 'blob',
     });

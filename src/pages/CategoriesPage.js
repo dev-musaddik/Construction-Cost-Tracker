@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import CombinedLoader from "../components/Loading/CombinedLoader";
 import CategoriesSkeleton from "../components/Skeleton/CategoriesSkeleton";
@@ -22,7 +21,6 @@ const toDate = (x) => new Date(x ?? 0);
 
 export default function CategoriesPage() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   const { dashboardData, loading, error } = useSelector((s) => s.dashboard);
 

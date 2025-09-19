@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
@@ -29,7 +28,6 @@ const getCatName = (e, map) =>
 
 export default function ExpensesPage() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   // pull from dashboard slice; support both `categories` and legacy `category` keys
   const {

@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import React, {  useMemo, useState } from "react";
+import {  useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -25,7 +24,6 @@ const toDate = (x) => new Date(x ?? 0);
 
 export default function DepositsPage() {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
   // Pull from Redux (dashboard is the source of truth, deposit slice is a fallback)
   const { dashboardData, loading, error,allDataBalance } = useSelector((s) => s.dashboard);
