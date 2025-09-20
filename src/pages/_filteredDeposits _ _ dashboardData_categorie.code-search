@@ -1,0 +1,9 @@
+# Query: ?.filteredDeposits || [], dashboardData.categorie
+# ContextLines: 1
+
+1 result - 1 file
+
+packages\frontend\src\hooks\useDepositsVisualizer.js:
+  5    const depositsWithCategories = useMemo(() => {
+  6:     return processItemsWithCategories(filteredData?.filteredDeposits || [], dashboardData?.categories);
+  7    }, [filteredData, dashboardData]);

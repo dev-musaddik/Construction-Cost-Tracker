@@ -7,8 +7,6 @@ import { Button } from "./ui/button";
 import {
   Menu,
   X,
-  Sun,
-  Moon,
   Globe,
   LogOut,
   LayoutDashboard,
@@ -52,7 +50,7 @@ export default function Navbar() {
 
   const userMenuRef = useRef(null);
   const mobileRef = useRef(null);
-  // Define getInitial function
+
   function getInitial(name) {
     if (!name) return "";
     const parts = String(name).trim().split(/\s+/);
@@ -60,19 +58,15 @@ export default function Navbar() {
     const last = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? "" : "";
     return (first + last).toUpperCase();
   }
-// Sync the mobile menu state with localStorage
-useEffect(() => {
-  const storedMobileOpen = localStorage.getItem("mobileOpen");
-  
-  // If there's a value in localStorage, use it. If not, set the default to false (closed)
-  setMobileOpen(storedMobileOpen === "true");
-}, []); // This runs only on the initial render
 
-// Update localStorage whenever mobileOpen state changes
-useEffect(() => {
-  localStorage.setItem("mobileOpen", mobileOpen);  // Save the current state of mobileOpen to localStorage
-}, [mobileOpen]); // This runs whenever mobileOpen state changes
+  useEffect(() => {
+    const storedMobileOpen = localStorage.getItem("mobileOpen");
+    setMobileOpen(storedMobileOpen === "true");
+  }, []);
 
+  useEffect(() => {
+    localStorage.setItem("mobileOpen", mobileOpen);
+  }, [mobileOpen]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -81,20 +75,17 @@ useEffect(() => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close menus on route change
   useEffect(() => {
     setMobileOpen(false);
     setUserMenuOpen(false);
   }, [location.pathname]);
 
-  // Click outside to close user menu & mobile sheet
   useEffect(() => {
     const onClick = (e) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setUserMenuOpen(false);
       }
       if (mobileRef.current && !mobileRef.current.contains(e.target)) {
-        // allow clicks on the hamburger button itself
         const isToggler = e.target.closest?.("#mobile-menu-toggle");
         if (!isToggler) setMobileOpen(false);
       }
@@ -132,12 +123,9 @@ useEffect(() => {
       ].join(" ")}
       role="banner"
     >
-      {/* top accent line */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-sky-400 via-indigo-400 to-fuchsia-400 opacity-60" />
-
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between gap-3">
-          {/* Left: Brand + Mobile Toggle */}
           <div className="flex items-center gap-2">
             <Button
               id="mobile-menu-toggle"
@@ -168,9 +156,8 @@ useEffect(() => {
             </h1>
           </div>
 
-          {/* Center: Desktop Nav */}
           <nav
-            className="hidden lg:flex md:items-center md:gap-1"
+            className=" hidden sm:flex md:items-center md:gap-1"
             aria-label="Primary"
           >
             {user && (
@@ -193,9 +180,7 @@ useEffect(() => {
             )}
           </nav>
 
-          {/* Right: Actions */}
-          <div className="flex items-center ">
-            {/* Language */}
+          <div className="flex items-center">
             <Button
               variant="ghost"
               size="sm"
@@ -203,24 +188,10 @@ useEffect(() => {
               className="inline-flex"
             >
               <Globe className="h-4 w-4" />
-              <p className=" hidden sm:block">{i18n.language === "en" ? "বাংলা" : "English"}</p>
+              <p className=" hidden sm:block">
+                {i18n.language === "en" ? "বাংলা" : "English"}
+              </p>
             </Button>
-
-            {/* Theme */}
-            {/* <Button
-              variant="ghost"
-              size="icon"
-              aria-label="Toggle theme"
-              onClick={toggleTheme}
-              className="relative"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-4 w-4" />
-              ) : (
-                <Moon className="h-4 w-4" />
-              )}
-              <span className="sr-only">Toggle Theme</span>
-            </Button> */}
 
             {user ? (
               <div className="relative" ref={userMenuRef}>
@@ -239,7 +210,6 @@ useEffect(() => {
                   </span>
                 </Button>
 
-                {/* User dropdown */}
                 {userMenuOpen && (
                   <div
                     role="menu"
@@ -281,23 +251,21 @@ useEffect(() => {
       <div
         className={[
           "lg:hidden",
-          mobileOpen === true ? "pointer-events-auto" : "pointer-events-none",
+          mobileOpen ? "pointer-events-auto" : "pointer-events-none",
         ].join(" ")}
       >
-        {/* overlay */}
         <div
           className={[
             "fixed inset-0 z-40 bg-black/30 transition-opacity",
-            mobileOpen === true ? "opacity-100" : "opacity-0",
+            mobileOpen ? "opacity-100" : "opacity-0",
           ].join(" ")}
         />
 
-        {/* panel */}
         <aside
           ref={mobileRef}
           className={[
             "fixed inset-y-0 left-0 z-50 flex w-[80%] max-w-xs flex-col gap-2 border-r border-slate-200 bg-gray-500 p-4 shadow-xl transition-transform dark:border-slate-800",
-            mobileOpen ? "translate-x-0" : "-translate-x-full", // Show/Hide based on mobileOpen state
+            mobileOpen ? "translate-x-0" : "-translate-x-full",
           ].join(" ")}
           aria-label="Mobile navigation"
         >
@@ -362,17 +330,6 @@ useEffect(() => {
               <Globe className="mr-2 h-4 w-4" />{" "}
               {i18n.language === "en" ? "বাংলা" : "English"}
             </Button>
-            {/* <Button variant="ghost" className="w-full" onClick={toggleTheme}>
-              {theme === "dark" ? (
-                <>
-                  <Sun className="mr-2 h-4 w-4" /> Light Mode
-                </>
-              ) : (
-                <>
-                  <Moon className="mr-2 h-4 w-4" /> Dark Mode
-                </>
-              )}
-            </Button> */}
             {user && (
               <Button
                 className="w-full"

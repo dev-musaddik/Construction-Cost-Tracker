@@ -39,7 +39,6 @@ import CombinedLoader from "../components/Loading/CombinedLoader";
 import DateFilterBar from "../components/Dashboad/DashboardFilter";
 import RecentExpenses from "../components/Expense/RecentExpenses";
 import ChartCard from "../components/Dashboad/ChartCard";
-import { useHandleExpenseSave } from "../hooks/useHandleExpenseSave";
 
 const COLORS = [
   "#0088FE",
@@ -50,8 +49,14 @@ const COLORS = [
   "#82ca9d",
 ];
 
+
+
+
+
 // -------------------------------- Page -----------------------------------
 const DashboardPage = () => {
+
+  
   const { t } = useTranslation();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -61,7 +66,7 @@ const DashboardPage = () => {
   const [query, setQuery] = useState({ date: ymdLocal(), from: "", to: "" });
   const [preset, setPreset] = useState("today"); // 'all' | 'today' | 'weekly' | 'monthly'
   const [weekStart, setWeekStart] = useState("mon");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
 
   // all data set for add before money
@@ -170,7 +175,8 @@ const DashboardPage = () => {
 
   const { allDataTotalBalance = [] } = allDataBalance || {};
 
-  // for developer send any kind of data then use this
+
+  // for developer send any kind of data then use this 
   // const sendData = async () => {
   //   try {
   //     const userString = localStorage.getItem("user"); // JSON string
@@ -207,11 +213,6 @@ const DashboardPage = () => {
   //   }
   // };
 
-  const handleAddExpense = () => {
-    // setCurrentExpense(null);
-    setIsModalOpen(true);
-  };
-
   const formattedExpensesOverTime = useMemo(
     () =>
       (expensesOverTime || [])
@@ -229,6 +230,8 @@ const DashboardPage = () => {
         .sort((a, b) => a._sortKey - b._sortKey),
     [expensesOverTime]
   );
+
+ 
 
   if (error) {
     return (
@@ -278,7 +281,7 @@ const DashboardPage = () => {
         onPreset={onPreset}
         preset={preset}
         weekStart={weekStart}
-        setWeekStart={setWeekStart}
+        setWeekStart={setWeekStart} 
         loading={loading}
       />
       {/* <Button loading={loading} onClick={sendData}>Send Dummy Expenses</Button> */}
@@ -324,7 +327,12 @@ const DashboardPage = () => {
         >
           {t("addDeposit")}
         </Button>
-        <Button variant="destructive" onClick={handleAddExpense}>
+        <Button
+          loading={loading}
+          text={t("addExpense")}
+          onClick={() => setIsExpenseModalOpen(true)}
+          variant="destructive"
+        >
           {t("addExpense")}
         </Button>
       </div>
@@ -346,24 +354,24 @@ const DashboardPage = () => {
         <PieChartSkeleton items={expensesByCategory.length} />
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <ChartCard
-            title="Expenses by Category"
-            data={expensesByCategory}
-            chartType="pie"
-            chartDataKey="total"
-            chartNameKey="category"
-            tooltipFormatter={(val) => fmtMoney(val)}
-            noDataMessage="No expenses by category"
-          />
-          <ChartCard
-            title="Expenses Over Time (Monthly)"
-            data={formattedExpensesOverTime}
-            chartType="line"
-            chartDataKey="total"
-            tooltipFormatter={(val) => fmtMoney(val)}
-            noDataMessage="No expenses over time"
-          />
-        </div>
+      <ChartCard
+        title="Expenses by Category"
+        data={expensesByCategory}
+        chartType="pie"
+        chartDataKey="total"
+        chartNameKey="category"
+        tooltipFormatter={(val) => fmtMoney(val)}
+        noDataMessage="No expenses by category"
+      />
+      <ChartCard
+        title="Expenses Over Time (Monthly)"
+        data={formattedExpensesOverTime}
+        chartType="line"
+        chartDataKey="total"
+        tooltipFormatter={(val) => fmtMoney(val)}
+        noDataMessage="No expenses over time"
+      />
+    </div>
       )}
       {/* Modals */}
       <DepositModal
@@ -397,12 +405,60 @@ const DashboardPage = () => {
       />
 
       <ExpenseModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={(expenseData) =>
-          useHandleExpenseSave(expenseData, setIsModalOpen)
-        }
-        expense={currentExpense}
+        isOpen={isExpenseModalOpen}
+        onClose={() => setIsExpenseModalOpen(false)}
+        onSave={async (expenseData) => {
+          try {
+            // ✅ Check for missing fields
+            if (
+              !expenseData.description ||
+              !expenseData.amount ||
+              !expenseData.category ||
+              !expenseData.date
+            ) {
+              toast.error(t("pleaseFillInAllFields"));
+              return;
+            }
+
+            // ✅ Validate amount
+            const amountNum = Number(expenseData.amount);
+            if (!Number.isFinite(amountNum) || amountNum <= 0) {
+              toast.error(t("pleaseEnterAValidAmount"));
+              return;
+            }
+
+            // ✅ If expense already exists → update
+            if (expenseData._id) {
+              await expenseService.updateExpense(
+                expenseData._id,
+                expenseData.description,
+                expenseData.amount,
+                expenseData.category,
+                expenseData.date,
+                expenseData.isContract
+              );
+              toast.success(t("expenseUpdated"));
+            }
+            // ✅ Otherwise → create new expense
+            else {
+              await expenseService.createExpense(
+                expenseData.description,
+                expenseData.amount,
+                expenseData.category,
+                expenseData.date,
+                expenseData.isContract
+              );
+              toast.success(t("expenseAdded"));
+            }
+
+            // ✅ Close modal & refresh data
+            setIsExpenseModalOpen(false);
+            const controller = new AbortController();
+            fetchDashboardData(controller.signal);
+          } catch (e) {
+            toast.error(t("failedToSaveExpense"));
+          }
+        }}
       />
     </div>
   );

@@ -1,22 +1,23 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+import axiosInstance from '../api/axiosConfig';
 
-const API_URL = 'https://construction-cost-tracker-server-g2.vercel.app/api/users/';
+const API_URL = '/users/';
 
 const getUsers = () => {
-  return axios.get(API_URL, { headers: authHeader() });
+  return axiosInstance.get(API_URL, { headers: authHeader() });
 };
 
 const getUserById = (id) => {
-  return axios.get(API_URL + id, { headers: authHeader() });
+  return axiosInstance.get(API_URL + id, { headers: authHeader() });
 };
 
 const updateUser = (id, userData) => {
-  return axios.put(API_URL + id, userData, { headers: authHeader() });
+  return axiosInstance.put(API_URL + id, userData, { headers: authHeader() });
 };
 
 const deleteUser = (id) => {
-  return axios.delete(API_URL + id, { headers: authHeader() });
+  return axiosInstance.delete(API_URL + id, { headers: authHeader() });
 };
 
 const userService = {

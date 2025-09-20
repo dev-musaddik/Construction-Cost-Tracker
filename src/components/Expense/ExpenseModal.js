@@ -118,7 +118,7 @@ const ExpenseModal = ({ isOpen, onClose, onSave, expense }) => {
       return toast.error(t("missingDescription"));
     }
 
-    // ✅ Check description length (at least 3 chars)
+    // ✅ Check description length (at least 3 chars)----
     if (payload.description.length < 3) {
       console.log("Validation error: Description too short");
       return toast.error(t("descriptionMinLength")); // e.g. "Description must be at least 3 characters"

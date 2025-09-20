@@ -26,8 +26,11 @@ export const useHandleExpenseSave = () => {
     const originalDashboardData = { ...dashboardData }; // Save original dashboard data for rollback
 
     const isUpdate = !!expenseData._id;
-    const tempId = `temp-${Date.now()}`;
-    const optimisticData = { ...expenseData, _id: isUpdate ? expenseData._id : tempId };
+    const tempId = `temp-${Date.now()}`; // Temporary ID for optimistic UI
+    const optimisticData = {
+      ...expenseData,
+      _id: isUpdate ? expenseData._id : tempId,
+    };
 
     const newExpenses = isUpdate
       ? dashboardData.expenses.map((e) =>
@@ -70,7 +73,7 @@ export const useHandleExpenseSave = () => {
           ? dashboardData.expenses.map((e) =>
               e._id === response.data._id ? response.data : e
             )
-          : newExpenses.map(e => e._id === tempId ? response.data : e);
+          : newExpenses.map((e) => (e._id === tempId ? response.data : e));
 
         dispatch(
           setDashboardData({
@@ -87,6 +90,10 @@ export const useHandleExpenseSave = () => {
   };
 
   const handleExpenseDelete = async (expenseId) => {
+    const isConfirmed = window.confirm(t("confirmDeleteExpense")); // Confirmation dialog
+
+    if (!isConfirmed) return; // If user cancels, exit the function
+
     const originalDashboardData = { ...dashboardData }; // Save original dashboard data for rollback
 
     dispatch(
